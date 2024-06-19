@@ -15,6 +15,7 @@ const TicTacToe = () => {
     const [xwin, xwinCount] = useState(0);
     const [owin, owinCount] = useState(0);
     const [xoties, xotiesCount] = useState(0);
+    const [popup, setPopup] = useState("none");
 
     const toggle = (index) => {
         if (lock || data[index]) {
@@ -49,11 +50,13 @@ const TicTacToe = () => {
             setLock(true);
             setMessage("It's a draw!");
             xotiesCount(xoties + 1);
+            setPopup("block");
         }
     };
 
     const won = (winner) => {
         setLock(true);
+        setPopup("block");
         setWinnerIcon(winner === 'x' ? crossIcon : circleIcon);
         if (winner === 'x') {
             xwinCount(xwin + 1);
@@ -66,13 +69,14 @@ const TicTacToe = () => {
         setData(initialData);
         setCount(0);
         setLock(false);
-        setMessage("");
+        // setMessage("Tic Tac Toe in <span>React</span>");
         setWinnerIcon(null);
+        setPopup("none");
     };
 
     return (
         <div className="container">
-
+            <div className="wrapper">
             <div className="boardHead">
                 <div className="icon">
                     <img src={crossIcon} />
@@ -86,15 +90,7 @@ const TicTacToe = () => {
                     <button><img src={resetIcon} /></button>
                 </div>
             </div>
-            <h1 className="title">
-                {winnerIcon ? (
-                    <>
-                        <img src={winnerIcon} alt="winner" />Wins
-                    </>
-                ) : (
-                    <span dangerouslySetInnerHTML={{ __html: message }} />
-                )}
-            </h1>
+            
             <div className="board">
                 {data.map((cell, index) => (
                     <div className="box" key={index} onClick={() => toggle(index)}>
@@ -114,6 +110,26 @@ const TicTacToe = () => {
                 <div>
                     <p>o player wins</p>
                     <h4>{owin}</h4>
+                </div>
+            </div>
+            {/* <button className="reset" onClick={resetGame}>Reset</button> */}
+            </div>
+
+            <div className="popup" style={{display: popup}}>
+                <div className="wrapper">
+                    <div className='gameOver'><h1>GAME OVER!</h1></div>
+                    <div>
+                        <h1 className="title">
+                            {winnerIcon ? (
+                                <>
+                                    <img src={winnerIcon} alt="winner" />WINS THE ROUND
+                                </>
+                            ) : (
+                                <span dangerouslySetInnerHTML={{ __html: message }} />
+                            )}
+                        </h1>
+                    </div>
+                    <div><button onClick={resetGame}>Next Round</button></div>
                 </div>
             </div>
         </div>

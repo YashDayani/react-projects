@@ -1,0 +1,30 @@
+.topMenu{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.topMenu-selector{
+    display: flex;
+    column-gap: 10px;
+}
+
+.topMenu-select{
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 10px;
+}
+
+.topMenu-list{
+    list-style: none;
+    display: flex;
+    column-gap: 24px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #A09D8C;
+    margin: 0;
+}

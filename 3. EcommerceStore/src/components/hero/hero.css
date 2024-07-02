@@ -1,0 +1,45 @@
+.hero-box {
+    background-color: var(--container-color);
+    width: 100%;
+    border-radius: 5px;
+}
+
+.hero-main {
+    display: grid;
+    grid-template-columns: 2fr 300px;
+    grid-template-rows: repeat(2, 300px);
+    grid-column-gap: 1.25rem;
+    grid-row-gap: 1.25rem;
+    margin: 1.5rem 0 0 0;
+}
+
+.div1 {
+    grid-area: 1 / 1 / 3 / 2;
+}
+
+.div2 {
+    grid-area: 1 / 2 / 2 / 3;
+    background: url(hero2.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.div3 {
+    grid-area: 2 / 2 / 3 / 3;
+    background: url(hero3.png);
+    background-size: cover;
+    background-position: center;
+}
+
+/* .div1 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+} */
+
+.div1{
+    background: url(div2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    
+}

@@ -7,6 +7,8 @@
     
 }
 
+/* Header Top Section*/
+
 .header-logo{
     height: 40px;
     margin: 10px;
@@ -16,7 +18,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 30px 30px;
+    padding: 1rem 2rem;
     border-bottom: 2px solid #F7F6F1;
 }
 
@@ -24,11 +26,6 @@
     display: flex;
     align-items: center;
     gap: 24px;
-}
-
-.header-top-right{
-    display: flex;
-    align-items: center;
 }
 
 .header-search {
@@ -52,67 +49,67 @@
     padding: 10px 50px;
 }
 
-.icon{
-    height: 34px;
-}
-
-.header-profile{
-    display: flex;
-    column-gap: 12px;
-    align-items: center;
-}
-
-.profile p{
-    color: #B6B4A6;
-    font-weight: 600;
-}
-
-.profile p>span{
-    color: #414141;
-}
-
-.partLeft{
-    display: flex;
-    align-items: center;
-}
-.partRight{
-    display: flex;
-    column-gap: 50px;
-}
-.partRight>div{
+.header-top-right{
     display: flex;
     align-items: center;
 }
 
-/* .header .secBottom{
+.header-icon{
+    height: 2.5rem;
+}
+
+.header-icon + .header-icon{
+    margin-left: 0.75rem;
+}
+
+.header-shop{
     display: flex;
     align-items: center;
+    gap: 1rem;
+}
+
+.header-profile-icon{
+    height: 2.5rem;
+    border-radius: 50%;
+}
+
+.header-profile {
+    display: flex;
+    column-gap: 1rem;
+    align-items: center;
+}
+
+.header-bottom,
+.header-contact,
+.header-bottom-right,
+.header-nav,
+.header-nav-component {
+    display: flex;
+    align-items: center;
+}
+
+.menu-icon{
+    height: 0.35rem;
+}
+
+.header-bottom{
     justify-content: space-between;
+    padding: 0 2rem;
 }
 
-.secBottom .partLeft{
-    display: flex;
-    gap: 24px;
+.header-bottom-right{
+    column-gap: 2rem;
 }
 
-.secBottom .partLeft div{
-    display: flex;
-    padding: 15px;
-    gap: 24px;
-    align-items: center;
-    justify-content: center;
+.header-contact{
+    column-gap: 0.5rem;
 }
 
-.secBottom .partLeft div + div{
-    border-left: 2px solid #F7F6F1;
+.header-nav-component {
+    padding: 1.2rem 2rem;
+    column-gap: 2rem;
 }
 
-.header .secBottom{
-    padding: 0 30px;
+.header-nav-component + .header-nav-component {
+    border-left: 2px solid var(--body-color);
 }
-
-.header .secBottom .partRight p{
-    display: flex;
-    align-items: center;
-    column-gap: 10px;
-} */

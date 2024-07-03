@@ -99,3 +99,34 @@ body{
     margin: 0 auto;
     padding: 0;
 }
+
+
+
+.item-category{
+    color: var(--green-color);
+    font-family: var(--sec-font);
+    font-weight: 600;
+    font-size: 15px;
+    font-style: italic;
+}
+
+.item-name{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.item-price{
+    color: var(--orange-color);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.round-btn{
+    font-weight: 600;
+    font-size: 12px;
+    text-decoration: none;
+    width: fit-content;
+    padding: 10px 25px;
+    color: white;
+    border-radius: 50vw;
+}

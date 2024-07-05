@@ -4,6 +4,7 @@ import Header from './components/header/Header'
 import Hero from './components/hero/Hero'
 import Slider from './components/slider/Slider'
 import Product from './components/product/Product'
+import Footer from './components/footer/Footer'
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <Hero />
     <Slider />
     <Product />
+    <Footer />
     </>
   )
 }

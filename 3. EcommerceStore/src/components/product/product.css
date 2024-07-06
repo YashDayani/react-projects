@@ -24,8 +24,9 @@
     
 }
 
-.product-header-text:hover{
+.product-active{
     border-bottom: 3px solid var(--green-color);
+    cursor: pointer;
     
 }
 
@@ -81,6 +82,7 @@
     color: #F76C4F;
     font-size: 12px;
     text-decoration: line-through;
+    margin-left: 8px;
 }
 
 

@@ -4,7 +4,7 @@ import Products from './Products'
 
 const Product = () => {
     return (
-        <section class="products container" id='products'>
+        <section className="products container" id='products'>
             <Products/>
         </section>
     )

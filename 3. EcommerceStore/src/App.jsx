@@ -2,6 +2,7 @@ import './App.css'
 import TopMenu from './components/topMenu/TopMenu'
 import Header from './components/header/Header'
 import Hero from './components/hero/Hero'
+import { ProductProvider } from './components/product/ProductContext'
 import Slider from './components/slider/Slider'
 import Product from './components/product/Product'
 import Footer from './components/footer/Footer'
@@ -13,8 +14,10 @@ function App() {
     <TopMenu />
     <Header />
     <Hero />
-    <Slider />
-    <Product />
+    <ProductProvider>
+      <Slider />
+      <Product />
+    </ProductProvider>
     <Footer />
     </>
   )

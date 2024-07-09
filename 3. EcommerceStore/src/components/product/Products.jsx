@@ -40,9 +40,17 @@ const Products = () => {
     if (product.name === "Discount") {
       newProjects = baseProjects.filter(project => project.discount > 0);
     } else if (product.name === "High to Low") {
-      newProjects = [...baseProjects].sort((a, b) => b.price - a.price);
+      newProjects = [...baseProjects].sort((a, b) => {
+        const priceA = a.discount ? a.price - (a.price * a.discount) / 100 : a.price;
+        const priceB = b.discount ? b.price - (b.price * b.discount) / 100 : b.price;
+        return priceB - priceA;
+      });
     } else if (product.name === "Low to High") {
-      newProjects = [...baseProjects].sort((a, b) => a.price - b.price);
+      newProjects = [...baseProjects].sort((a, b) => {
+        const priceA = a.discount ? a.price - (a.price * a.discount) / 100 : a.price;
+        const priceB = b.discount ? b.price - (b.price * b.discount) / 100 : b.price;
+        return priceA - priceB;
+      });
     } else if (product.name !== "All") {
       newProjects = baseProjects.filter(project => project.filter.toLowerCase() === product.name.toLowerCase());
     } else {
@@ -57,11 +65,23 @@ const Products = () => {
     setActive(index);
   };
 
+  const getDisplayName = () => {
+    switch (productChoise) {
+      case 'dataFruitsnVeges': return 'Fruits & Veges';
+      case 'dataHerb': return 'Herbs';
+      case 'dataDairy': return 'Dairy Items';
+      case 'dataOils': return 'Oils & Ghee';
+      case 'dataFrozen': return 'Frozen Items';
+      case 'dataSeeds': return 'Seeds & Nuts';
+      default: return 'All Products';
+    }
+  };
+
   return (
     <div className="works-wrapper">
       <div className="product-header">
         <div className="product-page-title">
-          <span className="product-header-text">TRENDING</span>
+          <span className="product-header-text">{getDisplayName()}</span>
         </div>
         <div className="product-page-filter">
           {productNav.map((navItem, index) => (

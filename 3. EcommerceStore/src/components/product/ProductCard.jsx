@@ -11,13 +11,13 @@ const ProductCard = ({ product }) => {
       <div className="product-card">
         <img src={img} className="product-img" alt={name} />
         <div className="hero-product-info">
-          <span className="hero-product-category item-category">{category}</span><br />
-          <span className="hero-product-name item-name">{name}</span><br />
-          {weight && <span className="hero-product-weight item-weight">{weight}</span>}<br />
+          <div className="hero-product-category item-category">{category}</div>
+          <div className="hero-product-name item-name">{name}</div>
+          {weight && <div className="hero-product-weight item-weight">{weight}</div>}
           <span className="hero-product-price item-price">
             {discountedPrice ? (
               <>
-                <span className="discounted-price">₹{discountedPrice.toFixed(2)}</span>
+                <span className="discounted-price">₹{Math.floor(discountedPrice.toFixed(2))}.00</span>
                 <span className="og-item-price">₹{price.toFixed(2)}</span>
               </>
             ) : (

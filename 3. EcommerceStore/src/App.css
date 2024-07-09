@@ -90,7 +90,7 @@ button {
 
 body{
     background: #F7F6F1;
-    /* background-image: url(./back.png); */
+    background-image: url(./back2.png);
     background-size: cover; 
 }
 
@@ -113,6 +113,8 @@ body{
 .item-name{
     font-size: 18px;
     font-weight: 600;
+    line-height: 1.2;
+    height: 46px;
 }
 
 .item-price{

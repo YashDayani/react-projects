@@ -6,7 +6,7 @@ export const dataFruitsnVeges = [
         name: "Avocado",
         category: "Fruit",
         discount: null,
-        weight:"30 gram",
+        weight:"30 g",
         price: 65,
 
     },
@@ -28,7 +28,7 @@ export const dataFruitsnVeges = [
         name: "Lemon",
         category: "Vegetable",
         discount: null,
-        weight:"100 gram",
+        weight:"100 g",
         price: 16,
 
     },
@@ -39,7 +39,7 @@ export const dataFruitsnVeges = [
         name: "Beetroot",
         category: "Vegetable",
         discount: null,
-        weight:"500 gram",
+        weight:"500 g",
         price: 32,
 
     },
@@ -50,7 +50,7 @@ export const dataFruitsnVeges = [
         name: "Potato",
         category: "Vegetable",
         discount: null,
-        weight:"1 kilogram",
+        weight:"1 kilog",
         price: 50,
 
     },
@@ -61,7 +61,7 @@ export const dataFruitsnVeges = [
         name: "Onion",
         category: "Vegetable",
         discount: null,
-        weight:"1 kilogram",
+        weight:"1 kilog",
         price: 49,
 
     },
@@ -72,7 +72,7 @@ export const dataFruitsnVeges = [
         name: "Green Chilli",
         category: "Vegetable",
         discount: null,
-        weight:"200 gram",
+        weight:"200 g",
         price: 32,
 
     },
@@ -135,7 +135,7 @@ export const dataHerb =   [
 export const dataDairy =   [
     {
         id: 201,
-        img: "https://www.jiomart.com/images/product/original/490010311/amul-taaza-homogenised-toned-milk-1-l-tetra-pak-product-images-o490010311-p490010311-0-202203152257.jpg?im=Resize=(360,360)", 
+        img: "https://in.mt/6nz", 
         filter: "All",
         name: "Amul Taaza",
         category: "Milk",
@@ -145,7 +145,7 @@ export const dataDairy =   [
     },
     {
         id: 202,
-        img: "https://www.jiomart.com/images/product/original/490001545/amul-gold-homogenised-standardised-milk-1-l-tetra-pak-product-images-o490001545-p490001545-0-202203170625.jpg?im=Resize=(360,360)", 
+        img: "https://in.mt/6ny", 
         filter: "All",
         name: "Amul Gold",
         category: "Milk",
@@ -155,13 +155,63 @@ export const dataDairy =   [
     },
     {
         id: 203,
-        img: "https://www.jiomart.com/images/product/original/490001401/amul-cheese-block-200-g-carton-product-images-o490001401-p490001401-0-202306061709.jpg?im=Resize=(360,360)", 
+        img: "https://in.mt/6nx", 
         filter: "All",
         name: "Amul Cheese",
         category: "Cheese",
         discount: 7,
-        weight:"200 gram",
+        weight:"200 g",
         price: 120,
+    },
+    {
+        id: 204,
+        img: "https://in.mt/6nw", 
+        filter: "All",
+        name: "fresho! Unsalted Butter",
+        category: "Butter",
+        discount: null,
+        weight:"200 g",
+        price: 335,
+    },
+    {
+        id: 205,
+        img: "https://in.mt/6ns", 
+        filter: "All",
+        name: "Amul Masti Buttermilk",
+        category: "Buttermilk",
+        discount: null,
+        weight:"200 ml",
+        price: 20,
+    },
+    {
+        id: 206,
+        img: "https://in.mt/6nt", 
+        filter: "All",
+        name: "Milky Mist Greek Yogurt",
+        category: "Yougurt",
+        discount: null,
+        weight:"100 g",
+        price: 35,
+    },
+    {
+        id: 207,
+        img: "https://in.mt/6nu", 
+        filter: "All",
+        name: "Amul Malai Paneer",
+        category: "Panner",
+        discount: null,
+        weight:"1 Kg",
+        price: 435,
+    },
+    {
+        id: 208,
+        img: "https://in.mt/6nv", 
+        filter: "All",
+        name: "Milky Mist Lactose Free Toned Milk",
+        category: "Milk",
+        discount: null,
+        weight:"250 ml",
+        price: 25,
     },
 ];
 
@@ -220,7 +270,7 @@ export const dataFrozen =   [
         name: "McCain Veggie Fingers",
         category: "Grocries",
         discount: 15,
-        weight:"400 gram",
+        weight:"400 g",
         price: 165,
 
     },
@@ -231,7 +281,7 @@ export const dataFrozen =   [
         name: "McCain French Fries",
         category: "Grocries",
         discount: 25,
-        weight:"1.25 kilogram",
+        weight:"1.25 kilog",
         price: 330,
 
     },
@@ -242,7 +292,7 @@ export const dataFrozen =   [
         name: "McCain Chili Garlic Potato Bites",
         category: "Grocries",
         discount: 15,
-        weight:"1.24 kilogram",
+        weight:"1.24 kilog",
         price: 390,
 
     },
@@ -253,7 +303,7 @@ export const dataFrozen =   [
         name: "McCain Smiles Crispy",
         category: "Grocries",
         discount: 15,
-        weight:"1.25 kilogram",
+        weight:"1.25 kilog",
         price: 370,
 
     }
@@ -267,7 +317,7 @@ export const dataSeeds =   [
         name: "bb Royal Organic - Almond",
         category: "Nuts",
         discount: null,
-        weight:"500 gram",
+        weight:"500 g",
         price: 421,
     },
     {
@@ -277,7 +327,7 @@ export const dataSeeds =   [
         name: "LILA DRY FRUITS Raw Chia Seeds",
         category: "Seeds",
         discount: 67,
-        weight:"500 gram",
+        weight:"500 g",
         price: 699,
     },
     {
@@ -287,7 +337,7 @@ export const dataSeeds =   [
         name: "Farmley Broken Walnuts Kernels",
         category: "Nuts",
         discount: null,
-        weight:"200 gram",
+        weight:"200 g",
         price: 360,
     },
     {
@@ -297,7 +347,7 @@ export const dataSeeds =   [
         name: "Wonderland Foods Sunflower Seeds",
         category: "Seeds",
         discount: null,
-        weight:"200 gram",
+        weight:"200 g",
         price: 175,
     },
 ];

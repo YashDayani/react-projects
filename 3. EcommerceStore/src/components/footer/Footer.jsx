@@ -1,6 +1,7 @@
 import React from 'react'
 import './footer.css'
 
+import arrowIcon from '../../assets/images/arrow-right.svg'
 import Logo from '../../assets/images/logo.svg'
 import Icon1 from '../../assets/images/icon-1.svg'
 import Icon2 from '../../assets/images/icon-2.svg'
@@ -12,6 +13,7 @@ import appstoreImg from '../../assets/images/app-store.jpg'
 const Footer = () => {
     return (
         <footer className="footer" id="footer">
+            <div className="footer-wrapper">
             <div className="footer-top-wrapper">
                 <div className="footer-top">
                     <div className="footer-features-items">
@@ -26,7 +28,7 @@ const Footer = () => {
                     <div className="footer-features-items">
                         <div className="footer-features-title">
                             <img src={Icon2} alt="" />
-                            <h4>Easy <br /> Payment</h4>
+                            <h4>Guaranteed <br /> Savings</h4>
                         </div>
                         <div className="footer-features-discription">
                             <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolorem non libero?</span>
@@ -35,7 +37,7 @@ const Footer = () => {
                     <div className="footer-features-items">
                         <div className="footer-features-title">
                             <img src={Icon3} alt="" />
-                            <h4>Easy <br /> Payment</h4>
+                            <h4>Free <br /> Delivery</h4>
                         </div>
                         <div className="footer-features-discription">
                             <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolorem non libero?</span>
@@ -44,7 +46,7 @@ const Footer = () => {
                     <div className="footer-features-items">
                         <div className="footer-features-title">
                             <img src={Icon4} alt="" />
-                            <h4>Easy <br /> Payment</h4>
+                            <h4>Quality <br /> Guarantee</h4>
                         </div>
                         <div className="footer-features-discription">
                             <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolorem non libero?</span>
@@ -53,7 +55,7 @@ const Footer = () => {
                     <div className="footer-features-items">
                         <div className="footer-features-title">
                             <img src={Icon5} alt="" />
-                            <h4>Easy <br /> Payment</h4>
+                            <h4>Earn Real <br /> Rewards</h4>
                         </div>
                         <div className="footer-features-discription">
                             <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolorem non libero?</span>
@@ -106,6 +108,9 @@ const Footer = () => {
                 </div>
             </div>
             </div>
+            <div className="scroll-top">
+                <a href="#"><img className='scroll-top-icon' src={arrowIcon} /></a>
+            </div></div>
         </footer>
     )
 }

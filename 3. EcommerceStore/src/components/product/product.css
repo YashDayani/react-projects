@@ -34,6 +34,7 @@
 }
 
 .product-active {
+    color: black;
     border-bottom: 3px solid var(--green-color);
 }
 

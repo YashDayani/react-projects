@@ -1,14 +1,14 @@
 import React, { useContext, useEffect } from 'react';
-import { ProductContext } from '../product/ProductContext';
+import { ProductContext } from '../DataContext';
 import './slider.css';
 import arrowLeftIcon from '../../assets/images/arrow-left.svg';
 import arrowRightIcon from '../../assets/images/arrow-right.svg';
-import cat1Icon from '../../assets/images/cat1.png';
-import cat2Icon from '../../assets/images/cat2.png';
-import cat3Icon from '../../assets/images/cat3.png';
-import cat4Icon from '../../assets/images/cat4.png';
-import cat5Icon from '../../assets/images/cat5.png';
-import cat6Icon from '../../assets/images/cat6.png';
+import cat1Icon from '../../assets/images/cat1.svg';
+import cat2Icon from '../../assets/images/cat2.svg';
+import cat3Icon from '../../assets/images/cat3.svg';
+import cat4Icon from '../../assets/images/cat4.svg';
+import cat5Icon from '../../assets/images/cat5.svg';
+import cat6Icon from '../../assets/images/cat6.svg';
 
 
 const Slider = () => {

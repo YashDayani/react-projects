@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { dataFruitsnVeges, dataHerb, dataDairy, dataOils, dataFrozen, dataSeeds, productNav } from './Data';
 import ProductCard from './ProductCard';
-import { ProductContext } from './ProductContext';
+import { ProductContext } from '../DataContext';
 
 const Products = () => {
   const { productChoise } = useContext(ProductContext);

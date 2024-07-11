@@ -17,11 +17,11 @@ const ProductCard = ({ product }) => {
           <span className="hero-product-price item-price">
             {discountedPrice ? (
               <>
-                <span className="discounted-price">₹{Math.floor(discountedPrice.toFixed(2))}.00</span>
-                <span className="og-item-price">₹{price.toFixed(2)}</span>
+                <span className="discounted-price">${Math.floor(discountedPrice.toFixed(2))}.00</span>
+                <span className="og-item-price">${price.toFixed(2)}</span>
               </>
             ) : (
-              <span className="price">₹{price.toFixed(2)}</span>
+              <span className="price">${price.toFixed(2)}</span>
             )}
           </span>
         </div>

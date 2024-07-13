@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { ProductContext } from '../DataContext';
+import { DataContext } from '../DataContext';
 import './slider.css';
 import arrowLeftIcon from '../../assets/images/arrow-left.svg';
 import arrowRightIcon from '../../assets/images/arrow-right.svg';
@@ -12,7 +12,7 @@ import cat6Icon from '../../assets/images/cat6.svg';
 
 
 const Slider = () => {
-  const { productChoise, setProductChoise } = useContext(ProductContext);
+  const { productChoise, setProductChoise } = useContext(DataContext);
 
   useEffect(() => {
     setProductChoise('dataFruitsnVeges');

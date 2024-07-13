@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import './topmenu.css';
+import { DataContext } from '../DataContext';
 
 const TopMenu = () => {
-  const [currency, setCurrency] = useState('inr');
-  const [language, setLanguage] = useState('en');
+  const { currency, setCurrency, setLanguage } = useContext(DataContext);
 
   const handleCurrencyChange = (e) => {
     setCurrency(e.target.value);
-    // Perform any additional actions needed when the currency changes
     console.log(`Currency changed to: ${e.target.value}`);
   };
 
   const handleLanguageChange = (e) => {
     setLanguage(e.target.value);
-    // Perform any additional actions needed when the language changes
     console.log(`Language changed to: ${e.target.value}`);
   };
 
@@ -37,7 +35,6 @@ const TopMenu = () => {
           className='topMenu-select'
           name="lang"
           id="lang"
-          value={language}
           onChange={handleLanguageChange}
         >
           <option value="en">ENGLISH</option>

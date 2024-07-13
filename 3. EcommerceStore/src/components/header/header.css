@@ -1,31 +1,25 @@
-.header{
+/*=============== HEADER STYLES ===============*/
+.header {
     background: #fff;
-    border-radius: 5px;
-    font-size: 12px;
-    font-weight: 500;
+    border-radius: var(--border-radius-small);
+    font-size: var(--small-font-size);
+    font-weight: var(--font-medium);
     /* padding: 10px; */
-    
 }
 
-/* Header Top Section*/
-
-.header-logo{
-    height: 40px;
-    margin: 10px;
-}
-
-.header-top{
+/* Header Top Section */
+.header-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 2rem;
-    border-bottom: 2px solid #F7F6F1;
+    padding: var(--mb-1) var(--mb-2);
+    border-bottom: 2px solid var(--body-color);
 }
 
-.header-top-left{
+.header-top-left {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: var(--column-gap-medium);
 }
 
 .header-search {
@@ -40,35 +34,36 @@
     height: 18px;
 }
 
-.header-search-input{
-    background: #F7F6F1;
-    border-radius: 50vw;
+.header-search-input {
+    background: var(--body-color);
+    border-radius: var(--border-radius-round);
     width: 100%;
     border: 0;
     outline: none;
-    padding: 10px 50px;
+    padding: var(--padding-small) var(--padding-medium);
+    font-size: var(--small-font-size);
 }
 
-.header-top-right{
+.header-top-right {
     display: flex;
     align-items: center;
 }
 
-.header-icon{
+.header-icon {
     height: 2.5rem;
 }
 
-.header-icon + .header-icon{
+.header-icon+.header-icon {
     margin-left: 0.75rem;
 }
 
-.header-shop{
+.header-shop {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.header-profile-icon{
+.header-profile-icon {
     height: 2.5rem;
     border-radius: 50%;
 }
@@ -88,28 +83,28 @@
     align-items: center;
 }
 
-.menu-icon{
+.menu-icon {
     height: 0.35rem;
 }
 
-.header-bottom{
+.header-bottom {
     justify-content: space-between;
-    padding: 0 2rem;
+    padding: 0 var(--mb-2);
 }
 
-.header-bottom-right{
-    column-gap: 2rem;
+.header-bottom-right {
+    column-gap: var(--column-gap-medium);
 }
 
-.header-contact{
-    column-gap: 0.5rem;
+.header-contact {
+    column-gap: var(--mb-0-5);
 }
 
 .header-nav-component {
-    padding: 1.2rem 2rem;
-    column-gap: 2rem;
+    padding: var(--mb-1-5) var(--mb-2);
+    column-gap: var(--column-gap-medium);
 }
 
-.header-nav-component + .header-nav-component {
+.header-nav-component+.header-nav-component {
     border-left: 2px solid var(--body-color);
 }

@@ -1,3 +1,4 @@
+/*=============== HERO STYLES ===============*/
 .hero-main {
     display: grid;
     grid-template-columns: 2fr 300px;
@@ -7,7 +8,7 @@
     margin: 1.5rem 0 0 0;
 }
 
-.hero-box-main{
+.hero-box-main {
     display: flex;
 }
 
@@ -17,7 +18,7 @@
     border-radius: 5px;
 }
 
-.hero-box-product{
+.hero-box-product {
     display: flex;
     flex-direction: column;
     align-self: center;
@@ -27,7 +28,7 @@
     margin: 3%;
 }
 
-.hero-product-status{
+.hero-product-status {
     background-color: #C29C1D;
     color: var(--container-color);
     padding: 0.2rem 0.5rem;
@@ -37,21 +38,19 @@
     width: fit-content;
 }
 
-.hero-product-title{
+.hero-product-title {
     font-size: 1.8rem;
     font-weight: 600;
 }
 
-.hero-product-img{
+.hero-product-img {
     width: 250px;
     align-self: center;
 }
 
-.hero-details-btn{
+.hero-details-btn {
     background-color: #7d9837;
 }
-
-
 
 .div1 {
     grid-area: 1 / 1 / 3 / 2;
@@ -71,12 +70,7 @@
     background-position: center;
 }
 
-/* .div1 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-} */
-
-.hero-box-img{
+.hero-box-img {
     background: url(div2.png);
     background-size: contain;
     background-repeat: no-repeat;

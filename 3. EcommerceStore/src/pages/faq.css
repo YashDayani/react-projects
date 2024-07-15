@@ -1,0 +1,13 @@
+.page-title,
+.page-subtitle{
+    text-align: center;
+}
+
+.page-title{
+    font-size: 5rem;
+    font-weight: 500;
+}
+
+.page-subtitle{
+    color: var();
+}

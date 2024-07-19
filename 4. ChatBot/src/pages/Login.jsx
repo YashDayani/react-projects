@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+
+import './pages.css';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +11,9 @@ const Login = () => {
   });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [type, setType] = useState('password');
+  const [iconClass, setIconClass] = useState('eyeOff');
+  const passwordInputRef = useRef(null); // Use useRef to get a reference to the password input element
 
   const navigate = useNavigate();
 
@@ -48,13 +53,26 @@ const Login = () => {
     }
   };
 
+  const handleToggle = () => {
+    if (type === 'password') {
+      setType('text');
+      setIconClass('eye');
+    } else {
+      setType('password');
+      setIconClass('eyeOff');
+    }
+    // Focus back on the password input element
+    if (passwordInputRef.current) {
+      passwordInputRef.current.focus();
+    }
+  };
+
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Welcome back</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email:</label>
+        <div className='input-box'>
           <input 
             type="email" 
             id="email" 
@@ -63,18 +81,25 @@ const Login = () => {
             onChange={handleChange} 
             required 
           />
+          <span>Email</span>
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
+        <div className='input-box'>
           <input 
-            type="password" 
+            type={type} 
             id="password" 
             name="password" 
             value={formData.password}
             onChange={handleChange} 
             required 
             minLength="6"
+            ref={passwordInputRef} // Attach the ref to the password input element
           />
+          <span>Password</span>
+          <div 
+            id="password-toggle" 
+            className={iconClass} 
+            onClick={handleToggle}
+          ></div>
         </div>
         <button type="submit" disabled={isLoading}>
           {isLoading ? 'Logging in...' : 'Login'}

@@ -1,20 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import Sidebar from '../components/Sidebar/Sidebar'
+import Main from '../components/Main/Main'
+import './Dasboard.css'
 
 const Dashboard = () => {
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    // Clear token from localStorage on logout
-    localStorage.removeItem('token');
-    navigate('/login'); // Redirect to login page after logout
-  };
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <button onClick={handleLogout}>Logout</button>
-      {/* Dashboard content */}
+    <div className='MainPage'>
+      <Sidebar />
+      <Main />
     </div>
   );
 };

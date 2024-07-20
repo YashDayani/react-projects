@@ -1,4 +1,5 @@
-body {
+.Login,
+.Register{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,9 +35,10 @@ body {
     font-size: 1rem;
     transition: 0.5s;
     color: rgba(0, 0, 0, 0.25);
+    font-weight: 500;
   }
   
-  .input-box input:focus ~ span,
+  /* .input-box input:focus ~ span,
   .input-box input:valid ~ span {
     color: rgba(0, 0, 0, 0.25);
     font-size: 14px;
@@ -44,8 +46,27 @@ body {
     font-weight: 500;
     padding: 0 5px;
     background: rgb(255, 255, 255);
+  } */
+
+  .input-box input:focus ~ span,
+  .input-box input:valid ~ span {
+    font-size: 14px;
+    transform: translateX(20px) translateY(-10px);
+    font-weight: 500;
+    padding: 0 5px;
+    background: rgb(255, 255, 255);
   }
   
+  .input-box input:focus{
+    border: 2px solid #323232;
+  }
+
+  .input-box input:focus,
+  .input-box input:focus ~ span{
+    color: #323232;
+  }
+
+
   #password-toggle {
     position: absolute;
     top: 50%;
@@ -77,7 +98,7 @@ body {
     color: #E4E5E7;
   }
   
-  p{
+  .tosDesc{
     margin-top: 1rem;
     color: rgba(0, 0, 0, 0.25);
     font-size: 0.8rem;
@@ -89,3 +110,4 @@ body {
     color: #323232;
     text-decoration: none;
   }
+

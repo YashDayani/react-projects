@@ -125,6 +125,32 @@ app.get('/protected', (req, res) => {
   }
 });
 
+// Middleware to verify token and attach user to the request
+const auth = (req, res, next) => {
+  const token = req.header('x-auth-token');
+  if (!token) return res.status(401).json({ message: 'No token, authorization denied' });
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded.id;
+    next();
+  } catch (error) {
+    res.status(401).json({ message: 'Token is not valid' });
+  }
+};
+
+// Route to get the current user's name
+app.get('/api/user/name', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user).select('username');
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.json({ name: user.username });
+  } catch (error) {
+    handleErrors(res, error);
+  }
+});
+
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

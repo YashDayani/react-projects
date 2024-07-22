@@ -34,6 +34,7 @@ const Main = () => {
 
   return (
     <div className='main'>
+      <div className="main-wrapper">
       <div className="nav">
         <p>Gemini</p>
         <img src={assets.dummy_icon} alt="" />
@@ -93,6 +94,7 @@ const Main = () => {
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 }

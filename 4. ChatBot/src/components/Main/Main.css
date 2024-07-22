@@ -2,9 +2,16 @@
     flex: 1;
     min-height: 100dvh;
     padding-bottom: 15vh;
-    position: relative;
+    border-radius: 10px;
 }
 
+.main-wrapper{
+    height: calc(100dvh - 20px);
+    margin: 10px;
+    border-radius: 10px;
+    position: relative;
+    background-color: #FCFCF9;
+}
 .main .nav{
     display: flex;
     align-items: center;
@@ -12,6 +19,7 @@
     font-size: 22px;
     padding: 20px;
     color: #585858;
+    /* border-bottom: 2px solid #F3F3EE; */
 }
 
 .main .nav img{
@@ -82,7 +90,7 @@
     bottom: 0;
     width: 100%;
     max-width: 900px;
-    padding: 0px 20px;
+    padding: 10px 20px 0px;
     margin: auto;
 }
 
@@ -91,7 +99,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    border: 2px solid rgba(0, 0, 0, 0.25);
+    border: 2px solid #D9D9D0;
+    box-shadow: 0px 0px 0px 10px rgba(243,243,238,1);
     background: #F9F9F9;
     padding: 10px 20px;
     border-radius: 50px;

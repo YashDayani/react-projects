@@ -1,5 +1,5 @@
 import history_icon from './history_icon.png'
-import menu_icon from './menu_icon.png'
+import menu_icon from './logo.svg'
 import plus_icon from './plus_icon.svg'
 import question_icon from './question_icon.png'
 import setting_icon from './setting_icon.svg'
@@ -15,6 +15,7 @@ import send_icon from './send_icon.png'
 import gemini_icon from './gemini_icon.png'
 import dummy_icon from './dummy.png'
 import logout_icon from './logout_icon.svg'
+import extended_logo from './extended_logo.png'
 
 export const assets = {
     history_icon,
@@ -33,5 +34,6 @@ export const assets = {
     send_icon,
     gemini_icon,
     dummy_icon,
-    logout_icon
+    logout_icon,
+    extended_logo
 }

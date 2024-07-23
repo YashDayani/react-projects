@@ -1,12 +1,18 @@
 .sidebar {
     min-height: 100vh;
     min-width: 80px;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: #F3F3EE;
     padding: 25px 15px;
     align-items: center;
+    transition: width 0.3s;
+}
+
+.sidebar.extended {
+    width: 250px;
+    align-items: flex-start;
 }
 
 .sidebar img {
@@ -14,9 +20,30 @@
 }
 
 .sidebar .menu {
-    display: block;
-    margin-left: 10px;
+    width: fit-content;
+    height: 45px; /* Ensure height is the same as width for centering */
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    justify-content: center;
     cursor: pointer;
+    transition: padding 0.75s, filter 1s; /* Added transition for transform */
+    margin: auto; /* Centers the menu icon */
+}
+
+.sidebar .menu:hover {
+     /* Slightly enlarge the menu icon on hover */
+    fill: rgb(30, 0, 255);
+    padding: 0;
+    filter: brightness(5) invert(0.1);
+}
+
+.sidelogo{
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    font-size: large;
+    font-weight: 500;
 }
 
 .sidebar .new-chat {
@@ -24,74 +51,141 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 15px;
+    padding: 10px;
     background-color: #E8E8E3;
-    border-radius: 50px;
+    border-radius: 50%; /* Makes it circular */
     font-size: 14px;
     cursor: pointer;
+    width: 50px; /* Set width and height to make it circular */
+    height: 50px; 
+    justify-content: center;
+    border: 0.1rem solid transparent;
+    transition: all 0.3s;
+    box-sizing: border-box;
 }
 
-.sidebar .new-chat:hover{
+.sidebar.extended .new-chat {
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    padding: 10px 15px;
+    max-width: 200px; /* Set max-width for extended state */
+    border-radius: 50px; /* Rounded corners for extended state */
+}
+
+.sidebar .new-chat:hover {
     border: 0.1rem solid #21808D;
 }
 
 .sidebar .recent {
     display: flex;
     flex-direction: column;
-    width: 15vw;
+    width: 100%;
     animation: fadeIn 1.5s;
 }
 
-.sidebar .recent-title{
+.sidebar .recent-title {
     margin-top: 30px;
     margin-bottom: 20px;
 }
 
-.sidebar .recent-entry{
+.sidebar .recent-entry {
     display: flex;
-    align-items: start;
-    gap: 10px;
+    align-items: center;
+    gap: 1px;
     padding: 10px;
-    /* padding-right: 40px; */
-    border-radius: 5px;
+    border-radius: 50%;
     color: #282828;
     cursor: pointer;
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.sidebar.extended .recent-entry {
+    border-radius: 5px;
+    width: 100%;
+    justify-content: flex-start;
 }
 
 .sidebar .recent-entry:hover {
-    background-color: #e2e6eb;
+    background-color: #E8E8E3;
 }
-
 
 .sidebar .bottom {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    gap: 7px;
+    align-items: center;
 }
-
 
 .sidebar .bottom-item {
     padding-right: 10px;
     cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s;
 }
 
+.sidebar.extended .bottom-item {
+    width: 100%;
+    justify-content: flex-start;
+    border-radius: 5px;
+}
 
-@media (max-width:600px) {
-    .sidebar{
+@media (max-width: 600px) {
+    .sidebar {
         position: absolute;
         z-index: 10;
         display: none;
     }
 
-    .sidebar .top{
+    .sidebar .top {
         display: none;
     }
 
-    .sidebar .bottom{
+    .sidebar .bottom {
         display: none;
     }
 
-    #root{
+    #root {
         min-height: 100vh;
     }
-    
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+.new-btn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.new-btn .srt-btn:nth-child(1){
+    margin-left: 8px;
+}
+.srt-btn{
+    background-color: transparent;
+    padding: 2px 8px;
+    margin: 2px;
+    font-size: 12px;
+    font-weight: 100;
+    border: 1px solid;
+    border-radius: 5px;
+    font-display: berkeley;
 }

@@ -1,0 +1,86 @@
+.code-block{
+  border-radius: 5px;
+}
+
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+code.hljs {
+  padding: 3px 5px;
+}
+/* lioshi Theme */
+/* Original theme - https://github.com/lioshi/vscode-lioshi-theme */
+.hljs {
+  background: #F3F3EE;
+  color: #4d4d4c;
+}
+/* Comment */
+.hljs-comment {
+  color: rgb(142, 144, 140);
+  font-family: berkeleyMono_italic;
+}
+/* quote */
+.hljs-quote {
+  color: #b3c7d8
+}
+/* Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+  color: #cc6666
+}
+/* Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-literal,
+.hljs-type,
+.hljs-subst
+.hljs-link {
+  color: #f5871f;
+}
+/* Yellow */
+.hljs-attribute {
+  color: #f0c674
+}
+/* Green */
+.hljs-string,
+.hljs-bullet,
+.hljs-params,
+.hljs-addition {
+  color: #718c00
+}
+/* Purple */
+.hljs-selector-tag,
+.hljs-keyword,
+.hljs-function,
+.hljs-class {
+  color: #8959A8;
+  font-weight: 400;
+}
+/* Blue */
+.hljs-title,
+.hljs-meta,
+.hljs-section {
+  color: #81a2be
+}
+/* Purple light */
+.hljs-symbol {
+  color: #dbc4d9
+}
+.hljs-emphasis {
+  font-style: italic
+}
+.hljs-strong {
+  font-weight: bold
+}
+
+.function_{
+  color: #4d4d4c;
+}

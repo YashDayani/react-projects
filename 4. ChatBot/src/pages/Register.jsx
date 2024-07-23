@@ -65,6 +65,7 @@ const Register = () => {
 
   return (
     <div className='login-regis'>
+      <div className="login-regis-wrapper">
       <h1>Create an account</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
@@ -113,6 +114,7 @@ const Register = () => {
         </button>
       </form>
       <p className='tosDesc'>By continuing, you agree <a href="terms">Consumer Terms</a> and <br /> <a href="policy">Usage Policy</a> of Mavrick Corp</p>
+    </div>
     </div>
   );
 };

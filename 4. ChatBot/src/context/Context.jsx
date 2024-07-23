@@ -1,7 +1,6 @@
 import { createContext, useState, useRef, useEffect } from "react";
 import runChat from "../config/gemini";
-import hljs from 'highlight.js';
-import 'highlight.js/styles/nord.css'; // Or your preferred syntax highlighting theme
+import hljs from 'highlight.js'; // Or your preferred syntax highlighting theme
 
 export const Context = createContext();
 

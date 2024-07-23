@@ -36,7 +36,7 @@ const Main = () => {
     <div className='main'>
       <div className="main-wrapper">
       <div className="nav">
-        <p>Gemini</p>
+        <p>Sophos</p>
         <img src={assets.dummy_icon} alt="" />
       </div>
       <div className="main-container">
@@ -67,11 +67,11 @@ const Main = () => {
           </>
           : <div className='result'>
             <div className="result-title">
-              <img src={assets.dummy_icon} alt="" />
               <p>{recentPrompt}</p>
             </div>
             <div className="result-data">
-              <img src={assets.gemini_icon} alt="" />
+              <div className='answer'>
+              <img src={assets.menu_icon} alt="" /> <span>Answer</span></div>
               {loading ? <div className='loader'>
                 <hr />
                 <hr />

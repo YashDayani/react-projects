@@ -68,7 +68,7 @@ const Login = () => {
   };
 
   return (
-    <div className='Login'>
+    <div className='login-regis'>
       <h1>Welcome back</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
@@ -105,7 +105,7 @@ const Login = () => {
           {isLoading ? 'Logging in...' : 'Login'}
         </button>
       </form>
-      <p>Don't have an account? <Link to="/register">Register here</Link></p>
+      <p className='regis-link'>Don't have an account? <Link to="/register">Register here</Link></p>
     </div>
   );
 };

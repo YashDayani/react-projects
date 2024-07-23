@@ -1,3 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+@font-face{
+    font-family: berkeley;
+    src:url(https://pplx-next-static-public.perplexity.ai/_next/static/media/aaa31597f0f36558-s.p.woff2) format("woff2");
+    font-display:swap
+  }
+  @font-face{
+    font-family: berkeleyMono_italic;
+    src:url(https://pplx-next-static-public.perplexity.ai/_next/static/media/666faf960b792da2-s.p.woff2) format("woff2");
+    font-display:swap;
+    font-style:italic
+  }
+
+.code-block *,.mb-4 *{
+    font-size: 14px;
+    font-family: berkeley;
+    font-weight: 100;
+}
+
 .MainPage {
     height: 100vh;
     display: flex;
@@ -54,21 +74,4 @@
 
 .ml-12 {
     margin-left: 3rem;
-}
-
-.code-block {
-    background-color: #25282b;
-    border-radius: 4px;
-    padding: 1rem;
-    overflow-x: auto;
-}
-
-.code-block pre {
-    margin: 0;
-}
-
-.inline-code {
-    background-color: #383b3d;
-    padding: 2px 4px;
-    border-radius: 4px;
 }

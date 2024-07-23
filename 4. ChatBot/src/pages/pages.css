@@ -1,13 +1,15 @@
-.Login,
-.Register{
+.login-regis{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    background-color: #F3F3EE;
     min-height: 100vh;
   }
 
   .login-regis{
-    width: 350px;
+    color: #13343b;
   }
   
   .input-box {
@@ -21,6 +23,7 @@
   .input-box input {
     padding: 15px 20px;
     border: 2px solid rgba(0, 0, 0, 0.25);
+    background-color: #F3F3EE;
     outline: none;
     width: 100%;
     font-size: 1em;
@@ -37,33 +40,23 @@
     color: rgba(0, 0, 0, 0.25);
     font-weight: 500;
   }
-  
-  /* .input-box input:focus ~ span,
-  .input-box input:valid ~ span {
-    color: rgba(0, 0, 0, 0.25);
-    font-size: 14px;
-    transform: translateX(20px) translateY(-10px);
-    font-weight: 500;
-    padding: 0 5px;
-    background: rgb(255, 255, 255);
-  } */
 
   .input-box input:focus ~ span,
   .input-box input:valid ~ span {
     font-size: 14px;
-    transform: translateX(20px) translateY(-10px);
+    transform: translateX(20px) translateY(-7px);
     font-weight: 500;
     padding: 0 5px;
-    background: rgb(255, 255, 255);
+    background: #F3F3EE;
   }
   
   .input-box input:focus{
-    border: 2px solid #323232;
+    border: 2px solid #21808D;
   }
 
   .input-box input:focus,
   .input-box input:focus ~ span{
-    color: #323232;
+    color: #21808D;
   }
 
 
@@ -88,17 +81,23 @@
 
   button{
     width: 100%;
-    background-color: #323232;
+    background-color: #21808D;
     padding: 15px 20px;
     border: 0;
     outline: 0;
-    font-size: 1rem;
+    font-weight: 500;
+    font-size: 1.2rem;
     cursor: pointer;
     border-radius: 5px;
-    color: #E4E5E7;
+    color: #ffffff;
+    transition: opacity 0.5s;
+  }
+
+  button:hover{
+    opacity: 0.9;
   }
   
-  .tosDesc{
+  .tosDesc,.regis-link{
     margin-top: 1rem;
     color: rgba(0, 0, 0, 0.25);
     font-size: 0.8rem;
@@ -107,7 +106,10 @@
   }
 
   a{
-    color: #323232;
+    color: #20808D;
     text-decoration: none;
   }
 
+  a:hover{
+    opacity: 0.8;
+  }

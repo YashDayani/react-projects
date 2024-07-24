@@ -1,23 +1,46 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 import { assets } from '../../assets/assets';
 import { Context } from '../../context/Context';
+import axios from 'axios';
 
 const Sidebar = () => {
     const [extended, setExtended] = useState(false);
     const { onSent, prevPrompts, setRecentPrompt, newChat } = useContext(Context);
+    const [searchHistory, setSearchHistory] = useState([]);
     const navigate = useNavigate();
+
+    const fetchSearchHistory = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                console.error('No token found');
+                return;
+            }
+            const response = await axios.get('http://localhost:5000/api/history', {
+                headers: {
+                    'x-auth-token': token
+                }
+            });
+            setSearchHistory(response.data);
+        } catch (error) {
+            console.error('Error fetching search history:', error);
+        }
+    };
 
     const loadPrompt = async (prompt) => {
         setRecentPrompt(prompt);
         await onSent(prompt);
     };
 
+    useEffect(() => {
+        fetchSearchHistory();
+    }, []);
+
     const handleLogout = () => {
-        // Clear token from localStorage on logout
         localStorage.removeItem('token');
-        navigate('/login'); // Redirect to login page after logout
+        navigate('/login');
     };
 
     return (
@@ -40,15 +63,15 @@ const Sidebar = () => {
                 {extended ? (
                     <div className="recent">
                         <p className="recent-title">Recent</p>
-                        {prevPrompts.map((item, index) => (
+                        {searchHistory.map((item, index) => (
                             <div 
                                 key={index} 
-                                onClick={() => loadPrompt(item)} 
+                                onClick={() => loadPrompt(item.prompt)} 
                                 className="recent-entry" 
-                                aria-label={`Load prompt ${item.slice(0, 12)}`}
+                                aria-label={`Load prompt ${item.prompt.slice(0, 12)}`}
                             >
                                 <img src={assets.message_icon} alt="Message icon" />
-                                <p>{item.slice(0, 20)} ...</p>
+                                <p>{item.prompt.slice(0, 20)} ...</p>
                             </div>
                         ))}
                     </div>

@@ -10,7 +10,7 @@
     margin: 10px;
     border-radius: 10px;
     position: relative;
-    border: 1px solid hsla(60,11%,83%,.5);;
+    border: 1px solid hsla(60,11%,83%,.5);
     background-color: #FCFCF9;
 }
 .main .nav{
@@ -20,7 +20,7 @@
     font-size: 22px;
     padding: 10px 20px;
     color: #585858;
-    border-bottom: 2px solid #F3F3EE;
+    border-bottom: 1px solid hsla(60,11%,83%,.5);
 }
 
 .main .nav img{
@@ -37,7 +37,7 @@
     /* margin: 50px 0px; */
     margin: 0px 30px;
     font-size: 48px;
-    color: #c4c7c5;
+    color: #64645f;
     font-weight: 500;
     /* padding: 20px; */
     margin-bottom: 30px;
@@ -45,7 +45,7 @@
 
 
 .main .greet span{
-    color: #323232;
+    color: #13343B;
 }
 
 .main .cards{
@@ -60,18 +60,19 @@
 .main .card{
     height: 200px;
     padding: 15px;
-    background-color: #F9F9F9;
-    /* border: 2px solid rgba(0, 0, 0, 0.25); */
+    border: 1px solid hsla(60,11%,83%,.5);
     border-radius: 10px;
     position: relative;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .main .card img{
     width: 35px;
     padding: 5px;
     position: absolute;
-
+    background-color: #F3F3EE;
+    border-radius: 5px;
     bottom: 10px;
     right: 10px;
 }
@@ -82,7 +83,7 @@
 }
 
 .main .card:hover{
-    background-color: #fdfdfd;
+    background-color: #F3F3EE;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 }
 
@@ -231,4 +232,13 @@
     }
 
     
+}
+
+table{
+    width: 100%;
+    border: 2px solid;
+}
+
+.result{
+    width: 100%;
 }

@@ -89,7 +89,7 @@ const Sidebar = () => {
                                         aria-label={`Load prompt ${item.prompt.slice(0, 12)}`}
                                     >
                                         <img src={assets.message_icon} alt="Message icon" />
-                                        <p>{item.prompt.slice(0, 22)}</p>
+                                        <p>{item.prompt.slice(0, 20)} ...</p>
                                     </div>
                                 ))
                             ) : (

@@ -1,12 +1,12 @@
-import { createContext, useState, useRef, useEffect } from "react";
-import runChat from "../config/gemini";
+import React, { createContext, useState, useRef, useEffect } from "react";
 import hljs from 'highlight.js';
 import DOMPurify from 'dompurify';
 import { marked } from 'marked';
+import { runChat } from '../config/gemini'; // Ensure this import is correct
 
 export const Context = createContext();
 
-const ContextProvider = (props) => {
+const ContextProvider = ({ children }) => {
     const [input, setInput] = useState("");
     const [recentPrompt, setRecentPrompt] = useState("");
     const [prevPrompts, setPrevPrompts] = useState([]);
@@ -28,7 +28,6 @@ const ContextProvider = (props) => {
     };
 
     const formatGeminiStyle = (text) => {
-        // Configure marked options
         marked.setOptions({
             highlight: function(code, lang) {
                 const language = hljs.getLanguage(lang) ? lang : 'plaintext';
@@ -37,24 +36,18 @@ const ContextProvider = (props) => {
             langPrefix: 'hljs language-'
         });
 
-        // Use marked to convert Markdown to HTML
         let html = marked(text);
-
-        // Additional custom styling
         html = html.replace(/<h2/g, '<h2 class="mb-4 mt-6"')
-                   .replace(/<h3/g, '<h3 class="mb-3 mt-5"')
-                   .replace(/<p>/g, '<p class="mb-4">')
-                   .replace(/<ul>/g, '<ul class="mb-4">')
-                   .replace(/<li>/g, '<li class="mb-2 ml-4">');
-
-        // Wrap code blocks
+                .replace(/<h3/g, '<h3 class="mb-3 mt-5"')
+                .replace(/<p>/g, '<p class="mb-4">')
+                .replace(/<ul>/g, '<ul class="mb-4">')
+                .replace(/<li>/g, '<li class="mb-2 ml-4">');
         html = html.replace(/<pre><code/g, '<div class="code-block"><pre><code')
-                   .replace(/<\/code><\/pre>/g, '</code></pre></div>');
-
+                .replace(/<\/code><\/pre>/g, '</code></pre></div>');
         return html;
     };
 
-    const highlightCode = (element) => {
+    const highlightCode = () => {
         hljs.highlightAll();
     };
 
@@ -64,22 +57,35 @@ const ContextProvider = (props) => {
         setShowResult(true);
 
         let response;
-        if (prompt !== undefined) {
-            response = await runChat(prompt);
-            setRecentPrompt(prompt);
-        } else {
-            setPrevPrompts(prev => [...prev, input]);
-            setRecentPrompt(input);
-            response = await runChat(input);
+        try {
+            if (prompt !== undefined) {
+                response = await runChat(prompt);
+                setRecentPrompt(prompt);
+            } else {
+                setPrevPrompts(prev => [...prev, input]);
+                setRecentPrompt(input);
+                response = await runChat(input);
+            }
+
+            if (response) {
+                let formattedResponse = formatGeminiStyle(response);
+                const sanitizedResponse = DOMPurify.sanitize(formattedResponse);
+
+                setResultData(sanitizedResponse);
+                return response;
+            } else {
+                console.error('No response received');
+                setResultData('No response text found');
+                return null;
+            }
+        } catch (error) {
+            console.error('Error in onSent:', error);
+            setResultData('An error occurred while processing the request');
+            return null;
+        } finally {
+            setLoading(false);
+            setInput("");
         }
-
-        let formattedResponse = formatGeminiStyle(response);
-        const sanitizedResponse = DOMPurify.sanitize(formattedResponse);
-
-        setResultData(sanitizedResponse);
-
-        setLoading(false);
-        setInput("");
     };
 
     const contextValue = {
@@ -99,7 +105,7 @@ const ContextProvider = (props) => {
 
     return (
         <Context.Provider value={contextValue}>
-            {props.children}
+            {children}
         </Context.Provider>
     );
 };

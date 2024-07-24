@@ -1,54 +1,67 @@
-import {
-  GoogleGenerativeAI,
-  HarmCategory,
-  HarmBlockThreshold,
-} from "@google/generative-ai";
+import axios from 'axios';
 
-// Ensure the environment variable is loaded
-const API_KEY = "AIzaSyC9EtRr3eu5QAAYL_wVNXfuUeUjgHV6bwg"; // Load API key from environment variable
+const API_KEY = 'AIzaSyC9EtRr3eu5QAAYL_wVNXfuUeUjgHV6bwg'; // Replace with your actual API key
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${API_KEY}`;
 
-const MODEL_NAME = "gemini-1.5-flash";
+export const runChat = async (prompt) => {
+  try {
+    const response = await axios.post(API_URL, {
+      contents: [
+        {
+          role: 'user',
+          parts: [
+            {
+              text: prompt,
+            },
+          ],
+        },
+      ],
+      generationConfig: {
+        temperature: 1,
+        topK: 64,
+        topP: 0.95,
+        maxOutputTokens: 8192,
+        responseMimeType: 'text/plain',
+      },
+      safetySettings: [
+        {
+          category: 'HARM_CATEGORY_HARASSMENT',
+          threshold: 'BLOCK_MEDIUM_AND_ABOVE',
+        },
+        {
+          category: 'HARM_CATEGORY_HATE_SPEECH',
+          threshold: 'BLOCK_MEDIUM_AND_ABOVE',
+        },
+        {
+          category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
+          threshold: 'BLOCK_MEDIUM_AND_ABOVE',
+        },
+        {
+          category: 'HARM_CATEGORY_DANGEROUS_CONTENT',
+          threshold: 'BLOCK_MEDIUM_AND_ABOVE',
+        },
+      ],
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-async function runChat(prompt) {
-  const genAI = new GoogleGenerativeAI(API_KEY);
-  const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+    // Log the full response for debugging
+    console.log('API response:', response.data);
 
-  const generationConfig = {
-    temperature: 0.9,
-    topK: 1,
-    topP: 1,
-    maxOutputTokens: 2048,
-  };
-
-  const safetySettings = [
-    {
-      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-      threshold: HarmBlockThreshold.BLOCK_NONE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-      threshold: HarmBlockThreshold.BLOCK_NONE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-      threshold: HarmBlockThreshold.BLOCK_NONE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-      threshold: HarmBlockThreshold.BLOCK_NONE,
-    },
-  ];
-
-  const chat = model.startChat({
-    generationConfig,
-    safetySettings,
-    history: [],
-  });
-
-  const result = await chat.sendMessage(prompt);
-  const response = result.response;
-  console.log(response.text());
-  return response.text();
-}
-
-export default runChat;
+    // Access the text from the response data
+    if (response.data.candidates && response.data.candidates.length > 0) {
+      const content = response.data.candidates[0]?.content;
+      if (content && content.parts && content.parts.length > 0) {
+        return content.parts[0]?.text || 'No response text found';
+      }
+    }
+    
+    console.error('Unexpected response format:', response.data);
+    return 'No response text found';
+  } catch (error) {
+    console.error('Error making request to Gemini API:', error);
+    throw error;
+  }
+};

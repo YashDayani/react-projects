@@ -63,7 +63,7 @@ const Main = () => {
         setError('Please enter a prompt before sending.');
         return;
       }
-      const response = await onSent();
+      const response = await onSent(input); // Pass the input to onSent
       console.log('Input:', input);
       console.log('Response:', response);
       if (response) {

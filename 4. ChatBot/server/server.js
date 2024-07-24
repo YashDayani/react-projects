@@ -32,16 +32,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.error('MongoDB connection error:', err));
 
-// User Model
-const UserSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
-});
-
-const User = mongoose.model('User', UserSchema);
-
-// SearchHistory Model
+// Import Models
+const User = require('./models/User');
 const SearchHistory = require('./models/SearchHistory');
 
 // Input validation middleware
@@ -129,7 +121,7 @@ const auth = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded.id;
+    req.user = decoded.id; // Get user ID from token
     next();
   } catch (error) {
     console.error('Token validation error:', error);

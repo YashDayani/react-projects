@@ -1,105 +1,91 @@
-import { createContext, useState, useRef, useEffect } from "react";
-import runChat from "../config/gemini";
-import hljs from 'highlight.js'; // Or your preferred syntax highlighting theme
+import React, { createContext, useState, useRef, useEffect } from "react";
+import hljs from 'highlight.js';
+import DOMPurify from 'dompurify';
+import { marked } from 'marked';
+import { runChat } from '../config/gemini'; // Ensure this import is correct
 
 export const Context = createContext();
 
-const ContextProvider = (props) => {
-    const [input, setInput] = useState(""); // Current user input
-    const [recentPrompt, setRecentPrompt] = useState(""); // Most recent prompt
-    const [prevPrompts, setPrevPrompts] = useState([]); // History of prompts
-    const [showResult, setShowResult] = useState(false); // Whether to show result
-    const [loading, setLoading] = useState(false); // Loading state
-    const [resultData, setResultData] = useState(""); // Formatted response data
+const ContextProvider = ({ children }) => {
+    const [input, setInput] = useState("");
+    const [recentPrompt, setRecentPrompt] = useState("");
+    const [prevPrompts, setPrevPrompts] = useState([]);
+    const [showResult, setShowResult] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [resultData, setResultData] = useState("");
 
-    const resultRef = useRef(null); // Ref to highlight code blocks
+    const resultRef = useRef(null);
 
     useEffect(() => {
         if (resultRef.current) {
-            highlightCode(resultRef.current); // Highlight code on result update
+            highlightCode(resultRef.current);
         }
     }, [resultData]);
 
-    const delayPara = (index, nextWord) => {
-        setTimeout(() => {
-            setResultData(prev => prev + nextWord); // Display words with delay
-        }, 3 * index); // Adjust delay as needed
-    };
-
     const newChat = () => {
-        setLoading(false); // Reset states for new chat
+        setLoading(false);
         setShowResult(false);
     };
 
     const formatGeminiStyle = (text) => {
-        // Handle code blocks
-        text = text.replace(
-            /```(\w+)?\n([\s\S]*?)```/g,
-            (match, lang, code) => `<div class="code-block"><pre class="language-${lang || ''}"><code class="hljs language-${lang || ''}">${hljs.highlightAuto(code.trim()).value}</code></pre></div>`
-        );
-    
-        // Handle inline code
-        text = text.replace(
-            /`([^`]+?)`/g,
-            '<code class="inline-code hljs">$1</code>'
-        );
-    
-        // Handle headers
-        text = text.replace(/^## (.*$)/gm, '<h2 class="mb-4 mt-6">$1</h2>')  // H2 headers with margin
-            .replace(/^### (.*$)/gm, '<h3 class="mb-3 mt-5">$1</h3>');  // H3 headers with margin
-    
-        // Handle bold and italic text
-        text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // Bold
-            .replace(/\*(.*?)\*/g, '<em>$1</em>');  // Italic
-    
-        // Handle paragraphs and line breaks
-        text = text.replace(/\n\n/g, '</p><p class="mb-4">')  // Paragraphs with margin
-            .replace(/\n/g, '<br>');  // Line breaks
-    
-        // Handle unordered lists
-        text = text.replace(/^(\s*)\* (.+)$/gm, (match, indent, content) => {
-            const depth = indent.length / 2;  // Assuming 2 spaces per indent level
-            return `<li class="mb-2 ml-${depth * 4}">${content}</li>`;
+        marked.setOptions({
+            highlight: function(code, lang) {
+                const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+                return hljs.highlight(code, { language }).value;
+            },
+            langPrefix: 'hljs language-'
         });
-    
-        // Wrap list items in <ul> tags
-        text = text.replace(/(<li.*?<\/li>\s*)+/g, '<ul class="mb-4">$&</ul>');
-    
-        return text;
+
+        let html = marked(text);
+        html = html.replace(/<h2/g, '<h2 class="mb-4 mt-6"')
+                .replace(/<h3/g, '<h3 class="mb-3 mt-5"')
+                .replace(/<p>/g, '<p class="mb-4">')
+                .replace(/<ul>/g, '<ul class="mb-4">')
+                .replace(/<li>/g, '<li class="mb-2 ml-4">');
+        html = html.replace(/<pre><code/g, '<div class="code-block"><pre><code')
+                .replace(/<\/code><\/pre>/g, '</code></pre></div>');
+        return html;
     };
-    
-    const highlightCode = (element) => {
-        hljs.highlightAll(); // Highlight all code blocks
+
+    const highlightCode = () => {
+        hljs.highlightAll();
     };
 
     const onSent = async (prompt) => {
-        setResultData(""); // Clear previous result
-        setLoading(true); // Set loading state
-        setShowResult(true); // Show result
+        setResultData("");
+        setLoading(true);
+        setShowResult(true);
 
         let response;
-        if (prompt !== undefined) {
-            response = await runChat(prompt);
-            setRecentPrompt(prompt); // Update recent prompt
-        } else {
-            setPrevPrompts(prev => [...prev, input]); // Save current input to history
-            setRecentPrompt(input); // Update recent prompt
-            response = await runChat(input);
+        try {
+            if (prompt !== undefined) {
+                response = await runChat(prompt);
+                setRecentPrompt(prompt);
+            } else {
+                setPrevPrompts(prev => [...prev, input]);
+                setRecentPrompt(input);
+                response = await runChat(input);
+            }
+
+            if (response) {
+                let formattedResponse = formatGeminiStyle(response);
+                const sanitizedResponse = DOMPurify.sanitize(formattedResponse);
+
+                setResultData(sanitizedResponse);
+                return response;
+            } else {
+                console.error('No response received');
+                setResultData('No response text found');
+                return null;
+            }
+        } catch (error) {
+            console.error('Error in onSent:', error);
+            setResultData('An error occurred while processing the request');
+            return null;
+        } finally {
+            setLoading(false);
+            setInput("");
         }
-
-        // Format the response
-        let formattedResponse = formatGeminiStyle(response);
-
-        // Split the formatted response into words
-        let words = formattedResponse.split(/(\s+)/);
-
-        // Display words with delay
-        words.forEach((word, index) => {
-            delayPara(index, word);
-        });
-
-        setLoading(false); // Reset loading state
-        setInput(""); // Clear input
     };
 
     const contextValue = {
@@ -119,7 +105,7 @@ const ContextProvider = (props) => {
 
     return (
         <Context.Provider value={contextValue}>
-            {props.children}
+            {children}
         </Context.Provider>
     );
 };

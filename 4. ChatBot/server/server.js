@@ -11,7 +11,18 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5173' }));
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token']
+}));
+
+// Logging middleware
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  console.log('Request body:', req.body);
+  next();
+});
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI, {
@@ -21,14 +32,9 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.error('MongoDB connection error:', err));
 
-// User Model
-const UserSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
-});
-
-const User = mongoose.model('User', UserSchema);
+// Import Models
+const User = require('./models/User');
+const SearchHistory = require('./models/SearchHistory');
 
 // Input validation middleware
 const registerValidation = [
@@ -45,7 +51,7 @@ const loginValidation = [
 // Helper function to handle errors
 const handleErrors = (res, error) => {
   console.error('Server error:', error);
-  res.status(500).json({ message: 'An unexpected error occurred' });
+  res.status(500).json({ message: 'An unexpected error occurred', error: error.message });
 };
 
 // Register endpoint
@@ -104,24 +110,7 @@ app.post('/login', loginValidation, async (req, res) => {
     res.status(200).json({ token, redirectUrl: '/dashboard' });
   } catch (error) {
     console.error('Login error:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
-// Protected route example
-app.get('/protected', (req, res) => {
-  const token = req.header('x-auth-token');
-
-  if (!token) {
-    return res.status(401).json({ message: 'No token, authorization denied' });
-  }
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded.id;
-    res.json({ message: 'Access to protected route granted' });
-  } catch (error) {
-    res.status(401).json({ message: 'Token is not valid' });
+    handleErrors(res, error);
   }
 });
 
@@ -132,10 +121,11 @@ const auth = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded.id;
+    req.user = decoded.id; // Get user ID from token
     next();
   } catch (error) {
-    res.status(401).json({ message: 'Token is not valid' });
+    console.error('Token validation error:', error);
+    res.status(401).json({ message: 'Token is not valid', error: error.message });
   }
 };
 
@@ -150,6 +140,15 @@ app.get('/api/user/name', auth, async (req, res) => {
   }
 });
 
+// History routes
+const historyRoutes = require('./routes/history');
+app.use('/api/history', historyRoutes);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Something went wrong!', error: err.message });
+});
 
 // Start server
 app.listen(PORT, () => {

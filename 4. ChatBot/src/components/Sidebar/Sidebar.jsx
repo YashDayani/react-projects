@@ -72,9 +72,12 @@ const Sidebar = () => {
                     ) : null}
                 </div>
 
+                {extended ? <p className="recent-title">Recent</p> : null}
+            </div>
+
+            <div className="recent-container">
                 {extended ? (
                     <div className="recent">
-                        <p className="recent-title">Recent</p>
                         {loading ? (
                             <p>Loading...</p>
                         ) : error ? (
@@ -88,8 +91,8 @@ const Sidebar = () => {
                                         className="recent-entry"
                                         aria-label={`Load prompt ${item.prompt.slice(0, 12)}`}
                                     >
-                                        <img src={assets.message_icon} alt="Message icon" />
-                                        <p>{item.prompt.slice(0, 20)} ...</p>
+                                        {/* <img src={assets.message_icon} alt="Message icon" /> */}
+                                        <p className="recent-entry-text">{item.prompt}</p>
                                     </div>
                                 ))
                             ) : (
@@ -99,6 +102,7 @@ const Sidebar = () => {
                     </div>
                 ) : null}
             </div>
+
             <div className="bottom">
                 <div className="bottom-item recent-entry" aria-label="Help">
                     <img src={assets.question_icon} alt="Question icon" />

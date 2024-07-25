@@ -32,13 +32,13 @@
 }
 
 .sidebar .menu:hover {
-     /* Slightly enlarge the menu icon on hover */
+    /* Slightly enlarge the menu icon on hover */
     fill: rgb(30, 0, 255);
     padding: 0;
     filter: brightness(5) invert(0.1);
 }
 
-.sidelogo{
+.sidelogo {
     display: flex;
     cursor: pointer;
     align-items: center;
@@ -57,7 +57,7 @@
     font-size: 14px;
     cursor: pointer;
     width: 50px; /* Set width and height to make it circular */
-    height: 50px; 
+    height: 50px;
     justify-content: center;
     border: 0.1rem solid transparent;
     transition: all 0.3s;
@@ -77,13 +77,61 @@
     border: 0.1rem solid #21808D;
 }
 
-.sidebar .recent {
+.new-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.new-btn .srt-btn:nth-child(1) {
+    margin-left: 8px;
+}
+
+.srt-btn {
+    background-color: transparent;
+    padding: 2px 8px;
+    margin: 2px;
+    font-size: 12px;
+    font-weight: 100;
+    border: 1px solid;
+    border-radius: 5px;
+    font-display: berkeley;
+}
+
+.sidebar .recent-container {
+    flex-grow: 1; /* Allow .recent-container to grow and fill the available space */
     display: flex;
     flex-direction: column;
     width: 100%;
-    animation: fadeIn 1.5s;
-    overflow: auto;
-    height: 400px;
+    overflow: hidden; /* Hide scrollbar when not needed */
+    max-height: calc(100vh - 200px); /* Ensure it doesn't push out the bottom section */
+}
+
+.sidebar .recent {
+    flex-grow: 1; /* Allow .recent to grow and fill the available space */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-bottom: 10px; /* Ensure padding at the bottom */
+}
+
+/* Custom scrollbar styles */
+.sidebar .recent::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar .recent::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.sidebar .recent::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.sidebar .recent::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .sidebar .recent-title {
@@ -95,7 +143,7 @@
     display: flex;
     align-items: center;
     gap: 1px;
-    padding: 10px;
+    padding: 15px 10px;
     border-radius: 50%;
     color: #282828;
     cursor: pointer;
@@ -103,6 +151,15 @@
     height: 50px;
     justify-content: center;
     transition: all 0.3s;
+}
+
+.sidebar .recent-entry-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px; /* Adjust based on your layout */
+    display: inline-block;
+    font-size: 14px;
 }
 
 .sidebar.extended .recent-entry {
@@ -170,24 +227,4 @@
         opacity: 1;
     }
 }
-
-
-.new-btn{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.new-btn .srt-btn:nth-child(1){
-    margin-left: 8px;
-}
-.srt-btn{
-    background-color: transparent;
-    padding: 2px 8px;
-    margin: 2px;
-    font-size: 12px;
-    font-weight: 100;
-    border: 1px solid;
-    border-radius: 5px;
-    font-display: berkeley;
-}
+    

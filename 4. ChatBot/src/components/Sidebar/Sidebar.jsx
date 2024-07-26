@@ -1,47 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 import { assets } from '../../assets/assets';
 import { Context } from '../../context/Context';
-import axios from 'axios';
 
-const Sidebar = () => {
+const Sidebar = ({ fetchSearchHistory, searchHistory, loading, error, onNewChat }) => {
     const [extended, setExtended] = useState(false);
-    const { onSent, setRecentPrompt, newChat } = useContext(Context);
-    const [searchHistory, setSearchHistory] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const { setRecentPrompt, onSent } = useContext(Context);
     const navigate = useNavigate();
-
-    const fetchSearchHistory = async () => {
-        try {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                setError('No token found. Please log in.');
-                return;
-            }
-            const response = await axios.get('http://localhost:5000/api/history', {
-                headers: {
-                    'x-auth-token': token
-                }
-            });
-            setSearchHistory(response.data);
-        } catch (error) {
-            console.error('Error fetching search history:', error.response ? error.response.data : error.message);
-            setError('Failed to load search history. Please log in again.');
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const loadPrompt = async (prompt) => {
         setRecentPrompt(prompt);
         await onSent(prompt);
+        fetchSearchHistory();
     };
 
-    useEffect(() => {
-        fetchSearchHistory();
-    }, []);
+    const handleNewChat = () => {
+        onNewChat();
+    };
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -61,7 +37,7 @@ const Sidebar = () => {
                     />
                 </div>
 
-                <div onClick={() => newChat()} className="new-chat" title='New Chat' aria-label="Start a new chat">
+                <div onClick={handleNewChat} className="new-chat" title='New Chat' aria-label="Start a new chat">
                     <img src={assets.plus_icon} alt="Plus icon" />
                     {extended ? (
                         <div className='new-btn'>
@@ -91,7 +67,6 @@ const Sidebar = () => {
                                         className="recent-entry"
                                         aria-label={`Load prompt ${item.prompt.slice(0, 12)}`}
                                     >
-                                        {/* <img src={assets.message_icon} alt="Message icon" /> */}
                                         <p className="recent-entry-text">{item.prompt}</p>
                                     </div>
                                 ))

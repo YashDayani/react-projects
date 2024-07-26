@@ -3,65 +3,47 @@ import axios from 'axios';
 const API_KEY = 'AIzaSyC9EtRr3eu5QAAYL_wVNXfuUeUjgHV6bwg'; // Replace with your actual API key
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${API_KEY}`;
 
+// Create a reusable axios instance
+const api = axios.create({
+  baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  timeout: 30000, // Set a timeout of 30 seconds
+});
+
 export const runChat = async (prompt) => {
   try {
-    const response = await axios.post(API_URL, {
+    const response = await api.post('', {
       contents: [
         {
           role: 'user',
-          parts: [
-            {
-              text: prompt,
-            },
-          ],
+          parts: [{ text: prompt }],
         },
       ],
       generationConfig: {
-        temperature: 1,
-        topK: 64,
+        temperature: 0.7, // Lowered for more focused responses
+        topK: 40,
         topP: 0.95,
-        maxOutputTokens: 8192,
-        responseMimeType: 'text/plain',
+        maxOutputTokens: 4096, // Reduced for faster responses
       },
       safetySettings: [
-        {
-          category: 'HARM_CATEGORY_HARASSMENT',
-          threshold: 'BLOCK_MEDIUM_AND_ABOVE',
-        },
-        {
-          category: 'HARM_CATEGORY_HATE_SPEECH',
-          threshold: 'BLOCK_MEDIUM_AND_ABOVE',
-        },
-        {
-          category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
-          threshold: 'BLOCK_MEDIUM_AND_ABOVE',
-        },
-        {
-          category: 'HARM_CATEGORY_DANGEROUS_CONTENT',
-          threshold: 'BLOCK_MEDIUM_AND_ABOVE',
-        },
+        { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
+        { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
+        { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
+        { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
       ],
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
 
-    // Log the full response for debugging
-    console.log('API response:', response.data);
-
-    // Access the text from the response data
-    if (response.data.candidates && response.data.candidates.length > 0) {
-      const content = response.data.candidates[0]?.content;
-      if (content && content.parts && content.parts.length > 0) {
-        return content.parts[0]?.text || 'No response text found';
-      }
+    const content = response.data.candidates?.[0]?.content;
+    if (content?.parts?.[0]?.text) {
+      return content.parts[0].text;
     }
-    
-    console.error('Unexpected response format:', response.data);
+
+    console.warn('Unexpected response format:', response.data);
     return 'No response text found';
   } catch (error) {
-    console.error('Error making request to Gemini API:', error);
-    throw error;
+    console.error('Error making request to Gemini API:', error.response?.data || error.message);
+    throw new Error('Failed to get response from Gemini API');
   }
 };

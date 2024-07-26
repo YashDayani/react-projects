@@ -104,7 +104,7 @@ app.post('/login', loginValidation, async (req, res) => {
     }
 
     console.log('Password match, generating token');
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '12h' });
 
     console.log('Login successful for email:', email);
     res.status(200).json({ token, redirectUrl: '/dashboard' });

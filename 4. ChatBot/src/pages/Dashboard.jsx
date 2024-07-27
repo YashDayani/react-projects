@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from '../components/Sidebar/Sidebar'
-import Main from '../components/Main/Main'
-import './Dasboard.css'
-import '../context/code.css';
+import Sidebar from '../components/Sidebar/Sidebar';
+import Main from '../components/Main/Main';
+import './Dasboard.css';
 import axios from 'axios';
 
 const Dashboard = () => {

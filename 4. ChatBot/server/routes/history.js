@@ -19,7 +19,7 @@ router.post('/', auth, async (req, res) => {
         const newHistory = new SearchHistory({
             prompt,
             response,
-            user
+            user // Include user ID
         });
 
         await newHistory.save();
@@ -39,6 +39,37 @@ router.get('/', auth, async (req, res) => {
     } catch (error) {
         console.error('Error fetching search history:', error);
         res.status(500).json({ message: 'Error fetching search history', error: error.message });
+    }
+});
+
+// Delete all search history for the authenticated user
+router.delete('/', auth, async (req, res) => {
+    try {
+        const userId = req.user;
+        await SearchHistory.deleteMany({ user: userId });
+        res.status(200).json({ message: 'All chats deleted successfully.' });
+    } catch (error) {
+        console.error('Error deleting all chats:', error.message);
+        res.status(500).json({ message: 'Failed to delete all chats.' });
+    }
+});
+
+// Delete a specific search history item by ID
+router.delete('/:id', auth, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = req.user;
+
+        const historyItem = await SearchHistory.findOneAndDelete({ _id: id, user });
+
+        if (!historyItem) {
+            return res.status(404).json({ message: 'Search history item not found' });
+        }
+
+        res.status(200).json({ message: 'Chat deleted successfully.' });
+    } catch (error) {
+        console.error('Error deleting chat:', error.message);
+        res.status(500).json({ message: 'Failed to delete chat.' });
     }
 });
 

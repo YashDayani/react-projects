@@ -24,7 +24,7 @@
 }
 
 .main .nav img{
-    width: 40px;
+    width: 30px;
     border-radius: 50%;
 }
 
@@ -214,6 +214,17 @@
         background-position: 800px 0px;
     }
     
+}
+
+.micSwitch{
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+.micSwitch:hover{
+    background-color: #F3F3EE;
+    box-sizing: border-box;
 }
 
 

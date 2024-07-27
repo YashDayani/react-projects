@@ -84,3 +84,27 @@ code.hljs {
 .function_{
   color: #4d4d4c;
 }
+
+.code-block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.code-block-lang {
+  font-weight: bold;
+}
+
+.copy-code-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.copy-code-btn:hover {
+  background-color: #0056b3;
+}

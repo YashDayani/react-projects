@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-const API_KEY = 'AIzaSyC9EtRr3eu5QAAYL_wVNXfuUeUjgHV6bwg'; // Replace with your actual API key
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${API_KEY}`;
+const API_KEY = 'AIzaSyC9EtRr3eu5QAAYL_wVNXfuUeUjgHV6bwg';
+const GEMINI_MODEL = 'gemini-1.0-pro'
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${API_KEY}`;
 
 // Create a reusable axios instance
 const api = axios.create({
@@ -9,39 +10,38 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 30000, // Set a timeout of 30 seconds
+  timeout: 15000, // Reduced timeout to 15 seconds
 });
+
+// Prepare static parts of the request body
+const staticRequestBody = {
+  generationConfig: {
+    temperature: 0.5, // Further lowered for more focused and faster responses
+    topP: 1, // Slightly reduced
+    maxOutputTokens: 2048, // Further reduced for faster responses
+  },
+  safetySettings: [
+    { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
+    { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' },
+    { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE' },
+    { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_NONE' },
+  ],
+};
 
 export const runChat = async (prompt) => {
   try {
     const response = await api.post('', {
+      ...staticRequestBody,
       contents: [
         {
           role: 'user',
           parts: [{ text: prompt }],
         },
       ],
-      generationConfig: {
-        temperature: 0.7, // Lowered for more focused responses
-        topK: 40,
-        topP: 0.95,
-        maxOutputTokens: 4096, // Reduced for faster responses
-      },
-      safetySettings: [
-        { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-        { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-        { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-        { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-      ],
     });
 
-    const content = response.data.candidates?.[0]?.content;
-    if (content?.parts?.[0]?.text) {
-      return content.parts[0].text;
-    }
-
-    console.warn('Unexpected response format:', response.data);
-    return 'No response text found';
+    const text = response.data.candidates?.[0]?.content?.parts?.[0]?.text;
+    return text || 'No response text found';
   } catch (error) {
     console.error('Error making request to Gemini API:', error.response?.data || error.message);
     throw new Error('Failed to get response from Gemini API');

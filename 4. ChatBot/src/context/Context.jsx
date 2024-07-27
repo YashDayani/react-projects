@@ -1,7 +1,8 @@
 import React, { createContext, useState, useRef, useEffect } from "react";
-import hljs from 'highlight.js';
 import DOMPurify from 'dompurify';
 import { marked } from 'marked';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism-tomorrow.css'; // Import a Prism theme CSS file
 import { runChat } from '../config/gemini'; // Ensure this import is correct
 
 export const Context = createContext();
@@ -30,25 +31,29 @@ const ContextProvider = ({ children }) => {
     const formatGeminiStyle = (text) => {
         marked.setOptions({
             highlight: function(code, lang) {
-                const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-                return hljs.highlight(code, { language }).value;
+                const language = Prism.languages[lang] ? lang : 'markup'; // Use 'markup' as a fallback language
+                return Prism.highlight(code, Prism.languages[language], language);
             },
-            langPrefix: 'hljs language-'
+            langPrefix: 'language-'
         });
 
         let html = marked(text);
-        html = html.replace(/<h2/g, '<h2 class="mb-4 mt-6"')
-                .replace(/<h3/g, '<h3 class="mb-3 mt-5"')
-                .replace(/<p>/g, '<p class="mb-4">')
-                .replace(/<ul>/g, '<ul class="mb-4">')
-                .replace(/<li>/g, '<li class="mb-2 ml-4">');
-        html = html.replace(/<pre><code/g, '<div class="code-block"><pre><code')
-                .replace(/<\/code><\/pre>/g, '</code></pre></div>');
-        return html;
+console.log(html); // Add this line to debug
+
+html = html.replace(/<h2/g, '<h2 class="mb-4 mt-6"')
+        .replace(/<h3/g, '<h3 class="mb-3 mt-5"')
+        .replace(/<p>/g, '<p class="mb-4">')
+        .replace(/<ul>/g, '<ul class="mb-4">')
+        .replace(/<li>/g, '<li class="mb-2 ml-4">');
+html = html.replace(/<pre><code/g, '<div class="code-block"><pre><code')
+        .replace(/<\/code><\/pre>/g, '</code></pre></div>');
+console.log(html); // Add this line to debug
+return html;
+
     };
 
-    const highlightCode = () => {
-        hljs.highlightAll();
+    const highlightCode = (element) => {
+        Prism.highlightElement(element);
     };
 
     const onSent = async (prompt) => {

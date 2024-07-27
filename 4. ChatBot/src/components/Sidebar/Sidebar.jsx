@@ -1,28 +1,91 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 import { assets } from '../../assets/assets';
 import { Context } from '../../context/Context';
+import axios from 'axios';
 
-const Sidebar = ({ fetchSearchHistory, searchHistory, loading, error, onNewChat }) => {
+const Sidebar = () => {
     const [extended, setExtended] = useState(false);
-    const { setRecentPrompt, onSent } = useContext(Context);
+    const { setRecentPrompt, onSent, newChat } = useContext(Context);
+    const [searchHistory, setSearchHistory] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
+
+    const fetchSearchHistory = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                setError('No token found. Please log in.');
+                return;
+            }
+            const response = await axios.get('http://localhost:5000/api/history', {
+                headers: {
+                    'x-auth-token': token
+                }
+            });
+            setSearchHistory(response.data);
+        } catch (error) {
+            console.error('Error fetching search history:', error.response ? error.response.data : error.message);
+            setError('Failed to load search history. Please log in again.');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const loadPrompt = async (prompt) => {
         setRecentPrompt(prompt);
         await onSent(prompt);
-        fetchSearchHistory();
     };
 
-    const handleNewChat = () => {
-        onNewChat();
+    const handleDeleteChat = async (id, event) => {
+        event.stopPropagation();
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                setError('No token found. Please log in.');
+                return;
+            }
+            await axios.delete(`http://localhost:5000/api/history/${id}`, {
+                headers: {
+                    'x-auth-token': token
+                }
+            });
+            setSearchHistory(searchHistory.filter(item => item._id !== id));
+        } catch (error) {
+            console.error('Error deleting chat:', error.response ? error.response.data : error.message);
+            setError('Failed to delete chat. Please try again.');
+        }
+    };
+
+    const handleDeleteAllChats = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                setError('No token found. Please log in.');
+                return;
+            }
+            await axios.delete('http://localhost:5000/api/history', {
+                headers: {
+                    'x-auth-token': token
+                }
+            });
+            setSearchHistory([]);
+        } catch (error) {
+            console.error('Error deleting all chats:', error.response ? error.response.data : error.message);
+            setError('Failed to delete all chats. Please try again.');
+        }
     };
 
     const handleLogout = () => {
         localStorage.removeItem('token');
         navigate('/login');
     };
+
+    useEffect(() => {
+        fetchSearchHistory();
+    }, []);
 
     return (
         <div className={`sidebar ${extended ? 'extended' : ''}`}>
@@ -37,59 +100,77 @@ const Sidebar = ({ fetchSearchHistory, searchHistory, loading, error, onNewChat 
                     />
                 </div>
 
-                <div onClick={handleNewChat} className="new-chat" title='New Chat' aria-label="Start a new chat">
+                <div onClick={() => newChat()} className="new-chat" title='New Chat' aria-label="Start a new chat">
                     <img src={assets.plus_icon} alt="Plus icon" />
-                    {extended ? (
+                    {extended && (
                         <div className='new-btn'>
                             New Chat
                             <span className='srt-btn'>Ctrl</span>
                             <span className='srt-btn'>I</span>
                         </div>
-                    ) : null}
+                    )}
                 </div>
 
-                {extended ? <p className="recent-title">Recent</p> : null}
+                {extended && <p className="recent-title">Recent</p>}
             </div>
 
             <div className="recent-container">
-                {extended ? (
+                {extended && (
                     <div className="recent">
                         {loading ? (
                             <p>Loading...</p>
                         ) : error ? (
                             <p className="error-message">{error}</p>
-                        ) : (
-                            searchHistory.length > 0 ? (
-                                searchHistory.map((item, index) => (
+                        ) : searchHistory.length > 0 ? (
+                            <>
+                                {searchHistory.map((item, index) => (
                                     <div
                                         key={index}
-                                        onClick={() => loadPrompt(item.prompt)}
                                         className="recent-entry"
                                         aria-label={`Load prompt ${item.prompt.slice(0, 12)}`}
                                     >
-                                        <p className="recent-entry-text">{item.prompt}</p>
+                                        <p 
+                                            className="recent-entry-text" 
+                                            onClick={() => loadPrompt(item.prompt)}
+                                        >
+                                            {item.prompt}
+                                        </p>
+                                        <button 
+                                            onClick={(e) => handleDeleteChat(item._id, e)}
+                                            className="delete-chat-btn"
+                                            aria-label="Delete this chat"
+                                        >
+                                            🗑️
+                                        </button>
                                     </div>
-                                ))
-                            ) : (
-                                <p>No recent history available.</p>
-                            )
+                                ))}
+                                <button 
+                                    onClick={handleDeleteAllChats}
+                                    className="delete-all-chats-btn"
+                                    aria-label="Delete all chats"
+                                >
+                                    Delete All Chats
+                                </button>
+                            </>
+                        ) : (
+                            <p>No recent history available.</p>
                         )}
                     </div>
-                ) : null}
+                )}
             </div>
 
             <div className="bottom">
                 <div className="bottom-item recent-entry" aria-label="Help">
                     <img src={assets.question_icon} alt="Question icon" />
-                    {extended ? <p>Help</p> : null}
+                    {extended && <p>Help</p>}
                 </div>
                 <div className="bottom-item recent-entry" aria-label="Activity">
                     <img src={assets.history_icon} alt="History icon" />
-                    {extended ? <p>Activity</p> : null}
+                    {extended && <p>Activity</p>}
                 </div>
                 <div onClick={handleLogout} className="bottom-item recent-entry" aria-label="Logout">
                     <img src={assets.logout_icon} alt="Logout icon" />
-                    {extended ? <p>Logout</p> : null}
+                    {extended && <p>Logout</p>}
                 </div>
             </div>
         </div>

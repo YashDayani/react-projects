@@ -90,25 +90,16 @@ const Main = ({ onSendMessage }) => {
   const saveSearchHistory = async (prompt, response) => {
     try {
       const token = localStorage.getItem('token');
-      if (!token) {
-        console.error('No token found');
-        return;
-      }
-      if (!prompt || !response) {
-        console.error('Prompt or response is missing');
-        return;
-      }
-      const data = { prompt, response };
-      const res = await axios.post('http://localhost:5000/api/history', data, {
+      const config = {
         headers: {
-          'x-auth-token': token,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'x-auth-token': token
         }
-      });
-      console.log('Search history saved:', res.data);
+      };
+      const body = { prompt, response };
+      await axios.post('http://localhost:5000/api/history', body, config);
     } catch (error) {
-      console.error('Error saving search history:', error.response ? error.response.data : error.message);
-      setError('Failed to save search history. Please try again.');
+      console.error('Error saving search history:', error.response.data);
     }
   };
 
@@ -190,7 +181,10 @@ const Main = ({ onSendMessage }) => {
       <div className="main-wrapper">
         <div className="nav">
           <p>Sophos</p>
-          <img src={assets.dummy_icon} alt="" />
+          <div>
+          <img src={assets.profile_icon} alt="" />
+          <p>{userName || 'User'}</p>
+          </div>
         </div>
         <div className="main-container">
           {!showResult ? (
@@ -253,14 +247,16 @@ const Main = ({ onSendMessage }) => {
                 placeholder='Enter a prompt here'
               />
               <div>
-                <img src={assets.gallery_icon} alt="" />
-                <img
-                  src={isListening ? assets.mic_icon_active : assets.mic_icon}
-                  alt="Microphone"
-                  onClick={toggleListening}
-                  style={{ cursor: 'pointer' }}
-                />
-                {input.trim() && <img onClick={handleSent} src={assets.send_icon} alt="" />}
+                <div className='micSwitch'>
+                  <img
+                    src={isListening ? assets.mic_icon_active : assets.mic_icon}
+                    alt="Microphone"
+                    onClick={toggleListening}
+                  />
+                </div>
+                <div>
+                  {input.trim() && <img onClick={handleSent} src={assets.send_icon} alt="" />}
+                </div>
               </div>
             </div>
             <p className="bottom-info">

@@ -111,9 +111,12 @@
     flex-grow: 1; /* Allow .recent to grow and fill the available space */
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: calc(100%);
     overflow-y: auto; /* Enable vertical scrolling */
     padding-bottom: 10px; /* Ensure padding at the bottom */
+    /* border-left: 1px solid #64645f50;
+    padding-left: 10px;
+    margin-left: 20px; */
 }
 
 /* Custom scrollbar styles */
@@ -143,7 +146,7 @@
     display: flex;
     align-items: center;
     gap: 1px;
-    padding: 15px 10px;
+    padding: 5px 10px;
     border-radius: 50%;
     color: #282828;
     cursor: pointer;
@@ -155,6 +158,8 @@
 
 .sidebar .recent-entry-text {
     white-space: nowrap;
+    color: #64645f;
+    font-weight: 500;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 180px; /* Adjust based on your layout */
@@ -227,4 +232,21 @@
         opacity: 1;
     }
 }
-    
+
+.delete-chat-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 0 5px;
+}
+
+.delete-all-chats-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}

@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const { body, validationResult } = require('express-validator');
+const authRoutes = require('./routes/auth');
+const historyRoutes = require('./routes/history');
 require('dotenv').config();
 
 const app = express();
@@ -35,6 +37,10 @@ mongoose.connect(process.env.MONGODB_URI, {
 // Import Models
 const User = require('./models/User');
 const SearchHistory = require('./models/SearchHistory');
+
+// Define Routes
+app.use('/api/users', authRoutes);
+app.use('/api/history', historyRoutes);
 
 // Input validation middleware
 const registerValidation = [
@@ -139,10 +145,6 @@ app.get('/api/user/name', auth, async (req, res) => {
     handleErrors(res, error);
   }
 });
-
-// History routes
-const historyRoutes = require('./routes/history');
-app.use('/api/history', historyRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

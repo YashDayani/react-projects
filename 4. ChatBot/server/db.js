@@ -1,10 +1,6 @@
-const mongoose = require('mongoose');
-
-mongoose.connect('mongodb+srv://yashdayani:NkZ04mYlUcPOb54K@ai-chatbot.qrjtmc9.mongodb.net/', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-}).then(() => {
-  console.log('MongoDB connected');
-}).catch(err => {
-  console.error('Connection error', err);
-});
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error('MongoDB connection error:', err));

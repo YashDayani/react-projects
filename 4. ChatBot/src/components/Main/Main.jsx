@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState, useCallback, useRef } from 'react';
-import './Main.css';
+import CodeBlock from '../CodeBlock/CodeBlock';
 import { assets } from '../../assets/assets';
 import { Context } from '../../context/Context';
 import axios from 'axios';
+import './Main.css';
 
 const Main = ({ onSendMessage }) => {
-  const { onSent, recentPrompt, showResult, loading, resultData, setInput, input, newChat } = useContext(Context);
+  const { onSent, recentPrompt, showResult, loading, resultData, setInput, input, newChat, resultRef } = useContext(Context);
   const [userName, setUserName] = useState('');
   const [error, setError] = useState(null);
   const [isListening, setIsListening] = useState(false);
@@ -14,6 +15,21 @@ const Main = ({ onSendMessage }) => {
   const [elapsedTime, setElapsedTime] = useState(0);
   const [milliseconds, setMilliseconds] = useState(0);
   const timerRef = useRef(null);
+
+  const renderContent = (html) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const elements = Array.from(doc.body.childNodes);
+  
+    return elements.map((node, index) => {
+      if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'PRE' && node.firstChild.tagName === 'CODE') {
+        const language = node.firstChild.className.replace('language-', '') || 'plaintext';
+        const code = node.firstChild.textContent;
+        return <CodeBlock key={index} language={language} code={code} />;
+      }
+      return <div key={index} dangerouslySetInnerHTML={{ __html: node.outerHTML }} />;
+    });
+  };
 
   useEffect(() => {
     const fetchUserName = async () => {
@@ -182,8 +198,8 @@ const Main = ({ onSendMessage }) => {
         <div className="nav">
           <p>Sophos</p>
           <div>
-          <img src={assets.profile_icon} alt="" />
-          <p>{userName || 'User'}</p>
+            <img src={assets.profile_icon} alt="" />
+            <p>{userName || 'User'}</p>
           </div>
         </div>
         <div className="main-container">
@@ -232,7 +248,9 @@ const Main = ({ onSendMessage }) => {
                     <hr />
                   </div>
                 ) : (
-                  <p dangerouslySetInnerHTML={{ __html: resultData }}></p>
+                  <div ref={resultRef} className="prism-highlight">
+                    {renderContent(resultData)}
+                  </div>
                 )}
               </div>
             </div>

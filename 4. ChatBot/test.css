@@ -40,4 +40,44 @@
     --light-background-color-100: var(--pale-yellow-100);
     --light-text-color-100: var(--pale-blue-200);
   }
+
+
+  /* General textarea styles */
+textarea {
+    overflow: auto; /* Makes the textarea scrollable */
+    max-height: 45vh; /* Sets the maximum height to 45% of the viewport height */
+    outline: none; /* Removes the default outline */
+    width: 100%; /* Full width of its container */
+    font-family: sans-serif; /* Font family set to sans-serif */
+    caret-color: #FFDD00; /* Custom caret color (superDuper) */
+    resize: none; /* Disables resizing */
+    background-color: #F5F5F5; /* Background color (background) */
+    color: #333333; /* Text color (textMain) */
+    placeholder-color: #B0B0B0; /* Placeholder color (placeholder-textOff) */
+    height: 48px !important; /* Height set to 48px with !important */
+    spellcheck: false; /* Disables spell checking */
+  }
+  
+  /* Selection styles */
+  textarea::selection {
+    background-color: #FFDD00; /* Background color of selected text (superDuper) */
+    color: #333333; /* Text color of selected text (textMain) */
+  }
+  
+  /* Dark mode styles */
+  .dark textarea {
+    background-color: #2E2E2E; /* Dark mode background color (offsetDark) */
+    color: #E0E0E0; /* Dark mode text color (textMainDark) */
+    placeholder-color: #505050; /* Dark mode placeholder color (textOffDark) */
+  }
+  
+  /* Autocomplete attribute is HTML5 and does not affect styles */
+  textarea[autocomplete="off"] {
+    /* No additional styling needed here */
+  }
+  
+  /* data-1p-ignore attribute is a custom attribute and does not affect styles */
+  textarea[data-1p-ignore="true"] {
+    /* No additional styling needed here */
+  }
   

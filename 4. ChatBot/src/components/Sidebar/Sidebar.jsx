@@ -126,7 +126,7 @@ const Sidebar = () => {
                                 {searchHistory.map((item, index) => (
                                     <div
                                         key={index}
-                                        className="recent-entry"
+                                        className="recent-entry chat-entry"
                                         aria-label={`Load prompt ${item.prompt.slice(0, 12)}`}
                                     >
                                         <p 
@@ -135,12 +135,13 @@ const Sidebar = () => {
                                         >
                                             {item.prompt}
                                         </p>
+
                                         <button 
                                             onClick={(e) => handleDeleteChat(item._id, e)}
                                             className="delete-chat-btn"
                                             aria-label="Delete this chat"
                                         >
-                                            🗑️
+                                            <img src={assets.cross_icon} />
                                         </button>
                                     </div>
                                 ))}
@@ -159,15 +160,19 @@ const Sidebar = () => {
                 )}
             </div>
 
+            
+
             <div className="bottom">
+                <div className="bottom-item recent-entry" aria-label="Activity">
+                        <img src={assets.history_icon} alt="History icon" />
+                        {extended && <p>Clear</p>}
+                </div>
+
                 <div className="bottom-item recent-entry" aria-label="Help">
                     <img src={assets.question_icon} alt="Question icon" />
                     {extended && <p>Help</p>}
                 </div>
-                <div className="bottom-item recent-entry" aria-label="Activity">
-                    <img src={assets.history_icon} alt="History icon" />
-                    {extended && <p>Activity</p>}
-                </div>
+                
                 <div onClick={handleLogout} className="bottom-item recent-entry" aria-label="Logout">
                     <img src={assets.logout_icon} alt="Logout icon" />
                     {extended && <p>Logout</p>}

@@ -120,6 +120,11 @@
     outline: none;
     padding: 8px;
     font-size: 18px;
+    caret-color: hsl(187.27 73% 46%);
+}
+
+.search-box input::selection{
+    background-color: hsl(187.27 73% 46%);
 }
 
 .search-box div{

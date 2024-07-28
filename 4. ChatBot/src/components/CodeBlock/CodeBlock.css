@@ -1,0 +1,42 @@
+.code-block {
+    background-color: #f4f4f4;
+    border-radius: 4px;
+    margin: 1em 0;
+  }
+  
+  .code-header {
+    background-color: #E8E5D8;
+    padding: 0.5em 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+  
+  .code-header *{
+    color: hsl(51, 8%, 30%);
+  }
+  
+  /* .language {
+  } */
+  
+  .code-header button {
+    background-color: transparent;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    width: fit-content;
+  }
+  
+  .code-header button:hover {
+    background-color: hsla(51, 8%, 30%, 0.1);
+  }
+  
+  .code-block pre {
+    margin: 0;
+    padding: 1em;
+    overflow-x: auto;
+  }

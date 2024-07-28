@@ -2,8 +2,13 @@ import React, { createContext, useState, useRef, useEffect } from "react";
 import DOMPurify from 'dompurify';
 import { marked } from 'marked';
 import Prism from 'prismjs';
-import 'prismjs/themes/prism-tomorrow.css'; // Import a Prism theme CSS file
+import './code.css';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-jsx';
+// Import other language components as needed
 import { runChat } from '../config/gemini'; // Ensure this import is correct
+
+Prism.manual = true;
 
 export const Context = createContext();
 
@@ -19,7 +24,12 @@ const ContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (resultRef.current) {
-            highlightCode(resultRef.current);
+            setTimeout(() => {
+                const codeBlocks = resultRef.current.querySelectorAll('pre code');
+                codeBlocks.forEach((block) => {
+                    Prism.highlightElement(block);
+                });
+            }, 0);
         }
     }, [resultData]);
 
@@ -31,29 +41,28 @@ const ContextProvider = ({ children }) => {
     const formatGeminiStyle = (text) => {
         marked.setOptions({
             highlight: function(code, lang) {
-                const language = Prism.languages[lang] ? lang : 'markup'; // Use 'markup' as a fallback language
-                return Prism.highlight(code, Prism.languages[language], language);
+                if (Prism.languages[lang]) {
+                    code = Prism.highlight(code, Prism.languages[lang], lang);
+                }
+                return `<code class="language-${lang}">${code}</code>`;
             },
             langPrefix: 'language-'
         });
 
         let html = marked(text);
-console.log(html); // Add this line to debug
 
-html = html.replace(/<h2/g, '<h2 class="mb-4 mt-6"')
-        .replace(/<h3/g, '<h3 class="mb-3 mt-5"')
-        .replace(/<p>/g, '<p class="mb-4">')
-        .replace(/<ul>/g, '<ul class="mb-4">')
-        .replace(/<li>/g, '<li class="mb-2 ml-4">');
-html = html.replace(/<pre><code/g, '<div class="code-block"><pre><code')
-        .replace(/<\/code><\/pre>/g, '</code></pre></div>');
-console.log(html); // Add this line to debug
-return html;
+        // Apply general styling classes
+        html = html.replace(/<h2/g, '<h2 class="mb-4 mt-6"')
+            .replace(/<h3/g, '<h3 class="mb-3 mt-5"')
+            .replace(/<p>/g, '<p class="mb-4">')
+            .replace(/<ul>/g, '<ul class="mb-4">')
+            .replace(/<li>/g, '<li class="mb-2 ml-4">');
 
-    };
+        // Render code blocks correctly
+        html = html.replace(/<pre><code class="language-(\w+)">/g, '<pre class="language-$1"><code class="language-$1">');
+        html = html.replace(/<pre><code>/g, '<pre class="language-none"><code class="language-none">');
 
-    const highlightCode = (element) => {
-        Prism.highlightElement(element);
+        return html;
     };
 
     const onSent = async (prompt) => {
@@ -79,12 +88,10 @@ return html;
                 setResultData(sanitizedResponse);
                 return response;
             } else {
-                console.error('No response received');
                 setResultData('No response text found');
                 return null;
             }
         } catch (error) {
-            console.error('Error in onSent:', error);
             setResultData('An error occurred while processing the request');
             return null;
         } finally {

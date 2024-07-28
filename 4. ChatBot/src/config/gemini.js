@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_KEY = 'AIzaSyC9EtRr3eu5QAAYL_wVNXfuUeUjgHV6bwg';
-const GEMINI_MODEL = 'gemini-1.0-pro'
+const GEMINI_MODEL = 'gemini-1.5-pro'
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${API_KEY}`;
 
 // Create a reusable axios instance
@@ -10,7 +10,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 15000, // Reduced timeout to 15 seconds
+  timeout: 150000, // Reduced timeout to 15 seconds
 });
 
 // Prepare static parts of the request body

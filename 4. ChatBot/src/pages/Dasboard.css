@@ -12,12 +12,6 @@
     font-style:italic
   }
 
-.code-block *,.mb-4 *{
-    font-size: 14px;
-    font-family: berkeley;
-    font-weight: 100;
-}
-
 .MainPage {
     height: 100vh;
     display: flex;

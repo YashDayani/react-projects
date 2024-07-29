@@ -1,83 +1,42 @@
 :root {
-    --pale-yellow-100: #ffffff;
-    --pale-yellow-200: #ffffff;
-    --pale-yellow-300: #ffffff;
-    --pale-yellow-400: #fffff5;
-    --pale-yellow-500: #fffff5;
-    --pale-yellow-600: #fffff5;
-    --pale-yellow-700: #cbcbc1;
-    --pale-yellow-800: #bab99a;
-    --pale-teal-100: #cef0ef;
-    --pale-cyan-100: #d1f3fa;
-    --pale-cyan-200: #b5e2ee;
-    --pale-cyan-300: #b0d9e4;
-    --pale-cyan-400: #accfdd;
-    --pale-blue-100: #c2e1f3;
-    --pale-blue-200: #b0cce8;
-    --teal-100: #8ab7cf;
-    --teal-200: #79a9bb;
-    --rose-100: #e9b6c4;
-    --red-100: #de6975;
-    --persimmon-100: #e88560;
-    --background-color-100: var(--pale-yellow-100);
-    --background-color-200: var(--pale-yellow-200);
-    --background-color-300: var(--pale-yellow-300);
-    --background-super-color-100: var(--pale-teal-100);
-    --background-super-color-200: var(--teal-200);
-    --background-super-color-300: var(--teal-100);
-    --background-super-alt-color-100: var(--persimmon-100);
-    --text-color-100: var(--pale-blue-200);
-    --text-color-200: var(--pale-yellow-700);
-    --dark-background-color-100: var(--pale-cyan-400);
-    --dark-background-color-200: var(--pale-cyan-300);
-    --dark-background-color-300: var(--pale-cyan-200);
-    --dark-background-super-color-100: var(--pale-blue-200);
-    --dark-background-super-color-200: var(--teal-100);
-    --dark-background-super-color-300: var(--teal-200);
-    --dark-background-super-alt-color-100: var(--red-100);
-    --dark-text-color-100: var(--pale-yellow-400);
-    --dark-text-color-200: var(--pale-cyan-100);
-    --light-background-color-100: var(--pale-yellow-100);
-    --light-text-color-100: var(--pale-blue-200);
-  }
-
-
-  /* General textarea styles */
-textarea {
-    overflow: auto; /* Makes the textarea scrollable */
-    max-height: 45vh; /* Sets the maximum height to 45% of the viewport height */
-    outline: none; /* Removes the default outline */
-    width: 100%; /* Full width of its container */
-    font-family: sans-serif; /* Font family set to sans-serif */
-    caret-color: #FFDD00; /* Custom caret color (superDuper) */
-    resize: none; /* Disables resizing */
-    background-color: #F5F5F5; /* Background color (background) */
-    color: #333333; /* Text color (textMain) */
-    placeholder-color: #B0B0B0; /* Placeholder color (placeholder-textOff) */
-    height: 48px !important; /* Height set to 48px with !important */
-    spellcheck: false; /* Disables spell checking */
-  }
-  
-  /* Selection styles */
-  textarea::selection {
-    background-color: #FFDD00; /* Background color of selected text (superDuper) */
-    color: #333333; /* Text color of selected text (textMain) */
-  }
-  
-  /* Dark mode styles */
-  .dark textarea {
-    background-color: #2E2E2E; /* Dark mode background color (offsetDark) */
-    color: #E0E0E0; /* Dark mode text color (textMainDark) */
-    placeholder-color: #505050; /* Dark mode placeholder color (textOffDark) */
-  }
-  
-  /* Autocomplete attribute is HTML5 and does not affect styles */
-  textarea[autocomplete="off"] {
-    /* No additional styling needed here */
-  }
-  
-  /* data-1p-ignore attribute is a custom attribute and does not affect styles */
-  textarea[data-1p-ignore="true"] {
-    /* No additional styling needed here */
-  }
-  
+  --pale-yellow-100: hsl(60, 100%, 99%);
+  --pale-yellow-200: hsl(58, 92%, 96%);
+  --pale-yellow-300: hsl(57, 86%, 93%);
+  --pale-yellow-400: hsl(59, 86%, 93%);
+  --pale-yellow-500: hsl(58, 81%, 91%);
+  --pale-yellow-600: hsl(57, 76%, 88%);
+  --pale-yellow-700: hsl(54, 99%, 50%);
+  --pale-yellow-800: hsl(57, 98%, 36%);
+  --pale-teal-100: hsl(186, 79%, 92%);
+  --pale-cyan-100: hsl(195, 99%, 65%);
+  --pale-cyan-200: hsl(196, 99%, 30%);
+  --pale-cyan-300: hsl(197, 99%, 25%);
+  --pale-cyan-400: hsl(196, 99%, 22%);
+  --pale-blue-100: hsl(207, 97%, 37%);
+  --pale-blue-200: hsl(205, 11%, 30%);
+  --teal-100: hsl(188, 46%, 72%);
+  --teal-200: hsl(189, 35%, 55%);
+  --rose-100: hsl(349, 53%, 68%);
+  --red-100: hsl(356, 43%, 54%);
+  --persimmon-100: hsl(25, 41%, 53%);
+  --background-color-100: var(--pale-yellow-100);
+  --background-color-200: var(--pale-yellow-200);
+  --background-color-300: var(--pale-yellow-300);
+  --background-super-color-100: var(--pale-teal-100);
+  --background-super-color-200: var(--teal-200);
+  --background-super-color-300: var(--teal-100);
+  --background-super-alt-color-100: var(--persimmon-100);
+  --text-color-100: var(--pale-blue-200);
+  --text-color-200: var(--pale-yellow-700);
+  --dark-background-color-100: var(--pale-cyan-400);
+  --dark-background-color-200: var(--pale-cyan-300);
+  --dark-background-color-300: var(--pale-cyan-200);
+  --dark-background-super-color-100: var(--pale-blue-200);
+  --dark-background-super-color-200: var(--teal-100);
+  --dark-background-super-color-300: var(--teal-200);
+  --dark-background-super-alt-color-100: var(--red-100);
+  --dark-text-color-100: var(--pale-yellow-400);
+  --dark-text-color-200: var(--pale-cyan-100);
+  --light-background-color-100: var(--pale-yellow-100);
+  --light-text-color-100: var(--pale-blue-200);
+}

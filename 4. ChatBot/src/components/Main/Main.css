@@ -10,7 +10,7 @@
     margin: 10px;
     border-radius: 10px;
     position: relative;
-    border: 1px solid hsla(60,11%,83%,.5);
+    border: 1px solid var(--border-color-100);
     background-color: #FCFCF9;
 }
 .main .nav{
@@ -19,8 +19,7 @@
     justify-content: space-between;
     font-size: 22px;
     padding: 10px 20px;
-    color: #585858;
-    border-bottom: 1px solid hsla(60,11%,83%,.5);
+    border-bottom: 1px solid var(--border-color-100);
 }
 
 .main .nav img{
@@ -34,10 +33,9 @@
 }
 
 .main .greet{
-    /* margin: 50px 0px; */
-    margin: 0px 30px;
+    margin: 30px;
     font-size: 48px;
-    color: #64645f;
+    color: var(--text-color-100);
     font-weight: 500;
     /* padding: 20px; */
     margin-bottom: 30px;
@@ -45,7 +43,7 @@
 
 
 .main .greet span{
-    color: #13343B;
+    color: var(--text-color-200);
 }
 
 .main .cards{
@@ -60,7 +58,7 @@
 .main .card{
     height: 200px;
     padding: 15px;
-    border: 1px solid hsla(60,11%,83%,.5);
+    border: 1px solid var(--border-color-100);
     border-radius: 10px;
     position: relative;
     cursor: pointer;
@@ -71,19 +69,18 @@
     width: 35px;
     padding: 5px;
     position: absolute;
-    background-color: #F3F3EE;
+    background-color: var(--background-color-200);
     border-radius: 5px;
     bottom: 10px;
     right: 10px;
 }
 
 .main .card p{
-    color: #585858;
     font-size: 17px;
 }
 
 .main .card:hover{
-    background-color: #F3F3EE;
+    background-color: var(--background-color-200);
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 }
 
@@ -101,9 +98,9 @@
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    border: 2px solid #D9D9D0;
+    border: 2px solid var(--border-color-100);
     box-shadow: 0px 0px 0px 10px rgba(243,243,238,1);
-    background: #F9F9F9;
+    background: transparent;
     padding: 10px 20px;
     border-radius: 50px;
 }
@@ -119,7 +116,9 @@
     border: none;
     outline: none;
     padding: 8px;
-    font-size: 18px;
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--text-color-200);
     caret-color: hsl(187.27 73% 46%);
 }
 
@@ -153,7 +152,7 @@
 .result-title{
     margin: 40px 0px;
     font-size: 30px;
-    color: #13343b;
+    color: var(--text-color-200);
     font-weight: 400;
     display: flex;
     align-items: center;
@@ -180,7 +179,7 @@
 .result-data .answer span{
     font-size: 18px;
     font-weight: 500;
-    color: #13343b;
+    color: var(--text-color-200);
 }
 
 .loader{
@@ -228,7 +227,7 @@
     transition: background-color 0.3s;
 }
 .micSwitch:hover{
-    background-color: #F3F3EE;
+    background-color: var(--background-color-300);
     box-sizing: border-box;
 }
 

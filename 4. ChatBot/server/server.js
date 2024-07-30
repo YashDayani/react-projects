@@ -39,8 +39,11 @@ const User = require('./models/User');
 const SearchHistory = require('./models/SearchHistory');
 
 // Define Routes
+console.log('Registering routes...');
 app.use('/api/users', authRoutes);
+console.log('Auth routes registered');
 app.use('/api/history', historyRoutes);
+console.log('History routes registered');
 
 // Input validation middleware
 const registerValidation = [
@@ -75,7 +78,7 @@ app.post('/register', registerValidation, async (req, res) => {
       return res.status(400).json({ message: 'Username or email already in use' });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 12);
     const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
 
@@ -93,29 +96,22 @@ app.post('/login', loginValidation, async (req, res) => {
   }
 
   try {
-    console.log('Login attempt for email:', req.body.email);
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
     if (!user) {
-      console.log('User not found for email:', email);
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    console.log('User found, comparing passwords');
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      console.log('Password mismatch for email:', email);
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    console.log('Password match, generating token');
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '12h' });
 
-    console.log('Login successful for email:', email);
     res.status(200).json({ token, redirectUrl: '/dashboard' });
   } catch (error) {
-    console.error('Login error:', error);
     handleErrors(res, error);
   }
 });
@@ -130,7 +126,6 @@ const auth = (req, res, next) => {
     req.user = decoded.id; // Get user ID from token
     next();
   } catch (error) {
-    console.error('Token validation error:', error);
     res.status(401).json({ message: 'Token is not valid', error: error.message });
   }
 };
@@ -144,6 +139,17 @@ app.get('/api/user/name', auth, async (req, res) => {
   } catch (error) {
     handleErrors(res, error);
   }
+});
+
+// Test route
+app.get('/test', (req, res) => {
+  res.json({ message: 'Test route working' });
+});
+
+// Test history route
+app.post('/api/test-history', (req, res) => {
+  console.log('Test history route hit');
+  res.json({ message: 'Test history route working' });
 });
 
 // Error handling middleware

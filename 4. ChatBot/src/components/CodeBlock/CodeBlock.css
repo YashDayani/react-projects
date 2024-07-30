@@ -15,7 +15,7 @@
   }
   
   .code-header *{
-    color: hsl(51, 8%, 30%);
+    color: var(--text-color-100);
   }
   
   /* .language {

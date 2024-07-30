@@ -34,9 +34,32 @@ const Sidebar = () => {
         }
     };
 
-    const loadPrompt = async (prompt) => {
-        setRecentPrompt(prompt);
-        await onSent(prompt);
+    const loadPrompt = async (id) => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                setError('No token found. Please log in.');
+                return;
+            }
+            const response = await axios.get(`http://localhost:5000/api/history/${id}`, {
+                headers: {
+                    'x-auth-token': token
+                }
+            });
+            const { prompt, response: responseText } = response.data;
+            if (!prompt || !responseText) {
+                throw new Error('Invalid data received from server');
+            }
+            setRecentPrompt(prompt);
+            await onSent(prompt, responseText);
+        } catch (error) {
+            console.error('Error fetching prompt and response:', error.response ? error.response.data : error.message);
+            if (error.response && error.response.status === 404) {
+                setError('Chat not found. It may have been deleted.');
+            } else {
+                setError('Failed to fetch prompt and response. Please try again.');
+            }
+        }
     };
 
     const handleDeleteChat = async (id, event) => {
@@ -128,11 +151,9 @@ const Sidebar = () => {
                                         key={index}
                                         className="recent-entry chat-entry"
                                         aria-label={`Load prompt ${item.prompt.slice(0, 12)}`}
+                                        onClick={() => loadPrompt(item._id)}
                                     >
-                                        <p 
-                                            className="recent-entry-text" 
-                                            onClick={() => loadPrompt(item.prompt)}
-                                        >
+                                        <p className="recent-entry-text">
                                             {item.prompt}
                                         </p>
 
@@ -141,7 +162,7 @@ const Sidebar = () => {
                                             className="delete-chat-btn"
                                             aria-label="Delete this chat"
                                         >
-                                            <img src={assets.cross_icon} />
+                                            <img src={assets.cross_icon} alt="Delete icon" />
                                         </button>
                                     </div>
                                 ))}
@@ -160,16 +181,14 @@ const Sidebar = () => {
                 )}
             </div>
 
-            
-
             <div className="bottom">
                 <div className="bottom-item recent-entry" aria-label="Activity">
-                        <img src={assets.history_icon} alt="History icon" />
-                        {extended && <p>Clear</p>}
+                    <img src={assets.history_icon} alt="History icon" />
+                    {extended && <p>Clear</p>}
                 </div>
 
                 <div className="bottom-item recent-entry" aria-label="Help">
-                    <img src={assets.question_icon} alt="Question icon" />
+                    <img src={assets.question_icon} alt="Help icon" />
                     {extended && <p>Help</p>}
                 </div>
                 

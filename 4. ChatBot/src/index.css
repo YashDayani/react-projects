@@ -9,7 +9,7 @@
     --pale-yellow-800: #bab99a;
     --pale-teal-100: #cef0ef;
     --pale-cyan-100: #d1f3fa;
-    --pale-cyan-200: #b5e2ee;
+    --pale-cyan-200: hsl(190.5 50.92% 15.33%);
     --pale-cyan-300: #b0d9e4;
     --pale-cyan-400: #accfdd;
     --pale-blue-100: #c2e1f3;
@@ -39,5 +39,22 @@
     --dark-text-color-200: var(--pale-cyan-100);
     --light-background-color-100: var(--pale-yellow-100);
     --light-text-color-100: var(--pale-blue-200);
+  }
+
+  :root{
+    --text-color-100: hsl(59.99, 2.639%, 38.25%);
+    --text-color-200: hsl(190.5, 50.92%, 15.33%);
+    --text-color-dark-100: hsl(180 1.903% 56.01%);
+    --text-color-dark-200: hsl(59.99 4.627% 90.49%);
+
+    --background-color-100: hsl(60, 33.3%, 98.2%);
+    --background-color-200: hsl(60, 17.2%, 94.3%);
+    --background-color-300: hsl(60, 9.8%, 90%);
+    --background-color-dark-100: hsl(180, 2%, 10%);
+    --background-color-dark-200: hsl(180, 3%, 13%);
+    --background-color-dark-300: hsl(180, 2%, 18%);
+
+    --border-color-100: hsla(60, 11%, 83%, .5);
+    --border-color-dark-100: hsla(60, 11%, 83%, .5);
   }
   

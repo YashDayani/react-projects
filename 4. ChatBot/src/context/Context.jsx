@@ -5,7 +5,8 @@ import Prism from 'prismjs';
 import './code.css';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-jsx';
-import { runChat } from '../config/gemini';
+// Import other language components as needed
+import { runChat } from '../config/gemini'; // Ensure this import is correct
 
 Prism.manual = true;
 
@@ -18,7 +19,6 @@ const ContextProvider = ({ children }) => {
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
     const [resultData, setResultData] = useState("");
-    const [error, setError] = useState("");
 
     const resultRef = useRef(null);
 
@@ -36,13 +36,11 @@ const ContextProvider = ({ children }) => {
     const newChat = () => {
         setLoading(false);
         setShowResult(false);
-        setResultData("");
-        setRecentPrompt("");
     };
 
     const formatGeminiStyle = (text) => {
         marked.setOptions({
-            highlight: (code, lang) => {
+            highlight: function(code, lang) {
                 if (Prism.languages[lang]) {
                     code = Prism.highlight(code, Prism.languages[lang], lang);
                 }
@@ -53,78 +51,52 @@ const ContextProvider = ({ children }) => {
 
         let html = marked(text);
 
+        // Apply general styling classes
         html = html.replace(/<h2/g, '<h2 class="mb-4 mt-6"')
             .replace(/<h3/g, '<h3 class="mb-3 mt-5"')
             .replace(/<p>/g, '<p class="mb-4">')
             .replace(/<ul>/g, '<ul class="mb-4">')
             .replace(/<li>/g, '<li class="mb-2 ml-4">');
 
+        // Render code blocks correctly
         html = html.replace(/<pre><code class="language-(\w+)">/g, '<pre class="language-$1"><code class="language-$1">');
         html = html.replace(/<pre><code>/g, '<pre class="language-none"><code class="language-none">');
 
         return html;
     };
 
-    const onSent = async (prompt, storedResponse = null) => {
+    const onSent = async (prompt) => {
+        setResultData("");
         setLoading(true);
         setShowResult(true);
-        setError("");
 
+        let response;
         try {
-            let response;
-            if (storedResponse) {
-                setRecentPrompt(prompt);
-                setResultData(storedResponse);
-            } else {
+            if (prompt !== undefined) {
                 response = await runChat(prompt);
                 setRecentPrompt(prompt);
+            } else {
+                setPrevPrompts(prev => [...prev, input]);
+                setRecentPrompt(input);
+                response = await runChat(input);
+            }
 
-                if (response) {
-                    const formattedResponse = formatGeminiStyle(response);
-                    const sanitizedResponse = DOMPurify.sanitize(formattedResponse);
-                    setResultData(sanitizedResponse);
-                } else {
-                    throw new Error('Empty response from API');
-                }
+            if (response) {
+                let formattedResponse = formatGeminiStyle(response);
+                const sanitizedResponse = DOMPurify.sanitize(formattedResponse);
+
+                setResultData(sanitizedResponse);
+                return response;
+            } else {
+                setResultData('No response text found');
+                return null;
             }
         } catch (error) {
-            console.error('Error in onSent:', error);
-            setError(`An error occurred while processing the request: ${error.message}`);
+            setResultData('An error occurred while processing the request');
+            return null;
         } finally {
             setLoading(false);
             setInput("");
-        }
-    };
-
-    const fetchPromptAndResponse = async (id) => {
-        setLoading(true);
-        setError("");
-        try {
-            const response = await fetch(`http://localhost:5000/api/history/${id}`, {
-                method: 'GET',
-                headers: {
-                    'x-auth-token': localStorage.getItem('token'),
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error(`Failed to fetch data: ${response.statusText}`);
-            }
-
-            const data = await response.json();
-
-            console.log('Fetched data:', data);
-
-            if (data && data.prompt && data.response) {
-                await onSent(data.prompt, data.response);
-            } else {
-                setError('No data found or incomplete data');
-            }
-        } catch (error) {
-            console.error('Error fetching prompt and response:', error);
-            setError(`Error fetching prompt and response: ${error.message}`);
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -140,9 +112,7 @@ const ContextProvider = ({ children }) => {
         input,
         setInput,
         newChat,
-        resultRef,
-        fetchPromptAndResponse,
-        error
+        resultRef
     };
 
     return (

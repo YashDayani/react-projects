@@ -4,26 +4,23 @@ import { assets } from '../../assets/assets';
 import { Context } from '../../context/Context';
 import axios from 'axios';
 import './Main.css';
-import { runChat } from '../../config/gemini'; // Import the runChat function
 
 const Main = ({ onSendMessage }) => {
-  const { onSent, recentPrompt, showResult, resultData, setInput, input, newChat, resultRef } = useContext(Context);
+  const { onSent, recentPrompt, showResult, loading, resultData, setInput, input, newChat, resultRef } = useContext(Context);
   const [userName, setUserName] = useState('');
   const [error, setError] = useState(null);
   const [isListening, setIsListening] = useState(false);
-  const [loading, setLoading] = useState(false); // Add loading state
   const recognitionRef = useRef(null);
   const [transcript, setTranscript] = useState('');
   const [elapsedTime, setElapsedTime] = useState(0);
   const [milliseconds, setMilliseconds] = useState(0);
   const timerRef = useRef(null);
 
-  // Function to render content with syntax highlighting
   const renderContent = (html) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
     const elements = Array.from(doc.body.childNodes);
-
+  
     return elements.map((node, index) => {
       if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'PRE' && node.firstChild.tagName === 'CODE') {
         const language = node.firstChild.className.replace('language-', '') || 'plaintext';
@@ -34,7 +31,6 @@ const Main = ({ onSendMessage }) => {
     });
   };
 
-  // Fetch user name and initialize speech recognition
   useEffect(() => {
     const fetchUserName = async () => {
       try {
@@ -44,7 +40,9 @@ const Main = ({ onSendMessage }) => {
           return;
         }
         const response = await axios.get('http://localhost:5000/api/user/name', {
-          headers: { 'x-auth-token': token }
+          headers: {
+            'x-auth-token': token
+          }
         });
         setUserName(response.data.name);
       } catch (error) {
@@ -94,23 +92,19 @@ const Main = ({ onSendMessage }) => {
     };
   }, []);
 
-  // Update input state with transcript
   useEffect(() => {
     setInput(prevInput => prevInput + transcript);
     setTranscript('');
   }, [transcript, setInput]);
 
-  // Clear timer when loading state changes
   useEffect(() => {
     if (!loading && elapsedTime !== 0) {
       clearInterval(timerRef.current);
     }
   }, [loading, elapsedTime]);
 
-  // Save search history
   const saveSearchHistory = async (prompt, response) => {
     try {
-      console.log('Attempting to save search history');
       const token = localStorage.getItem('token');
       const config = {
         headers: {
@@ -118,26 +112,23 @@ const Main = ({ onSendMessage }) => {
           'x-auth-token': token
         }
       };
-      const res = await axios.post('http://localhost:5000/api/history', { prompt, response }, config);
-      console.log('Save search history response:', res.data);
+      const body = { prompt, response };
+      await axios.post('http://localhost:5000/api/history', body, config);
     } catch (error) {
-      console.error('Error saving search history:', error.response?.data || error.message);
+      console.error('Error saving search history:', error.response.data);
     }
   };
 
-  // Handle sending input
   const handleSent = async () => {
     try {
       if (!input.trim()) {
         setError('Please enter a prompt before sending.');
         return;
       }
-  
       if (isListening) {
         recognitionRef.current.stop();
         setIsListening(false);
       }
-  
       setElapsedTime(0);
       setMilliseconds(0);
       timerRef.current = setInterval(() => {
@@ -149,31 +140,23 @@ const Main = ({ onSendMessage }) => {
           return prev + 10;
         });
       }, 10);
-  
-      setLoading(true); // Start loading
-      console.log('Sending input:', input);
-  
-      // Call the runChat function and handle the response
-      const response = await runChat(input); // Use runChat directly
-      console.log('Received response:', response);
-  
+      const response = await onSent(input);
+      console.log('Input:', input);
+      console.log('Response:', response);
       if (response) {
         await saveSearchHistory(input, response);
         await onSendMessage(input);
       } else {
-        throw new Error('No response received from Gemini API');
+        console.error('No response received from onSent');
       }
     } catch (error) {
       console.error('Error in handleSent:', error);
       setError('An error occurred while processing your request. Please try again.');
     } finally {
-      setLoading(false); // End loading
       clearInterval(timerRef.current);
     }
   };
-  
 
-  // Handle key press for sending message
   const handleKeyPress = (event) => {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
@@ -181,7 +164,6 @@ const Main = ({ onSendMessage }) => {
     }
   };
 
-  // Handle new chat shortcut
   const handleNewChat = useCallback((event) => {
     if (event.ctrlKey && event.key === 'i') {
       event.preventDefault();
@@ -196,7 +178,6 @@ const Main = ({ onSendMessage }) => {
     };
   }, [handleNewChat]);
 
-  // Toggle speech recognition
   const toggleListening = () => {
     if (isListening) {
       recognitionRef.current.stop();
@@ -267,9 +248,10 @@ const Main = ({ onSendMessage }) => {
                     <hr />
                   </div>
                 ) : (
-                  <div ref={resultRef} className="prism-highlight" dangerouslySetInnerHTML={{ __html: resultData }} />
+                  <div ref={resultRef} className="prism-highlight">
+                    {renderContent(resultData)}
+                  </div>
                 )}
-
               </div>
             </div>
           )}
@@ -291,7 +273,7 @@ const Main = ({ onSendMessage }) => {
                   />
                 </div>
                 <div>
-                  {input.trim() && <img onClick={handleSent} src={assets.send_icon} alt="Send" />}
+                  {input.trim() && <img onClick={handleSent} src={assets.send_icon} alt="" />}
                 </div>
               </div>
             </div>
@@ -303,6 +285,6 @@ const Main = ({ onSendMessage }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Main;

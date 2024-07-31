@@ -22,7 +22,7 @@
 
 .sidebar .menu {
     width: fit-content;
-    height: 45px; /* Ensure height is the same as width for centering */
+    height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;

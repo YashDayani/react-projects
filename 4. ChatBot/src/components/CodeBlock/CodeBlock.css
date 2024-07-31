@@ -1,7 +1,10 @@
 .code-block {
+    display: grid;
+    grid-template-columns: 1fr;
     background-color: #f4f4f4;
     border-radius: 4px;
     margin: 1em 0;
+    padding: 0;
   }
   
   .code-header {
@@ -17,9 +20,6 @@
   .code-header *{
     color: var(--text-color-100);
   }
-  
-  /* .language {
-  } */
   
   .code-header button {
     background-color: transparent;

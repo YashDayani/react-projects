@@ -100,7 +100,7 @@
     gap: 20px;
     border: 2px solid var(--border-color-100);
     box-shadow: 0px 0px 0px 10px rgba(243,243,238,1);
-    background: transparent;
+    background: var(--background-color-100);
     padding: 10px 20px;
     border-radius: 50px;
 }

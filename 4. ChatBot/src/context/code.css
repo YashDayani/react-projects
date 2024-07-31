@@ -1,7 +1,3 @@
-.code-block{
-  border-radius: 5px;
-}
-
 pre code.hljs {
   display: block;
   overflow-x: auto;
@@ -140,16 +136,22 @@ Conversion: Bram de Haan (http://atelierbram.github.io/Base2Tone-prism/output/pr
 Generated with Base16 Builder (https://github.com/base16-builder/base16-builder)
 */
 
+.prism-highlight{
+	width: 100%;
+}
+
 pre *{
   font-family: berkeley !important;
   font-weight: 100 !important;
-  
+}
+
+code{
+	border: 5px;
 }
 
 code[class*="language-"],
 pre[class*="language-"] {
   font-size: 14px;
-	line-height: 1.375;
 	direction: ltr;
 	text-align: left;
 	white-space: pre;

@@ -1,0 +1,43 @@
+/* src/pages/History.css */
+
+/* Ensure the history page can scroll */
+.history-page {
+    overflow-y: auto; /* Enable vertical scrolling */
+    height: 100vh; /* Ensure it takes the full viewport height */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.history-list {
+    margin-top: 20px;
+}
+
+.history-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.history-item-content {
+    margin-bottom: 10px;
+}
+
+.history-item-content h3 {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.history-item-content p {
+    margin: 5px 0;
+}
+
+.delete-all-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}

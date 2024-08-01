@@ -1,9 +1,10 @@
 // src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
+import Login from './pages/Login/Login';
+import Register from './pages/Login/Register';
+import Dashboard from './pages/Dashboard/Dashboard';
+import History from './pages/History/History'
 
 import './App.css'
 
@@ -13,6 +14,7 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/history" element={<History />} />
         <Route path="/dashboard" element={<ProtectedRoute />} />
         <Route path="/" element={<NavigateIfAuthenticated />} /> {/* Default redirect to login */}
       </Routes>

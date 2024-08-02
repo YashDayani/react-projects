@@ -5,7 +5,6 @@ import Prism from 'prismjs';
 import './code.css';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-jsx';
-// Import other language components as needed
 import { runChat } from '../config/gemini'; // Ensure this import is correct
 
 Prism.manual = true;
@@ -70,8 +69,8 @@ const ContextProvider = ({ children }) => {
         setLoading(true);
         setShowResult(true);
 
-        let response;
         try {
+            let response;
             if (prompt !== undefined) {
                 response = await runChat(prompt);
                 setRecentPrompt(prompt);

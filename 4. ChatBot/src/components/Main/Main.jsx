@@ -20,7 +20,7 @@ const Main = ({ onSendMessage }) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
     const elements = Array.from(doc.body.childNodes);
-  
+
     return elements.map((node, index) => {
       if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'PRE' && node.firstChild.tagName === 'CODE') {
         const language = node.firstChild.className.replace('language-', '') || 'plaintext';

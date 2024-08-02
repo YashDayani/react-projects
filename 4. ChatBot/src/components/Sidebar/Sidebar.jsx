@@ -141,17 +141,10 @@ const Sidebar = () => {
                                             className="delete-chat-btn"
                                             aria-label="Delete this chat"
                                         >
-                                            <img src={assets.cross_icon} />
+                                            <img src={assets.cross_icon} alt="Delete icon" />
                                         </button>
                                     </div>
                                 ))}
-                                <button 
-                                    onClick={handleDeleteAllChats}
-                                    className="delete-all-chats-btn"
-                                    aria-label="Delete all chats"
-                                >
-                                    Delete All Chats
-                                </button>
                             </>
                         ) : (
                             <p>No recent history available.</p>
@@ -160,20 +153,30 @@ const Sidebar = () => {
                 )}
             </div>
 
-            
-
             <div className="bottom">
-                <div className="bottom-item recent-entry" aria-label="Activity">
-                        <img src={assets.history_icon} alt="History icon" />
-                        {extended && <p>Clear</p>}
+                <div 
+                    className="bottom-item recent-entry" 
+                    aria-label="Clear History"
+                    onClick={handleDeleteAllChats}
+                >
+                    <img src={assets.question_icon} alt="Question icon" />
+                    {extended && <p>Clear</p>}
                 </div>
 
-                <div className="bottom-item recent-entry" aria-label="Help">
-                    <img src={assets.question_icon} alt="Question icon" />
-                    {extended && <p>Help</p>}
+                <div 
+                    className="bottom-item recent-entry" 
+                    aria-label="View History"
+                    onClick={() => navigate('/history')}
+                >
+                    <img src={assets.history_icon} alt="History icon" />
+                    {extended && <p>History</p>}
                 </div>
                 
-                <div onClick={handleLogout} className="bottom-item recent-entry" aria-label="Logout">
+                <div 
+                    className="bottom-item recent-entry" 
+                    aria-label="Logout"
+                    onClick={handleLogout}
+                >
                     <img src={assets.logout_icon} alt="Logout icon" />
                     {extended && <p>Logout</p>}
                 </div>

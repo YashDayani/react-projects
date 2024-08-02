@@ -143,6 +143,7 @@ Generated with Base16 Builder (https://github.com/base16-builder/base16-builder)
 pre *{
   font-family: berkeley !important;
   font-weight: 100 !important;
+  background: transparent;
 }
 
 code{

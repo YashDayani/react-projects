@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_KEY = "AIzaSyAoPuOFotjXmths6Ju02QQfOGxjG28FoBM"
 
-const GEMINI_MODEL = 'gemini-1.0-pro'
+const GEMINI_MODEL = 'gemini-1.5-flash'
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${API_KEY}`;
 
 // Create a reusable axios instance
@@ -17,7 +17,7 @@ const api = axios.create({
 // Prepare static parts of the request body
 const staticRequestBody = {
   generationConfig: {
-    temperature: 0.5, // Further lowered for more focused and faster responses
+    temperature: 0.9, // Further lowered for more focused and faster responses
     topP: 1, // Slightly reduced
     maxOutputTokens: 2048, // Further reduced for faster responses
   },

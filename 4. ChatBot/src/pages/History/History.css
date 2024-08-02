@@ -6,6 +6,13 @@
     height: 100vh; /* Ensure it takes the full viewport height */
     padding: 20px;
     box-sizing: border-box;
+    background-color: var(--background-color-200);
+}
+
+.history-container{
+    background-color: var(--background-color-100);
+    padding: 50px 10%;
+    border-radius: 5px;
 }
 
 .history-list {

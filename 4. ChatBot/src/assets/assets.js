@@ -13,11 +13,10 @@ import mic_icon from './mic_icon.svg'
 import mic_icon_active from './mic_icon_active.svg'
 import plus_icon from './plus_icon.svg'
 import profile_icon from './profile.svg'
-import question_icon from './question_icon.png'
+import question_icon from './trash_icon.svg'
 import setting_icon from './setting_icon.svg'
-import user_icon from './user_icon.png'
 import send_icon from './send_icon.svg'
-import youtube_icon from './youtube_icon.png'
+import nav_arrow from './nav-arrow.svg'
 
 export const assets = {
     history_icon,
@@ -31,9 +30,8 @@ export const assets = {
     gallery_icon,
     mic_icon,
     mic_icon_active,
-    user_icon,
-    youtube_icon,
     message_icon,
+    nav_arrow,
     code_icon,
     send_icon,
     gemini_icon,

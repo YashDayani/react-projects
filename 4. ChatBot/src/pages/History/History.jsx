@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import DOMPurify from 'dompurify';
 import { marked } from 'marked';
-import Prism from 'prismjs';
-import Accordion from '../../components/Accordion/Accordion'; // Import the Accordion component
-import Popup from '../../components/Popup/Popup'; // Import the Popup component
+import { assets } from '../../assets/assets';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/default.css'; // You can choose a different style
+import Accordion from '../../components/Accordion/Accordion';
+import Popup from '../../components/Popup/Popup';
 import './History.css';
-import '../../context/code.css'; // Or any other Prism theme you like
-
-// Ensure to import Prism.js components for languages you want to support
+import '../../context/code.css';
 
 const History = () => {
     const [searchHistory, setSearchHistory] = useState([]);
@@ -94,66 +94,69 @@ const History = () => {
             response = String(response);
         }
 
-        // Step 1: Parse the markdown text with marked
-        const rawHtml = marked.parse(response);
+        // Parse the markdown
+        const tokens = marked.lexer(response);
 
-        // Step 2: Create a temporary DOM element to manipulate HTML
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = rawHtml;
+        // Process code blocks
+        const processedTokens = tokens.map(token => {
+            if (token.type === 'code') {
+                // Use regex to fetch the language from the first line
+                const langMatch = token.text.match(/^```(\w+)/);
+                let language = langMatch ? langMatch[1].toLowerCase() : '';
+                
+                // Remove the language declaration line if it exists
+                let code = token.text.replace(/^```\w+\n/, '').trim();
+                
+                // Highlight the code
+                const highlighted = hljs.highlightAuto(code, language ? [language] : undefined);
 
-        // Step 3: Find all code blocks and replace them with highlighted code
-        const codeBlocks = tempDiv.querySelectorAll('pre code');
-        codeBlocks.forEach((block) => {
-            const code = block.textContent;
-            const language = block.className.replace('language-', '');
-            const validLang = Prism.languages[language] ? language : 'text';
-            const html = Prism.highlight(code, Prism.languages[validLang] || Prism.languages['text'], validLang);
-
-            // Create a wrapper for the code block
-            const wrapper = document.createElement('div');
-            wrapper.className = 'code-block';
-            wrapper.style.margin = '10px -20px';
-
-            // Create a header for the code block
-            const header = document.createElement('div');
-            header.className = 'code-header';
-            header.innerHTML = `
-                <span class="code-language">${validLang}</span>
-                <button class="copy-code-btn">Copy Code</button>
-            `;
-
-            // Create a new pre element with the highlighted code
-            const newPre = document.createElement('pre');
-            newPre.innerHTML = `<code class="language-${validLang}">${html}</code>`;
-
-            // Assemble the wrapper
-            wrapper.appendChild(header);
-            wrapper.appendChild(newPre);
-
-            // Replace the original code block with the new wrapper
-            block.parentNode.replaceWith(wrapper);
+                return {
+                    ...token,
+                    html: highlighted.value,
+                    language: highlighted.language
+                };
+            }
+            return token;
         });
 
-        // Step 4: Sanitize and return the HTML
-        const sanitizedHtml = DOMPurify.sanitize(tempDiv.innerHTML);
+        // Render the processed tokens
+        const renderedHtml = processedTokens.map(token => {
+            if (token.type === 'code') {
+                return `
+                    <div class="code-block-wrapper">
+                        <div class="code-header">
+                            <span class="code-language">${token.language}</span>
+                            <button class="copy-code-btn">Copy Code</button>
+                        </div>
+                        <pre><code class="hljs language-${token.language}">${token.html}</code></pre>
+                    </div>
+                `;
+            }
+            return marked.parser([token]);
+        }).join('');
+
+        // Sanitize and return the HTML
+        const sanitizedHtml = DOMPurify.sanitize(renderedHtml);
         return (
-            <div 
-                dangerouslySetInnerHTML={{ __html: sanitizedHtml }} 
-                onClick={(e) => {
-                    if (e.target.classList.contains('copy-code-btn')) {
-                        const codeElement = e.target.closest('.code-block-wrapper').querySelector('code');
-                        navigator.clipboard.writeText(codeElement.textContent)
-                            .then(() => {
-                                e.target.textContent = 'Copied!';
-                                setTimeout(() => {
-                                    e.target.textContent = 'Copy Code';
-                                }, 2000);
-                            })
-                            .catch(err => console.error('Failed to copy: ', err));
-                    }
-                }}
+            <div
+                dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
+                onClick={handleCopyCode}
             />
         );
+    };
+
+    const handleCopyCode = (e) => {
+        if (e.target.classList.contains('copy-code-btn')) {
+            const codeElement = e.target.closest('.code-block-wrapper').querySelector('code');
+            navigator.clipboard.writeText(codeElement.textContent)
+                .then(() => {
+                    e.target.textContent = 'Copied!';
+                    setTimeout(() => {
+                        e.target.textContent = 'Copy Code';
+                    }, 2000);
+                })
+                .catch(err => console.error('Failed to copy: ', err));
+        }
     };
 
     const filteredHistory = searchHistory.filter(item =>
@@ -164,14 +167,15 @@ const History = () => {
     return (
         <section className='history-page'>
             <div className="history-container">
-                <h1>Search History</h1>
-                <input
-                    type="text"
-                    placeholder="Search history..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="search-input"
-                />
+                <div className="history-page-header">
+                    <h1 className='history-title'>History</h1>
+                    <input
+                        type="text"
+                        placeholder="Search history..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                </div>
                 {loading ? (
                     <p>Loading...</p>
                 ) : error ? (
@@ -184,13 +188,13 @@ const History = () => {
                                     prompt={item.prompt} 
                                     response={renderResponse(item.response)} 
                                 />
-                                <button onClick={() => handleDeleteChat(item._id)}>Delete</button>
+                                <img className='historyDeletebtn' src={assets.trash_icon} onClick={() => handleDeleteChat(item._id)} alt="Delete" />
                             </div>
                         ))}
                         <button onClick={handleDeleteAllChats} className="delete-all-btn">Delete All Chats</button>
                     </div>
                 ) : (
-                    <p>No history available.</p>
+                    <p>No history yet</p>
                 )}
             </div>
             {popup.show && (

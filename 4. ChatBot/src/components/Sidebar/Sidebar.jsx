@@ -4,6 +4,7 @@ import './Sidebar.css';
 import { assets } from '../../assets/assets';
 import { Context } from '../../context/Context';
 import axios from 'axios';
+import Popup from '../Popup/Popup';
 
 const Sidebar = () => {
     const [extended, setExtended] = useState(false);
@@ -11,6 +12,7 @@ const Sidebar = () => {
     const [searchHistory, setSearchHistory] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [popup, setPopup] = useState({ show: false, message: '', onConfirm: null });
     const navigate = useNavigate();
 
     const fetchSearchHistory = async () => {
@@ -39,8 +41,17 @@ const Sidebar = () => {
         await onSent(prompt);
     };
 
-    const handleDeleteChat = async (id, event) => {
+    const handleDeleteChat = (id, event) => {
         event.stopPropagation();
+        setPopup({
+            show: true,
+            message: 'Are you sure you want to delete this chat?',
+            onConfirm: () => confirmDeleteChat(id)
+        });
+    };
+
+    const confirmDeleteChat = async (id) => {
+        setPopup({ show: false });
         try {
             const token = localStorage.getItem('token');
             if (!token) {
@@ -59,7 +70,16 @@ const Sidebar = () => {
         }
     };
 
-    const handleDeleteAllChats = async () => {
+    const handleDeleteAllChats = () => {
+        setPopup({
+            show: true,
+            message: 'Are you sure you want to delete all chats?',
+            onConfirm: confirmDeleteAllChats
+        });
+    };
+
+    const confirmDeleteAllChats = async () => {
+        setPopup({ show: false });
         try {
             const token = localStorage.getItem('token');
             if (!token) {
@@ -79,6 +99,15 @@ const Sidebar = () => {
     };
 
     const handleLogout = () => {
+        setPopup({
+            show: true,
+            message: 'Are you sure you want to log out?',
+            onConfirm: confirmLogout
+        });
+    };
+
+    const confirmLogout = () => {
+        setPopup({ show: false });
         localStorage.removeItem('token');
         navigate('/login');
     };
@@ -159,7 +188,7 @@ const Sidebar = () => {
                     aria-label="Clear History"
                     onClick={handleDeleteAllChats}
                 >
-                    <img src={assets.question_icon} alt="Question icon" />
+                    <img src={assets.trash_icon} alt="Question icon" />
                     {extended && <p>Clear</p>}
                 </div>
 
@@ -181,6 +210,14 @@ const Sidebar = () => {
                     {extended && <p>Logout</p>}
                 </div>
             </div>
+            
+            {popup.show && (
+                <Popup 
+                    message={popup.message} 
+                    onConfirm={popup.onConfirm} 
+                    onCancel={() => setPopup({ show: false })} 
+                />
+            )}
         </div>
     );
 };

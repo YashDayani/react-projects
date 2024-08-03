@@ -1,29 +1,85 @@
-/* src/pages/History.css */
-
 /* Ensure the history page can scroll */
 .history-page {
     overflow-y: auto; /* Enable vertical scrolling */
     height: 100vh; /* Ensure it takes the full viewport height */
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
     background-color: var(--background-color-200);
 }
 
-.history-container{
-    background-color: var(--background-color-100);
-    padding: 50px 10%;
+.history-container>p{
+    color: var(--text-color-100);
+    position: relative;
+    top: 50px;
+    background-color: var(--background-color-300);
+    padding: 40px;
+    margin: 0 10%;
+    display: flex;
     border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.history-container {
+    background-color: var(--background-color-100);
+    border: 1px solid var(--border-color-100);
+    border-radius: 5px;
+    min-height: 100%;
+}
+
+.history-page-header {
+    display: flex;
+    border-bottom: 1px solid var(--border-color-100);
+    justify-content: space-between;
+    padding: 15px 50px;
+    width: 100%;
+}
+
+.history-page-header input {
+    border-radius: 50vw;
+    outline: 0;
+    border: 1px solid var(--border-color-100);
+    padding: 0 15px;
+}
+
+.history-title {
+    font-weight: 400;
+    font-size: 30px;
+    color: var(--text-color-200);
 }
 
 .history-list {
-    margin-top: 20px;
+    margin: 20px 10%;
 }
 
 .history-item {
-    border: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
+    position: relative;
+}
+
+.accordion-title:hover ~ .historyDeletebtn,
+.history-item:hover .historyDeletebtn {
+    opacity: 1;
+    height: 26px; /* Adjust this value as needed */
+    padding: 4px;
+}
+
+.historyDeletebtn {
+    position: absolute;
+    top: 19px;
+    right: 60px;
+    opacity: 0;
+    height: 0;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+    transition: opacity 0.3s, height 0.3s, padding 0.3s; /* Transition properties */
+}
+
+.historyDeletebtn:hover {
+    background: var(--background-color-300);
 }
 
 .history-item-content {

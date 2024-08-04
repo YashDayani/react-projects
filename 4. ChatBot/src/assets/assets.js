@@ -17,12 +17,16 @@ import trash_icon from './trash_icon.svg'
 import setting_icon from './setting_icon.svg'
 import send_icon from './send_icon.svg'
 import nav_arrow from './nav-arrow.svg'
+import day_icon from './day_mode_icon.svg'
+import night_icon from './night_mode_icon.svg'
 
 export const assets = {
     history_icon,
     profile_icon,
     menu_icon,
     plus_icon,
+    day_icon,
+    night_icon,
     trash_icon,
     setting_icon,
     bulb_icon,

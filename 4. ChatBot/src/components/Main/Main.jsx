@@ -10,6 +10,7 @@ const Main = ({ onSendMessage }) => {
   const [userName, setUserName] = useState('');
   const [error, setError] = useState(null);
   const [isListening, setIsListening] = useState(false);
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'day'); // State for theme with initial value from localStorage
   const recognitionRef = useRef(null);
   const [transcript, setTranscript] = useState('');
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -103,6 +104,11 @@ const Main = ({ onSendMessage }) => {
     }
   }, [loading, elapsedTime]);
 
+  useEffect(() => {
+    document.body.classList.toggle('night', theme === 'night');
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
   const saveSearchHistory = async (prompt, response) => {
     try {
       const token = localStorage.getItem('token');
@@ -188,18 +194,25 @@ const Main = ({ onSendMessage }) => {
     setIsListening(!isListening);
   };
 
+  const toggleTheme = () => {
+    setTheme(prevTheme => (prevTheme === 'day' ? 'night' : 'day'));
+  };
+
   if (error) {
     return <div className="error-message">{error}</div>;
   }
 
   return (
-    <div className='main'>
+    <div className={`main ${theme}`}>
       <div className="main-wrapper">
         <div className="nav">
           <p>Sophos</p>
           <div>
-            <img src={assets.profile_icon} alt="" />
-            <p>{userName || 'User'}</p>
+            <img 
+              src={theme === 'day' ? assets.day_icon : assets.night_icon} 
+              alt="Toggle Theme" 
+              onClick={toggleTheme} 
+            />
           </div>
         </div>
         <div className="main-container">
@@ -272,9 +285,9 @@ const Main = ({ onSendMessage }) => {
                     onClick={toggleListening}
                   />
                 </div>
-                <div>
-                  {input.trim() && <img onClick={handleSent} src={assets.send_icon} alt="" />}
-                </div>
+                {input.trim() && <div className='sendBtn'>
+                  <img onClick={handleSent} src={assets.send_icon} alt="" />
+                </div>}
               </div>
             </div>
             <p className="bottom-info">

@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="18.015" height="19.018" viewBox="0 0 18.015 19.018">
-  <g id="Group_1" data-name="Group 1" transform="translate(0.5 18.5) rotate(-90)">
-    <path id="Path_1" data-name="Path 1" d="M4.263,0a8.967,8.967,0,1,0,9.4,0" transform="translate(0 0.433)" fill="none" stroke="#13343b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
-    <path id="Path_2" data-name="Path 2" d="M0,5V.6A.6.6,0,0,1,.6,0H5" transform="translate(13 0)" fill="none" stroke="#13343b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
-    <path id="Path_3" data-name="Path 3" d="M0,0V6.825L3.2,9.85" transform="translate(14.623 8.295) rotate(90)" fill="none" stroke="#13343b" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" id="history"><path fill="#13343B" d="M12,2A10,10,0,0,0,5.12,4.77V3a1,1,0,0,0-2,0V7.5a1,1,0,0,0,1,1H8.62a1,1,0,0,0,0-2H6.22A8,8,0,1,1,4,12a1,1,0,0,0-2,0A10,10,0,1,0,12,2Zm0,6a1,1,0,0,0-1,1v3a1,1,0,0,0,1,1h2a1,1,0,0,0,0-2H13V9A1,1,0,0,0,12,8Z"></path></svg>

@@ -16,7 +16,7 @@
     height: 100vh;
     display: flex;
     animation: fadeIn 1.5s;
-    background-color: #F3F3EE;
+    background-color: var(--background-color-200);
 }
 
 @keyframes fadeIn {

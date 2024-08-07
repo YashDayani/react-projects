@@ -1,75 +1,32 @@
-:root {
-  --pale-yellow-100: #ffffff;
-  --pale-yellow-200: #ffffff;
-  --pale-yellow-300: #ffffff;
-  --pale-yellow-400: #fffff5;
-  --pale-yellow-500: #fffff5;
-  --pale-yellow-600: #fffff5;
-  --pale-yellow-700: #cbcbc1;
-  --pale-yellow-800: #bab99a;
-  --pale-teal-100: #cef0ef;
-  --pale-cyan-100: #d1f3fa;
-  --pale-cyan-200: hsl(190.5 50.92% 15.33%);
-  --pale-cyan-300: #b0d9e4;
-  --pale-cyan-400: #accfdd;
-  --pale-blue-100: #c2e1f3;
-  --pale-blue-200: #b0cce8;
-  --teal-100: #8ab7cf;
-  --teal-200: #79a9bb;
-  --rose-100: #e9b6c4;
-  --red-100: #de6975;
-  --persimmon-100: #e88560;
-  --background-color-100: var(--pale-yellow-100);
-  --background-color-200: var(--pale-yellow-200);
-  --background-color-300: var(--pale-yellow-300);
-  --background-super-color-100: var(--pale-teal-100);
-  --background-super-color-200: var(--teal-200);
-  --background-super-color-300: var(--teal-100);
-  --background-super-alt-color-100: var(--persimmon-100);
-  --text-color-100: var(--pale-blue-200);
-  --text-color-200: var(--pale-yellow-700);
-  --dark-background-color-100: var(--pale-cyan-400);
-  --dark-background-color-200: var(--pale-cyan-300);
-  --dark-background-color-300: var(--pale-cyan-200);
-  --dark-background-super-color-100: var(--pale-blue-200);
-  --dark-background-super-color-200: var(--teal-100);
-  --dark-background-super-color-300: var(--teal-200);
-  --dark-background-super-alt-color-100: var(--red-100);
-  --dark-text-color-100: var(--pale-yellow-400);
-  --dark-text-color-200: var(--pale-cyan-100);
-  --light-background-color-100: var(--pale-yellow-100);
-  --light-text-color-100: var(--pale-blue-200);
-}
-
 :root{
-  --text-color-100: hsl(59.99, 2.639%, 38.25%);
-  --text-color-200: hsl(190.5, 50.92%, 15.33%);
-  --text-color-300: hsl(187.2 62.06% 34.13%);
+  --text-color-100: 59.99, 2.639%, 38.25%;
+  --text-color-200: 190.5, 50.92%, 15.33%;
+  --text-color-300: 187.2 62.06% 34.13%;
 
 
-  --background-color-100: hsl(60, 33.3%, 98.2%);
-  --background-color-200: hsl(60, 17%, 94%);
-  --background-color-300: hsl(60, 9.8%, 90%);
+  --background-color-100: 60, 33.3%, 98.2%;
+  --background-color-200: 60, 17%, 94%;
+  --background-color-300: 60, 9.8%, 90%;
 
 
-  --border-color-100: hsla(60, 11%, 83%, .5);
+  --border-color-100: 60, 11%, 83%;
   
 
 
-  --persimmon-100: hsl(13.89 56% 45%);
+  --persimmon-100: 13.89 56% 45%;
 }
 
 body.night {
-  --text-color-100: hsl(180 1.903% 56.01%);
-  --text-color-200: hsl(59.99 4.627% 90.49%);
+  --text-color-100: 180 1.903% 56.01%;
+  --text-color-200: 59.99 4.627% 90.49%;
 
-  --background-color-100: hsl(180, 2%, 10%);
-  --background-color-200: hsl(180, 3%, 13%);
-  --background-color-300: hsl(180, 2%, 18%);
+  --background-color-100: 180, 2%, 10%;
+  --background-color-200: 180, 3%, 13%;
+  --background-color-300: 180, 2%, 18%;
 
   --border-color-100: rgba(61, 63, 64, .5);
 
-  --persimmon-100: hsl(2.48 50% 47%);
+  --persimmon-100: 2.48 50% 47%;
   }
 
 

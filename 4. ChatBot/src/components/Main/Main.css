@@ -9,8 +9,8 @@
   margin: 10px;
   border-radius: 10px;
   position: relative;
-  border: 1px solid var(--border-color-100);
-  background-color: var(--background-color-100);
+  border: 1px solid hsla(var(--border-color-100), 0.5);
+  background-color: hsl(var(--background-color-100));
 }
   
 .main .nav {
@@ -19,7 +19,7 @@
   justify-content: space-between;
   font-size: 22px;
   padding: 10px 20px;
-  border-bottom: 1px solid var(--border-color-100);
+  border-bottom: 1px solid hsla(var(--border-color-100), 0.5);
 }
 
 .main .nav img {
@@ -56,7 +56,7 @@
 .main .card {
   height: 200px;
   padding: 15px;
-  border: 1px solid var(--border-color-100);
+  border: 1px solid hsla(var(--border-color-100), 0.5);
   border-radius: 10px;
   position: relative;
   cursor: pointer;
@@ -67,7 +67,7 @@
   width: 35px;
   padding: 5px;
   position: absolute;
-  background-color: var(--background-color-200);
+  background-color: hsl(var(--background-color-200));
   border-radius: 5px;
   bottom: 10px;
   right: 10px;
@@ -79,8 +79,8 @@
 }
 
 .main .card:hover {
-  background-color: var(--background-color-200);
-  box-shadow: var(--background-color-100) 0px 0px 0px 1px;
+  background-color: hsl(var(--background-color-200));
+  box-shadow: hsl(var(--background-color-100)) 0px 0px 0px 1px;
 }
 
 
@@ -98,9 +98,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  border: 2px solid var(--border-color-100);
-  box-shadow: 0px 0px 0px 10px var(--background-color-200);
-  background: var(--background-color-100);
+  border: 2px solid hsla(var(--border-color-100), 0.5);
+  box-shadow: 0px 0px 0px 10px hsl(var(--background-color-200));
+  background: hsl(var(--background-color-100));
   padding: 10px 20px;
   border-radius: 50px;
 }
@@ -195,7 +195,7 @@
 .loader hr {
   border-radius: 4px;
   border: none;
-  background: radial-gradient(circle at 18.7% 37.8%, var(--background-color-200)0%, var(--background-color-300) 100%);
+  background: radial-gradient(circle at 18.7% 37.8%, hsl(var(--background-color-200))0%, hsl(var(--background-color-300)) 100%);
   background-size: 800px 50px;
   height: 15px;
   animation: loader 3s infinite linear;
@@ -231,7 +231,7 @@
 
 .micSwitch:hover,
 .sendBtn:hover {
-  background-color: var(--background-color-300);
+  background-color: hsl(var(--background-color-300));
   box-sizing: border-box;
 }
 

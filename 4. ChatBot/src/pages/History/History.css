@@ -4,14 +4,14 @@
     height: 100vh; /* Ensure it takes the full viewport height */
     padding: 10px;
     box-sizing: border-box;
-    background-color: var(--background-color-200);
+    background-color: hsl(var(--background-color-200));
 }
 
 .history-container>p{
     color: var(--text-color-100);
     position: relative;
     top: 50px;
-    background-color: var(--background-color-300);
+    background-color: hsl(var(--background-color-300));
     padding: 40px;
     margin: 0 10%;
     display: flex;
@@ -21,15 +21,15 @@
 }
 
 .history-container {
-    background-color: var(--background-color-100);
-    border: 1px solid var(--border-color-100);
+    background-color: hsl(var(--background-color-100));
+    border: 1px solid hsla(var(--border-color-100), 0.5);
     border-radius: 5px;
     min-height: 100%;
 }
 
 .history-page-header {
     display: flex;
-    border-bottom: 1px solid var(--border-color-100);
+    border-bottom: 1px solid hsla(var(--border-color-100), 0.5);
     justify-content: space-between;
     padding: 15px 50px;
     width: 100%;
@@ -38,14 +38,14 @@
 .history-page-header input {
     border-radius: 50vw;
     outline: 0;
-    border: 1px solid var(--border-color-100);
+    border: 1px solid hsla(var(--border-color-100), 0.5);
     padding: 0 15px;
 }
 
 .history-title {
     font-weight: 400;
     font-size: 30px;
-    color: var(--text-color-200);
+    color: hsl(var(--text-color-200));
 }
 
 .history-list {
@@ -79,7 +79,7 @@
 }
 
 .historyDeletebtn:hover {
-    background: var(--background-color-300);
+    background: hsl(var(--background-color-300));
 }
 
 .history-item-content {

@@ -1,12 +1,12 @@
-// src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Register from './pages/Login/Register';
 import Dashboard from './pages/Dashboard/Dashboard';
-import History from './pages/History/History'
+import History from './pages/History/History';
+import NotFound from './pages/NotFound/NotFound';
 
-import './App.css'
+import './App.css';
 
 const App = () => {
   return (
@@ -14,9 +14,10 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/history" element={<History />} />
-        <Route path="/dashboard" element={<ProtectedRoute />} />
+        <Route path="/dashboard" element={<ProtectedRoute component={Dashboard} />} />
+        <Route path="/history" element={<ProtectedRoute component={History} />} />
         <Route path="/" element={<NavigateIfAuthenticated />} /> {/* Default redirect to login */}
+        <Route path="*" element={<NotFound />} /> {/* 404 Not Found route */}
       </Routes>
     </Router>
   );
@@ -24,13 +25,13 @@ const App = () => {
 
 export default App;
 
-const ProtectedRoute = () => {
+const ProtectedRoute = ({ component: Component }) => {
   // Check if token exists in localStorage
   const token = localStorage.getItem('token');
 
   if (token) {
-    // Render dashboard component or protected content
-    return <Dashboard />;
+    // Render the passed component or protected content
+    return <Component />;
   } else {
     // Redirect to login page if no token found
     return <Navigate to="/login" replace />;

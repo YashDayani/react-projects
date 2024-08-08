@@ -35,14 +35,14 @@
 .main .greet {
   margin: 30px;
   font-size: 48px;
-  color: var(--text-color-100);
+  color: hsl(var(--text-color-100));
   font-weight: 500;
   margin-bottom: 30px;
 }
 
 
 .main .greet span {
-  color: var(--text-color-200);
+  color: hsl(var(--text-color-200));
 }
 
 

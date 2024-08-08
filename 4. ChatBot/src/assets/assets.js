@@ -19,9 +19,11 @@ import send_icon from './send_icon.svg'
 import nav_arrow from './nav-arrow.svg'
 import day_icon from './day_mode_icon.svg'
 import night_icon from './night_mode_icon.svg'
+import error404_img from './404_error.gif'
 
 export const assets = {
     history_icon,
+    error404_img,
     profile_icon,
     menu_icon,
     plus_icon,

@@ -1,0 +1,39 @@
+.not-found{
+    background-color: hsl(var(--background-color-200));
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* flex-direction: column; */
+    gap: 35px;
+    text-align: left;
+}
+
+.not-found a{
+    background-color: hsl(var(--text-color-300));
+    color: hsl(var(--background-color-100));
+    padding: 12px 24px;
+    border-radius: 5px;
+    width: fit-content;
+}
+
+.not-found h2{
+    font-size: 48px;
+    line-height: 1;
+    color: hsl(var(--text-color-200));
+    opacity: 0.9;
+}
+.not-found p{
+    font-size: 18px;
+    padding:22px 0;
+}
+
+.not-found .left{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.not-found img{
+    width: 450px;
+}

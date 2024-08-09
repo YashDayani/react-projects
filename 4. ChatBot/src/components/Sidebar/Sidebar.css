@@ -1,5 +1,5 @@
 .sidebar {
-    min-height: 100vh;
+    max-height: 100vh;
     min-width: 80px;
     display: flex;
     flex-direction: column;
@@ -9,6 +9,22 @@
     padding: 25px 15px;
     align-items: center;
     transition: width 0.3s;
+}
+
+.MainPage {
+    animation: fadeIn 1.5s;
+    background-color: hsl(var(--background-color-200));
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
 }
 
 .sidebar.extended {

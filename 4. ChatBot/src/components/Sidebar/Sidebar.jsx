@@ -112,6 +112,11 @@ const Sidebar = () => {
         navigate('/login');
     };
 
+    const handleNewChat = async () => {
+        navigate('/dashboard');  // Ensure we're on the dashboard (main page)
+        newChat();  // Start a new chat
+    };
+
     useEffect(() => {
         fetchSearchHistory();
     }, []);
@@ -129,7 +134,7 @@ const Sidebar = () => {
                     />
                 </div>
 
-                <div onClick={() => newChat()} className="new-chat" title='New Chat' aria-label="Start a new chat">
+                <div onClick={handleNewChat} className="new-chat" title='New Chat' aria-label="Start a new chat">
                     <img src={assets.plus_icon} alt="Plus icon" />
                     {extended && (
                         <div className='new-btn'>

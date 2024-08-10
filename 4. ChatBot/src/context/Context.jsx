@@ -18,6 +18,7 @@ const ContextProvider = ({ children }) => {
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
     const [resultData, setResultData] = useState("");
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'day'); // Initialize theme
 
     const resultRef = useRef(null);
 
@@ -31,6 +32,12 @@ const ContextProvider = ({ children }) => {
             }, 0);
         }
     }, [resultData]);
+
+    useEffect(() => {
+        // Apply the theme to the body
+        document.body.classList.toggle('night', theme === 'night');
+        localStorage.setItem('theme', theme);
+    }, [theme]);
 
     const newChat = () => {
         setLoading(false);
@@ -111,7 +118,9 @@ const ContextProvider = ({ children }) => {
         input,
         setInput,
         newChat,
-        resultRef
+        resultRef,
+        theme,         // Provide theme value
+        setTheme       // Provide function to change theme
     };
 
     return (

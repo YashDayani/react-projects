@@ -5,12 +5,11 @@ import { Context } from '../../context/Context';
 import axios from 'axios';
 import './Main.css';
 
-const Main = ({ onSendMessage }) => {
+const Main = ({ theme, toggleTheme }) => {
   const { onSent, recentPrompt, showResult, loading, resultData, setInput, input, newChat, resultRef } = useContext(Context);
   const [userName, setUserName] = useState('');
   const [error, setError] = useState(null);
   const [isListening, setIsListening] = useState(false);
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'day'); // State for theme with initial value from localStorage
   const recognitionRef = useRef(null);
   const [transcript, setTranscript] = useState('');
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -104,11 +103,6 @@ const Main = ({ onSendMessage }) => {
     }
   }, [loading, elapsedTime]);
 
-  useEffect(() => {
-    document.body.classList.toggle('night', theme === 'night');
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
   const saveSearchHistory = async (prompt, response) => {
     try {
       const token = localStorage.getItem('token');
@@ -151,7 +145,6 @@ const Main = ({ onSendMessage }) => {
       console.log('Response:', response);
       if (response) {
         await saveSearchHistory(input, response);
-        await onSendMessage(input);
       } else {
         console.error('No response received from onSent');
       }
@@ -192,10 +185,6 @@ const Main = ({ onSendMessage }) => {
       recognitionRef.current.start();
     }
     setIsListening(!isListening);
-  };
-
-  const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'day' ? 'night' : 'day'));
   };
 
   if (error) {

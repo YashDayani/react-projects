@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useCallback, useRef } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import CodeBlock from '../CodeBlock/CodeBlock';
 import { assets } from '../../assets/assets';
 import { Context } from '../../context/Context';
@@ -162,20 +162,6 @@ const Main = ({ theme, toggleTheme }) => {
       handleSent();
     }
   };
-
-  const handleNewChat = useCallback((event) => {
-    if (event.ctrlKey && event.key === 'i') {
-      event.preventDefault();
-      newChat();
-    }
-  }, [newChat]);
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleNewChat);
-    return () => {
-      window.removeEventListener('keydown', handleNewChat);
-    };
-  }, [handleNewChat]);
 
   const toggleListening = () => {
     if (isListening) {

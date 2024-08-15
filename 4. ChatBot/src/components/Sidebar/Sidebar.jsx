@@ -15,6 +15,21 @@ const Sidebar = () => {
     const [popup, setPopup] = useState({ show: false, message: '', onConfirm: null });
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.ctrlKey && e.key === 'i') {
+                e.preventDefault();
+                handleNewChat(); // Call the new chat handler
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
+
     const fetchSearchHistory = async () => {
         try {
             const token = localStorage.getItem('token');
@@ -193,7 +208,7 @@ const Sidebar = () => {
                     aria-label="Clear History"
                     onClick={handleDeleteAllChats}
                 >
-                    <img src={assets.trash_icon} alt="Question icon" />
+                    <img src={assets.trash_icon} alt="Trash icon" />
                     {extended && <p>Clear</p>}
                 </div>
 

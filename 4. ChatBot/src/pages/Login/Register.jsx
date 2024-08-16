@@ -113,7 +113,7 @@ const Register = () => {
           {isLoading ? 'Registering...' : 'Register'}
         </button>
       </form>
-      <p className='tosDesc'>By continuing, you agree <a href="terms">Consumer Terms</a> and <br /> <a href="policy">Usage Policy</a> of Mavrick Corp</p>
+      <p className='link-container'>By continuing, you agree <a href="terms">Consumer Terms</a> and <br /> <a href="policy">Usage Policy</a> of Sophos AI</p>
     </div>
     </div>
   );

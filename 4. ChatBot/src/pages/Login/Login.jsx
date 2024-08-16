@@ -105,7 +105,7 @@ const Login = () => {
           {isLoading ? 'Logging in...' : 'Login'}
         </button>
       </form>
-      <p className='regis-link'>Don't have an account? <Link to="/register">Register here</Link></p>
+      <p className='link-container'>Don't have an account? <Link to="/register">Register here</Link></p>
     </div>
   );
 };

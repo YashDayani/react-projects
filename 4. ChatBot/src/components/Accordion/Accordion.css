@@ -14,6 +14,10 @@
     cursor: pointer;
 }
 
+pre{
+    width:  1040px;
+}
+
 .accordion-title h3 {
     margin: 0;
     color: hsl(var(--text-color-200));

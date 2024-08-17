@@ -12,7 +12,7 @@ const Accordion = ({ prompt, response }) => {
     return (
         <div className="accordion-item">
             <div className="accordion-title" onClick={toggleAccordion}>
-            <h3>{prompt}</h3>
+            <h3>{prompt.slice(0, 148)}</h3>
                 <img 
                     src={assets.nav_arrow} 
                     className={isOpen ? 'rotate-icon' : ''} 

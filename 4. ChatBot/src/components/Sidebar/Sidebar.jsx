@@ -45,7 +45,11 @@ const Sidebar = () => {
             setSearchHistory(response.data);
         } catch (error) {
             console.error('Error fetching search history:', error.response ? error.response.data : error.message);
-            setError('Failed to load search history. Please log in again.');
+            if (error.response && error.response.status === 401) {
+                handleLogout('Your session has expired. Please log in again.');
+            } else {
+                setError('Failed to load search history. Please try again.');
+            }
         } finally {
             setLoading(false);
         }
@@ -81,7 +85,11 @@ const Sidebar = () => {
             setSearchHistory(searchHistory.filter(item => item._id !== id));
         } catch (error) {
             console.error('Error deleting chat:', error.response ? error.response.data : error.message);
-            setError('Failed to delete chat. Please try again.');
+            if (error.response && error.response.status === 401) {
+                handleLogout('Your session has expired. Please log in again.');
+            } else {
+                setError('Failed to delete chat. Please try again.');
+            }
         }
     };
 
@@ -109,16 +117,21 @@ const Sidebar = () => {
             setSearchHistory([]);
         } catch (error) {
             console.error('Error deleting all chats:', error.response ? error.response.data : error.message);
-            setError('Failed to delete all chats. Please try again.');
+            if (error.response && error.response.status === 401) {
+                handleLogout('Your session has expired. Please log in again.');
+            } else {
+                setError('Failed to delete all chats. Please try again.');
+            }
         }
     };
 
-    const handleLogout = () => {
-        setPopup({
-            show: true,
-            message: 'Are you sure you want to log out?',
-            onConfirm: confirmLogout
-        });
+    const handleLogout = (logoutMessage) => {
+        setPopup({ show: false });
+        localStorage.removeItem('token');
+        if (logoutMessage) {
+            setError(logoutMessage);
+        }
+        navigate('/login');
     };
 
     const confirmLogout = () => {

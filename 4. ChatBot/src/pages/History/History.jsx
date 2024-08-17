@@ -103,10 +103,10 @@ const History = () => {
                 // Use regex to fetch the language from the first line
                 const langMatch = token.text.match(/^```(\w+)/);
                 let language = langMatch ? langMatch[1].toLowerCase() : '';
-                
+
                 // Remove the language declaration line if it exists
                 let code = token.text.replace(/^```\w+\n/, '').trim();
-                
+
                 // Highlight the code
                 const highlighted = hljs.highlightAuto(code, language ? [language] : undefined);
 
@@ -181,27 +181,30 @@ const History = () => {
                 ) : error ? (
                     <p className="error-message">{error}</p>
                 ) : filteredHistory.length > 0 ? (
-                    <div className="history-list">
-                        {filteredHistory.map((item) => (
-                            <div key={item._id} id={`${item._id}`} className="history-item">
-                                <Accordion 
-                                    prompt={item.prompt} 
-                                    response={renderResponse(item.response)} 
-                                />
-                                <img className='historyDeletebtn' src={assets.trash_icon} onClick={() => handleDeleteChat(item._id)} alt="Delete" />
-                            </div>
-                        ))}
-                        <button onClick={handleDeleteAllChats} className="delete-all-btn">Delete All Chats</button>
+                    <div className="history-items">
+                        <div className="history-list">
+                            {filteredHistory.map((item) => (
+                                <div key={item._id} id={`${item._id}`} className="history-item">
+                                    <Accordion
+                                        prompt={item.prompt}
+                                        response={renderResponse(item.response)}
+                                    />
+                                    <img className='historyDeletebtn' src={assets.trash_icon} onClick={() => handleDeleteChat(item._id)} alt="Delete" />
+                                </div>
+                            ))}
+                            <button onClick={handleDeleteAllChats} className="delete-all-btn">Delete All Chats</button>
+                        </div>
                     </div>
+
                 ) : (
                     <p>No history yet</p>
                 )}
             </div>
             {popup.show && (
-                <Popup 
-                    message={popup.message} 
-                    onConfirm={popup.onConfirm} 
-                    onCancel={() => setPopup({ show: false })} 
+                <Popup
+                    message={popup.message}
+                    onConfirm={popup.onConfirm}
+                    onCancel={() => setPopup({ show: false })}
                 />
             )}
         </section>

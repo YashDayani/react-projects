@@ -1,3 +1,6 @@
+/* Accordion.css */
+
+
 .accordion-item {
     background-color: hsl(var(--background-color-200));
     overflow: hidden;

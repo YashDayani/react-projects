@@ -105,12 +105,17 @@ code.hljs {
   background-color: #0056b3;
 }
 
-
-
-
-
 .prism-highlight{
 	width: 100%;
+}
+
+.prism-highlight > .code-block *{
+	width: 800px;
+	overflow: hidden;
+}
+
+.prism-highlight > .code-block button{
+	width: 100px !important;
 }
 
 pre *{

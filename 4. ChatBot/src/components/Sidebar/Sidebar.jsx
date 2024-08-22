@@ -141,8 +141,8 @@ const Sidebar = () => {
     };
 
     const handleNewChat = async () => {
-        navigate('/dashboard');  // Ensure we're on the dashboard (main page)
-        newChat();  // Start a new chat
+        navigate('/dashboard');
+        newChat();
     };
 
     useEffect(() => {

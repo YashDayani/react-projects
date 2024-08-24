@@ -119,8 +119,8 @@ const ContextProvider = ({ children }) => {
         setInput,
         newChat,
         resultRef,
-        theme,         // Provide theme value
-        setTheme       // Provide function to change theme
+        theme,
+        setTheme
     };
 
     return (

@@ -15,7 +15,6 @@ code.hljs {
 /* Comment */
 .hljs-comment {
   color: rgb(142, 144, 140);
-  font-family: berkeleyMono_italic !important;
 }
 /* quote */
 .hljs-quote {
@@ -58,7 +57,7 @@ code.hljs {
 .hljs-function,
 .hljs-class {
   color: #8959A8;
-  font-weight: 400;
+  font-weight: 500 !important;
 }
 /* Blue */
 .hljs-title,
@@ -74,7 +73,7 @@ code.hljs {
   font-style: italic
 }
 .hljs-strong {
-  font-weight: bold
+  font-weight: bold;
 }
 
 .function_{
@@ -116,12 +115,6 @@ code.hljs {
 
 .prism-highlight > .code-block button{
 	width: 100px !important;
-}
-
-pre *{
-  font-family: berkeley !important;
-  font-weight: 100 !important;
-  background: transparent;
 }
 
 code{

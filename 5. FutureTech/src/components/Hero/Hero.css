@@ -1,0 +1,41 @@
+.hero-section *{
+    font-family: "Kumbh Sans", sans-serif;
+}
+
+.hero-section{
+    display: flex;
+}
+
+.hero-section-left-top-wrapper{
+    padding: 100px 40px 100px 80px;
+}
+
+.hero-section-left-top-wrapper span{
+    line-height: 120%;
+    color: #666666;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.hero-section-left-top-wrapper h1{
+    font-size: 55px;
+    line-height: 120%;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.hero-section-left-top-wrapper p{
+    font-size: 16px;
+    line-height: 150%;
+    font-weight: 400;
+    color: #7E7E81;
+}
+
+
+.hero-section-right{
+    background-image: url(../../assets/hero_img.png);
+}
+
+.hero-section-right{
+    margin-right: 162px;
+}

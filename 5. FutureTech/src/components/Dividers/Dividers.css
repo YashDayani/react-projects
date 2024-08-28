@@ -1,0 +1,50 @@
+.divider{
+display: flex;
+align-items: center;
+padding: 80px;
+gap: 200px;
+background-color: #1A1A1A;
+}
+
+.divider-left{
+    flex: 1;
+}
+
+.divider .divider-left .subtitle{
+    background-color: #333333;
+    color: #fff;
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin-bottom: 10px;
+    width: fit-content;
+
+}
+
+.divider .divider-left .title{
+font-weight: 500;
+font-size: 44px;
+color: #fff;
+}
+
+.divider .divider-right a{
+    display: flex;
+}
+
+.divider .divider-right img{
+    display: flex;
+    height: 20px;
+}
+
+.divider .divider-right a{
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #98989A;
+    display: flex;
+    gap: 4px;
+    border-radius: 8px;
+    border: 1px solid #262626;
+    padding: 14px 20px;
+    width: fit-content;
+    background-color: #141414;
+}

@@ -1,8 +1,9 @@
 import React from 'react'
 import './Home.css'
-import Header from '../../components/header/Header'
+import Header from '../../components/Header/Header'
 import Hero from '../../components/Hero/Hero'
 import Dividers from '../../components/Dividers/Dividers'
+import Footer from '../../components/Footer/Footer'
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       <Header />
       <Hero />
       <Dividers title='' subtitle='' linktext=''/>
+      <Footer />
     </div>
   )
 }

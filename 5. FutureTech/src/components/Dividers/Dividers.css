@@ -1,7 +1,7 @@
 .divider{
 display: flex;
 align-items: center;
-padding: 80px;
+padding: 120px var(--default-margin);
 gap: 200px;
 background-color: #1A1A1A;
 }
@@ -26,16 +26,16 @@ font-size: 44px;
 color: #fff;
 }
 
-.divider .divider-right a{
+.link-btn a{
     display: flex;
 }
 
-.divider .divider-right img{
+.link-btn img{
     display: flex;
     height: 20px;
 }
 
-.divider .divider-right a{
+.link-btn a{
     text-decoration: none;
     font-size: 14px;
     font-weight: 400;

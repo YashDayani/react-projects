@@ -7,8 +7,8 @@ const Header = () => {
   return (
     <header>
         <div className="top-banner">
-            <span>Subscribe to our Newsletter For New & latest Blogs and Resources</span>
-            <img src={assets.up_arrow} />
+            <span>Subscribe to our Newsletter For Blogs and Resources</span>
+            <img className='up_arror_img' src={assets.up_arrow} />
         </div>
         <nav className='navbar'>
             <div className="logo">

@@ -1,16 +1,16 @@
-.divider{
-display: flex;
-align-items: center;
-padding: 120px var(--default-margin);
-gap: 200px;
-background-color: #1A1A1A;
+.divider {
+    display: flex;
+    align-items: center;
+    padding: var(--m120) var(--m162);
+    gap: 200px;
+    background-color: #1A1A1A;
 }
 
-.divider-left{
+.divider-left {
     flex: 1;
 }
 
-.divider .divider-left .subtitle{
+.divider .divider-left .subtitle {
     background-color: #333333;
     color: #fff;
     border-radius: 4px;
@@ -20,22 +20,22 @@ background-color: #1A1A1A;
 
 }
 
-.divider .divider-left .title{
-font-weight: 500;
-font-size: 44px;
-color: #fff;
+.divider .divider-left .title {
+    font-weight: 500;
+    font-size: 44px;
+    color: #fff;
 }
 
-.link-btn a{
+.link-btn a {
     display: flex;
 }
 
-.link-btn img{
+.link-btn img {
     display: flex;
     height: 20px;
 }
 
-.link-btn a{
+.link-btn a {
     text-decoration: none;
     font-size: 14px;
     font-weight: 400;

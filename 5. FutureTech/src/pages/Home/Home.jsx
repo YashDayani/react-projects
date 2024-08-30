@@ -2,7 +2,7 @@ import React from 'react'
 import './Home.css'
 import Header from '../../components/Header/Header'
 import Hero from '../../components/Hero/Hero'
-import Dividers from '../../components/Dividers/Dividers'
+import Features from '../../components/Features/Features'
 import Footer from '../../components/Footer/Footer'
 
 const Home = () => {
@@ -10,7 +10,7 @@ const Home = () => {
     <div>
       <Header />
       <Hero />
-      <Dividers title='' subtitle='' linktext=''/>
+      <Features/>
       <Footer />
     </div>
   )

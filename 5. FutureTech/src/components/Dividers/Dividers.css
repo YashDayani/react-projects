@@ -23,6 +23,7 @@
 .divider .divider-left .title {
     font-weight: 500;
     font-size: var(--h1);
+    font-family: "Kumbh Sans", system-ui;
     color: #fff;
 }
 

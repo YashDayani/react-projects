@@ -12,7 +12,7 @@ const Features = () => {
 
       <div className="feature-container">
         <div className="left">
-            <img src={assets.icon1_img} alt="" />
+            <img src={assets.icon4_img} alt="" />
             <span className='title'>Future Technology Blog</span>
             <span className='subtitle'>Stay informed with our blog section dedicated to future technology.</span>
         </div>
@@ -37,7 +37,7 @@ const Features = () => {
       </div>
       <div className="feature-container">
         <div className="left">
-            <img src={assets.icon1_img} alt="" />
+            <img src={assets.icon5_img} alt="" />
             <span className='title'>Research Insights Blogs</span>
             <span className='subtitle'>Dive deep into future technology concepts with our research section.</span>
         </div>

@@ -12,7 +12,7 @@ const Header = () => {
         </div>
         <nav className='navbar'>
             <div className="logo">
-                <img src={assets.logo} alt="" />
+                <img src={assets.logoEx} alt="" />
             </div>
             <div className="nav-btns">
                 <ul>

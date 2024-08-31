@@ -5,6 +5,35 @@ import { assets } from '../../assets/assets'
 
 const Footer = () => {
     return (
+        <>
+        <div className="footer-banner">
+            <div className="top">
+                    <img className='div1' src={assets.logo} alt="" />
+                    <div className="subtitle div2">Learn, Connect, and Innovate</div>
+                    <div className="title div3">Be Part of the Future Tech Revolution</div>
+                    <div className="info div4">Immerse yourself in the world of future technology. Explore our comprehensive resources, connect with fellow tech enthusiasts, and drive innovation in the industry. Join a dynamic community of forward-thinkers.</div>
+            </div>
+            <div className="bottom">
+                <div className="cards">
+                    <div className="title">
+                        <span> Resource Access</span>
+                        <img src={assets.up_arrow_fill} alt="" /></div>
+                    <div className="info">Visitors can access a wide range of resources, including ebooks, whitepapers, reports.</div>
+                </div>
+                <div className="cards">
+                    <div className="title">
+                        <span> Community Forum </span>
+                        <img src={assets.up_arrow_fill} alt="" /></div>
+                    <div className="info">Join our active community forum to discuss industry trends, share insights, and collaborate with peers.</div>
+                </div>
+                <div className="cards">
+                    <div className="title">
+                        <span> Tech Events </span>
+                        <img src={assets.up_arrow_fill} alt="" /></div>
+                    <div className="info">Stay updated on upcoming tech events, webinars, and conferences to enhance your knowledge.</div>
+                </div>
+            </div>
+        </div>
         <footer className="footer">
             <div className="footer-top">
                 <div className="cols-wrapper">
@@ -72,6 +101,7 @@ const Footer = () => {
                 </div>
             </div>
         </footer>
+        </>
     )
 }
 

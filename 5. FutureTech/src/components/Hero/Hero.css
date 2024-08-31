@@ -253,4 +253,8 @@ opacity: 50%;
         margin: 0;
         width: 100%;
     }
+
+    .hero-card-container .hero-cards + .hero-cards{
+        border-top: 1px solid hsl(var(--border-color));
+    }
   }

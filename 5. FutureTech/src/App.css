@@ -48,6 +48,7 @@
 
 body{
   background-color: hsl(var(--primary-color));
+  scroll-behavior: smooth;
 }
 
 body::-webkit-scrollbar {

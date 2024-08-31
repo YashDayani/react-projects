@@ -1,0 +1,35 @@
+.blogp .category{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    padding: 50px var(--m162);
+    gap: 20px;
+}
+
+.blogp .category .cards{
+    border: 1px solid hsl(var(--border-color));
+    display: flex;
+    justify-content: center;
+    font-size: var(--p);
+    color: hsl(var(--font-color-medium));
+    padding: 28px 0px;
+    border-radius: 8px;
+}
+
+.blogp .category .active{
+    background-color: hsl(var(--secondary-color));
+}
+
+@media  (max-width: 1440px) {
+    .blogp .category{
+        padding: 24px var(--m162);
+        gap: 14px;
+    }
+}
+
+@media  (max-width: 930px) {
+    .blogp .category{
+        display: grid;
+        overflow-x: scroll;
+        grid-template-columns: repeat(6, 160px);
+    }
+}

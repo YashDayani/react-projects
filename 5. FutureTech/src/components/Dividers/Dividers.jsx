@@ -4,7 +4,7 @@ import './Dividers.css'
 
 const Dividers = (props) => {
   return (
-    <section className="divider">
+    <section className="divider" id={props.id}>
         <div className='divider-left'>
             <div className="subtitle"> {props.subtitle} </div>
             <div className="title"> {props.title} </div>

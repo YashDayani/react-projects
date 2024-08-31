@@ -39,8 +39,8 @@ const Footer = () => {
                 <div className="cols-wrapper">
                     <a href='#' className="cols-title">Home</a>
                     <div className="cols-items">
-                        <a href='#' className="cols-item">Features</a>
-                        <a href='#' className="cols-item">Blogs</a>
+                        <a href='#features' className="cols-item">Features</a>
+                        <a href='#blogp' className="cols-item">Blogs</a>
                         <a href='#' className="cols-item">Resources <div className='new-pill'><span>New</span></div></a>
                         <a href='#' className="cols-item">Testimonials</a>
                         <a href='#' className="cols-item">Contact Us</a>

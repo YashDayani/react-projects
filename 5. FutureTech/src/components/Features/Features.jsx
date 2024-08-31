@@ -7,7 +7,7 @@ import { assets } from '../../assets/assets'
 
 const Features = () => {
   return (
-    <div className='features'>
+    <div className='features' id='features'>
       <Dividers title='FutureTech Features' subtitle='Unlock the Power of'/>
 
       <div className="feature-container">

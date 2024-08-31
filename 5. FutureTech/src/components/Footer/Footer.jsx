@@ -12,6 +12,7 @@ const Footer = () => {
                     <div className="cols-items">
                         <a href='#' className="cols-item">Features</a>
                         <a href='#' className="cols-item">Blogs</a>
+                        <a href='#' className="cols-item">Resources <div className='new-pill'><span>New</span></div></a>
                         <a href='#' className="cols-item">Testimonials</a>
                         <a href='#' className="cols-item">Contact Us</a>
                         <a href='#' className="cols-item">Newsletter</a></div>
@@ -35,7 +36,7 @@ const Footer = () => {
                         <a href='#' className="cols-item">Quantum Computing</a>
                         <a href='#' className="cols-item">AI Ethics</a>
                         <a href='#' className="cols-item">Space Exploration</a>
-                        <a href='#' className="cols-item">Biotechnology</a>
+                        <a href='#' className="cols-item">Biotechnology <div className='new-pill'><span>New</span></div></a>
                         <a href='#' className="cols-item">Renewable Energy</a>
                         <a href='#' className="cols-item">Biohacking</a>
                     </div>
@@ -44,7 +45,7 @@ const Footer = () => {
                 <div className="cols-wrapper">
                     <a href='#' className="cols-title">Podcasts</a>
                     <div className="cols-items">
-                        <a href='#' className="cols-item">AI Revolution</a>
+                        <a href='#' className="cols-item">AI Revolution <div className='new-pill'><span>New</span></div></a>
                         <a href='#' className="cols-item">TechTalk AI</a>
                         <a href='#' className="cols-item">AI Conversations</a></div>
                 </div>

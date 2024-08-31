@@ -76,7 +76,7 @@ a{
   :root{
     --m162: 80px;
     --m120: 80px;
-    --m80: 50px;
+    --m80: 60px;
     --m50: 40px;
     --m40: 40px;
     --m30: 30px;
@@ -108,6 +108,12 @@ a{
 
 @media  (max-width: 930px) {
   :root{
+      /* Colors */
+  --primary-color: 0, 0%, 5%;
+  --secondary-color: 0, 0%, 7%;
+  --accent-color: 48, 100%, 55%;
+  --border-color: 0, 0%, 15%;
+
     --m162: 16px;
     --m120: 40px;
     --m80: 80px;

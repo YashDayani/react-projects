@@ -21,11 +21,19 @@ const App = () => {
     setTheme((prevTheme) => (prevTheme === 'day' ? 'night' : 'day'));
   }, []);
 
+  const isAuthenticated = localStorage.getItem('token');
+
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route 
+          path="/login" 
+          element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Login />} 
+        />
+        <Route 
+          path="/register" 
+          element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Register />} 
+        />
         <Route
           path="/dashboard"
           element={<ProtectedRoute component={Main} theme={theme} toggleTheme={toggleTheme} />}
@@ -34,8 +42,8 @@ const App = () => {
           path="/history"
           element={<ProtectedRoute component={History} theme={theme} toggleTheme={toggleTheme} />}
         />
-        <Route path="/" element={<NavigateIfAuthenticated />} /> {/* Default redirect to login */}
-        <Route path="*" element={<NotFound />} /> {/* 404 Not Found route */}
+        <Route path="/" element={<NavigateIfAuthenticated />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import CodeBlock from '../CodeBlock/CodeBlock';
 import { assets } from '../../assets/assets';
 import { Context } from '../../context/Context';
+import { cardPrompts } from './data';
 import axios from 'axios';
 import './Main.css';
 
@@ -173,6 +174,10 @@ const Main = ({ theme, toggleTheme }) => {
     setIsListening(!isListening);
   };
 
+  const handleCardClick = (prompt) => {
+    setInput(prompt);
+  };
+
   if (error) {
     return <div className="error-message">{error}</div>;
   }
@@ -183,10 +188,10 @@ const Main = ({ theme, toggleTheme }) => {
         <div className="nav">
           <p>Sophos</p>
           <div>
-            <img 
-              src={theme === 'day' ? assets.day_icon : assets.night_icon} 
-              alt="Toggle Theme" 
-              onClick={toggleTheme} 
+            <img
+              src={theme === 'day' ? assets.day_icon : assets.night_icon}
+              alt="Toggle Theme"
+              onClick={toggleTheme}
             />
           </div>
         </div>
@@ -198,22 +203,16 @@ const Main = ({ theme, toggleTheme }) => {
                 <p>How can I help you today?</p>
               </div>
               <div className="cards">
-                <div className="card">
-                  <p>Suggest beautiful places to see on an upcoming road trip</p>
-                  <img src={assets.compass_icon} alt="" />
-                </div>
-                <div className="card">
-                  <p>Briefly summarize this concept: urban planning</p>
-                  <img src={assets.bulb_icon} alt="" />
-                </div>
-                <div className="card">
-                  <p>Brainstorm team bonding activities for our work retreat</p>
-                  <img src={assets.message_icon} alt="" />
-                </div>
-                <div className="card">
-                  <p>Improve the readability of the following code</p>
-                  <img src={assets.code_icon} alt="" />
-                </div>
+                {cardPrompts.map((card, index) => (
+                  <div
+                    key={index}
+                    className="card"
+                    onClick={() => handleCardClick(card.text)}
+                  >
+                    <p>{card.text}</p>
+                    <img src={assets[card.icon]} alt="" />
+                  </div>
+                ))}
               </div>
             </>
           ) : (
@@ -276,4 +275,3 @@ const Main = ({ theme, toggleTheme }) => {
 }
 
 export default Main;
-  

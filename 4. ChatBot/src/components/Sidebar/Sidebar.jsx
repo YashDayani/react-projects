@@ -125,20 +125,20 @@ const Sidebar = () => {
         }
     };
 
-    const handleLogout = (logoutMessage) => {
-        setPopup({ show: false });
-        localStorage.removeItem('token');
-        if (logoutMessage) {
-            setError(logoutMessage);
-        }
-        navigate('/login');
+    const handleLogout = () => {
+        setPopup({
+            show: true,
+            message: 'Are you sure you want to log out?',
+            onConfirm: confirmLogout
+        });
     };
-
+    
     const confirmLogout = () => {
         setPopup({ show: false });
         localStorage.removeItem('token');
         navigate('/login');
     };
+    
 
     const handleNewChat = async () => {
         navigate('/dashboard');

@@ -5,7 +5,7 @@ import 'prismjs/plugins/autoloader/prism-autoloader';
 
 import './CodeBlock.css'
 
-// Configure the autoloader
+
 Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/';
 
 const CodeBlock = ({ language, code }) => {
@@ -23,7 +23,7 @@ const CodeBlock = ({ language, code }) => {
       setIsLoaded(true);
       highlight();
     }, () => {
-      // Language failed to load, fallback to plaintext
+      
       setIsLoaded(true);
       highlight();
     });

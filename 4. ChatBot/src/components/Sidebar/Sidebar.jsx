@@ -19,7 +19,7 @@ const Sidebar = () => {
         const handleKeyDown = (e) => {
             if (e.ctrlKey && e.key === 'i') {
                 e.preventDefault();
-                handleNewChat(); // Call the new chat handler
+                handleNewChat(); 
             }
         };
 

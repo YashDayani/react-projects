@@ -13,7 +13,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState('password');
   const [iconClass, setIconClass] = useState('eyeOff');
-  const passwordInputRef = useRef(null); // Use useRef to get a reference to the password input element
+  const passwordInputRef = useRef(null); 
 
   const navigate = useNavigate();
 
@@ -32,9 +32,9 @@ const Login = () => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/login`, formData);
       if (response.data && response.data.token) {
-        // Store the token in localStorage
+        
         localStorage.setItem('token', response.data.token);
-        // Successful login
+        
         navigate(response.data.redirectUrl || '/dashboard');
       } else {
         setError('Login failed. Please try again.');
@@ -61,7 +61,7 @@ const Login = () => {
       setType('password');
       setIconClass('eyeOff');
     }
-    // Focus back on the password input element
+    
     if (passwordInputRef.current) {
       passwordInputRef.current.focus();
     }
@@ -92,7 +92,7 @@ const Login = () => {
             onChange={handleChange} 
             required 
             minLength="6"
-            ref={passwordInputRef} // Attach the ref to the password input element
+            ref={passwordInputRef} 
           />
           <span>Password</span>
           <div 

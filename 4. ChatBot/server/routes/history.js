@@ -6,7 +6,7 @@ const cors = require('cors');
 
 router.use(cors());
 
-// Route to save search history
+
 router.post('/', auth, async (req, res) => {
     try {
         const { prompt, response } = req.body;
@@ -19,7 +19,7 @@ router.post('/', auth, async (req, res) => {
         const newHistory = new SearchHistory({
             prompt,
             response,
-            user // Include user ID
+            user 
         });
 
         await newHistory.save();
@@ -30,7 +30,7 @@ router.post('/', auth, async (req, res) => {
     }
 });
 
-// Route to get search history
+
 router.get('/', auth, async (req, res) => {
     try {
         const user = req.user;
@@ -42,7 +42,7 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-// Delete all search history for the authenticated user
+
 router.delete('/', auth, async (req, res) => {
     try {
         const userId = req.user;
@@ -54,7 +54,7 @@ router.delete('/', auth, async (req, res) => {
     }
 });
 
-// Delete a specific search history item by ID
+
 router.delete('/:id', auth, async (req, res) => {
     try {
         const { id } = req.params;

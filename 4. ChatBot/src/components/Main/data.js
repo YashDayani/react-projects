@@ -12,7 +12,7 @@ export const cardPrompts = [
       icon: "message_icon",
     },
     {
-      text: "Improve the readability of the following code",
+      text: "Explain the use of recursion in solving complex problems, with a simple code example.",
       icon: "code_icon",
     },
   ];

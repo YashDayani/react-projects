@@ -54,7 +54,7 @@ const Main = ({ theme, toggleTheme }) => {
 
     fetchUserName();
 
-    // Initialize speech recognition
+    
     if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       recognitionRef.current = new SpeechRecognition();

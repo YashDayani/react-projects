@@ -4,7 +4,7 @@ import DOMPurify from 'dompurify';
 import { marked } from 'marked';
 import { assets } from '../../assets/assets';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/default.css'; // You can choose a different style
+import 'highlight.js/styles/default.css'; 
 import Accordion from '../../components/Accordion/Accordion';
 import Popup from '../../components/Popup/Popup';
 import './History.css';
@@ -94,20 +94,20 @@ const History = () => {
             response = String(response);
         }
 
-        // Parse the markdown
+        
         const tokens = marked.lexer(response);
 
-        // Process code blocks
+        
         const processedTokens = tokens.map(token => {
             if (token.type === 'code') {
-                // Use regex to fetch the language from the first line
+                
                 const langMatch = token.text.match(/^```(\w+)/);
                 let language = langMatch ? langMatch[1].toLowerCase() : '';
 
-                // Remove the language declaration line if it exists
+                
                 let code = token.text.replace(/^```\w+\n/, '').trim();
 
-                // Highlight the code
+                
                 const highlighted = hljs.highlightAuto(code, language ? [language] : undefined);
 
                 return {
@@ -119,7 +119,7 @@ const History = () => {
             return token;
         });
 
-        // Render the processed tokens
+        
         const renderedHtml = processedTokens.map(token => {
             if (token.type === 'code') {
                 return `
@@ -135,7 +135,7 @@ const History = () => {
             return marked.parser([token]);
         }).join('');
 
-        // Sanitize and return the HTML
+        
         const sanitizedHtml = DOMPurify.sanitize(renderedHtml);
         return (
             <div

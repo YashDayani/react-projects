@@ -5,7 +5,7 @@ import Prism from 'prismjs';
 import './code.css';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-jsx';
-import { runChat } from '../config/gemini'; // Ensure this import is correct
+import { runChat } from '../config/gemini'; 
 
 Prism.manual = true;
 
@@ -18,7 +18,7 @@ const ContextProvider = ({ children }) => {
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
     const [resultData, setResultData] = useState("");
-    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'day'); // Initialize theme
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'day'); 
 
     const resultRef = useRef(null);
 
@@ -34,7 +34,7 @@ const ContextProvider = ({ children }) => {
     }, [resultData]);
 
     useEffect(() => {
-        // Apply the theme to the body
+        
         document.body.classList.toggle('night', theme === 'night');
         localStorage.setItem('theme', theme);
     }, [theme]);
@@ -55,16 +55,16 @@ const ContextProvider = ({ children }) => {
             langPrefix: 'language-'
         });
 
-        let html = marked(text);
+        let html = marked(text); 
 
-        // Apply general styling classes
+        
         html = html.replace(/<h2/g, '<h2 class="mb-4 mt-6"')
             .replace(/<h3/g, '<h3 class="mb-3 mt-5"')
             .replace(/<p>/g, '<p class="mb-4">')
             .replace(/<ul>/g, '<ul class="mb-4">')
             .replace(/<li>/g, '<li class="mb-2 ml-4">');
 
-        // Render code blocks correctly
+        
         html = html.replace(/<pre><code class="language-(\w+)">/g, '<pre class="language-$1"><code class="language-$1">');
         html = html.replace(/<pre><code>/g, '<pre class="language-none"><code class="language-none">');
 

@@ -247,8 +247,17 @@
   .main-bottom img {
     width: 20px;
   }
+  .main .cards {
+    overflow: auto;
+  }
+  
   .search-box {
     padding: 5px 10px;
+
+  }
+
+  .search-box input{
+    flex: 1;
   }
   .search-box div {
     gap: 5px;

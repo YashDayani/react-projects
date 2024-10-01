@@ -2,15 +2,15 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './NotFound.css';
 import { assets } from '../../assets/assets';
-import { Context } from '../../context/Context'; // Import the Context to access the theme
+import { Context } from '../../context/Context'; 
 
 const NotFound = () => {
-    const { theme } = useContext(Context); // Get the current theme from context
+    const { theme } = useContext(Context); 
 
-    // Select the image based on the theme
+    
     const errorImage = theme === 'night' ? assets.error404_dark_img : assets.error404_img;
 
-    // Debugging logs
+    
     console.log('Current theme:', theme);
     console.log('Selected image:', errorImage);
 

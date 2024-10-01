@@ -5,7 +5,7 @@ const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 const router = express.Router();
 
-// Input validation middleware
+
 const registerValidation = [
   body('username').isLength({ min: 3 }).trim().escape(),
   body('email').isEmail().normalizeEmail(),
@@ -17,7 +17,7 @@ const loginValidation = [
   body('password').exists()
 ];
 
-// Register endpoint
+
 router.post('/register', registerValidation, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -43,7 +43,7 @@ router.post('/register', registerValidation, async (req, res) => {
   }
 });
 
-// Login endpoint
+
 router.post('/login', loginValidation, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

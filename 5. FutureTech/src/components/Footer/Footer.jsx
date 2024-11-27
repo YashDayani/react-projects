@@ -82,10 +82,10 @@ const Footer = () => {
                 <div className="cols-wrapper">
                     <a href='#' className="cols-title">Resources</a>
                     <div className="cols-items">
-                        <a href='#' className="cols-item">Whitepapers <img className='up_arror_img' src={assets.up_arrow} /></a>
-                        <a href='#' className="cols-item">Ebooks <img className='up_arror_img' src={assets.up_arrow} /></a>
-                        <a href='#' className="cols-item">Reports <img className='up_arror_img' src={assets.up_arrow} /></a>
-                        <a href='#' className="cols-item">Research Papers <img className='up_arror_img' src={assets.up_arrow} /></a>
+                        <a href='#' className="cols-item nav-btn">Whitepapers <img className='up_arror_img' src={assets.up_arrow} /></a>
+                        <a href='#' className="cols-item nav-btn">Ebooks <img className='up_arror_img' src={assets.up_arrow} /></a>
+                        <a href='#' className="cols-item nav-btn">Reports <img className='up_arror_img' src={assets.up_arrow} /></a>
+                        <a href='#' className="cols-item nav-btn">Research Papers <img className='up_arror_img' src={assets.up_arrow} /></a>
                     </div>
                 </div>
             </div>

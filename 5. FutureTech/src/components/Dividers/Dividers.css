@@ -36,20 +36,6 @@
     height: var(--h6);
 }
 
-.link-btn a {
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 400;
-    color: #98989A;
-    display: flex;
-    gap: 10px;
-    border-radius: 8px;
-    border: 1px solid #262626;
-    padding: 14px 20px;
-    width: fit-content;
-    background-color: #141414;
-}
-
 @media  (max-width: 1440px) {
     .link-btn a{
         gap: 4px;

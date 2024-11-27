@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_KEY = "AIzaSyAoPuOFotjXmths6Ju02QQfOGxjG28FoBM"
 
-const GEMINI_MODEL = 'gemini-1.5-flash'
+const GEMINI_MODEL = 'gemini-1.5-pro'
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${API_KEY}`;
 
 

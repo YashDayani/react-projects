@@ -16,14 +16,14 @@ const Header = () => {
             </div>
             <div className="nav-btns">
                 <ul>
-                    <li className='nav-active'>Home</li>
-                    <li>News</li>
-                    <li>Podcast</li>
-                    <li>Resources</li>
+                    <li className='nav-active'><a href="/Home">Home</a></li>
+                    <li><a href="/News"> News </a></li>
+                    <li><a href="/Podcast"> Podcast </a></li>
+                    <li><a href="/Resources"> Resources </a></li>
                 </ul>
             </div>
             <div className="nav-cta">
-                <a href="#">Contact Us</a>
+                <a href="/contact">Contact Us</a>
             </div>
         </nav>
     </header>

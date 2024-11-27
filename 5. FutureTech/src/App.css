@@ -52,7 +52,7 @@ body{
 }
 
 body::-webkit-scrollbar {
-  width: 1em;
+  width: 12px;
 }
  
 body::-webkit-scrollbar-track {
@@ -63,15 +63,38 @@ body::-webkit-scrollbar-thumb {
   background-color: hsl(0, 0%, 10%);
 }
 
-.up_arror_img{
-  height: 20px;
+.nav-btn img{
+  height: var(--p);
 }
 
 a{
   text-decoration: none;
+  color: white;
 }
 
+.nav-btn{
+  text-decoration: none;
+  font-size: var(--p);
+  font-weight: 400;
+  color: #98989A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid hsl(var(--border-color));
+  padding: 10px 16px;
+  width: max-content;
+  background-color: hsl(var(--primary-color));
+}
 
+.nav-btn img{
+  transition: rotate 0.3s;
+}
+
+.nav-btn:hover img{
+  rotate: 45deg;
+}
 
 @media  (max-width: 1440px) {
   :root{
@@ -97,14 +120,13 @@ a{
     --p: 14px;
   }
 
-  .up_arror_img{
-    height: 18px;
-  }
-
   .logo{
     height: 40px;
   }
 
+  .nav-btn a{
+    gap: 4px;
+}
 }
 
 @media  (max-width: 930px) {

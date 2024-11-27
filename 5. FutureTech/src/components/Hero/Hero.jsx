@@ -37,7 +37,7 @@ const Hero = () => {
           <p>Explore 1000+ resources</p>
           <p>Over 1,000 articles on emerging tech trends and breakthroughs.</p>
           </div>
-          <a href="#">Explore Resources <img className='up_arror_img' src={assets.up_arrow} /></a>
+          <a href="#" className='nav-btn'>Explore Resources <img className='up_arror_img' src={assets.up_arrow} /></a>
           <img className='hero-img' src={assets.hero_img} alt="" />
         </div>
       </div>

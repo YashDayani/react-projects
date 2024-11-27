@@ -72,18 +72,6 @@ color: #FFFFFF;
     color: #98989A;
 }
 
-.hero-section-right-wrapper a{
-    text-decoration: none;
-    font-size: 14px;
-    color: #98989A;
-    display: flex;
-    gap: 4px;
-    border-radius: 6px;
-    border: 1px solid #262626;
-    padding: 14px 20px;
-    width: fit-content;
-}
-
 .hero-section-right-wrapper>img{
     height: 66px;
     width: 174px;

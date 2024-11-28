@@ -1,5 +1,5 @@
 .hero *{
-    font-family: "Kumbh Sans", sans-serif;
+    font-family: var(--kbsans);
 }
 
 .hero-section{

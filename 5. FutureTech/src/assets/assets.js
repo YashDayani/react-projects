@@ -13,11 +13,16 @@ import icon2_img from './icon2.svg'
 import icon3_img from './icon3.svg'
 import icon4_img from './icon4.svg'
 import icon5_img from './icon5.svg'
+import icon6_img from './icon6.svg'
+import icon7_img from './icon7.svg'
 import menu_icon from './menu.svg'
 import like_icon from './like.png'
+import eye_icon from './eye_icon.svg'
 import likefill_icon from './likefill.png'
 import comment_icon from './comment.png'
 import share_icon from './share.png'
+import res_img from './res.png'
+import res1_img from './res1.png'
 
 export const assets = {
     logo,
@@ -36,8 +41,13 @@ export const assets = {
     icon3_img,
     icon4_img,
     icon5_img,
+    icon6_img,
+    icon7_img,
     like_icon,
     likefill_icon,
     comment_icon,
-    share_icon
+    share_icon,
+    eye_icon,
+    res_img,
+    res1_img
 }

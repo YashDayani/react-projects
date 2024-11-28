@@ -20,6 +20,8 @@
   --font-color-medium: 240, 1%, 60%;
   --font-color-dark: 240, 1%, 50%;
 
+  --kbsans : "Kumbh Sans", system-ui;
+
   /* Margin*/
  --m162: 162px;
  --m150: 150px;

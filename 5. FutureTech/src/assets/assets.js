@@ -23,6 +23,7 @@ import comment_icon from './comment.png'
 import share_icon from './share.png'
 import res_img from './res.png'
 import res1_img from './res1.png'
+import ratings from './ratings.svg'
 
 export const assets = {
     logo,
@@ -49,5 +50,6 @@ export const assets = {
     share_icon,
     eye_icon,
     res_img,
-    res1_img
+    res1_img,
+    ratings
 }

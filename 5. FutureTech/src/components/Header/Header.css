@@ -1,14 +1,10 @@
-*{
-    line-height: 150%;
+header {
+    font-size: 16px;
+    font-family: Arial, sans-serif;
 }
 
-header{
-    font-size: var(--p);
-}
-
-.top-banner{
+.top-banner {
     background-color: hsl(var(--primary-color));
-    font-weight: 400;
     color: #98989a;
     display: flex;
     align-items: center;
@@ -17,7 +13,7 @@ header{
     gap: 10px;
 }
 
-.navbar{
+.navbar {
     background-color: hsl(var(--secondary-color));
     display: flex;
     align-items: center;
@@ -25,26 +21,28 @@ header{
     padding: var(--m24) var(--m162);
     border-top: 1px solid hsl(var(--border-color));
     border-bottom: 1px solid hsl(var(--border-color));
+    position: relative;
 }
 
-.navbar img{
+.navbar img {
     height: var(--m50);
+    max-width: 100%;
 }
 
-.navbar .nav-btns ul{
+.nav-links {
     list-style: none;
     display: flex;
     align-items: center;
-    color: #98989a;
     gap: var(--m40);
 }
 
-.navbar .nav-btns ul li,
-.navbar .nav-cta a {
-    cursor: pointer;
+.nav-links a {
+    text-decoration: none;
+    color: #98989a;
+    transition: color 0.3s ease;
 }
 
-.nav-active{
+.nav-active {
     background-color: hsl(var(--primary-color));
     padding: var(--m14) var(--m24);
     border-radius: 6px;
@@ -52,24 +50,73 @@ header{
     border: 1px solid hsl(var(--border-color));
 }
 
-.navbar .nav-cta a{
+.nav-cta a {
     padding: var(--m14) var(--m20);
     color: hsl(var(--primary-color));
     background-color: hsl(var(--accent-color));
     border-radius: 6px;
-    font-weight: 500;
+    text-decoration: none;
 }
 
-@media  (max-width: 930px) {
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
 
-    .top-banner span{
-        flex: 1;
+/* Mobile Styles */
+@media (max-width: 930px) {
+    .navbar {
+        padding: var(--m14) var(--m24);
+        position: relative;
     }
 
-    .navbar .nav-btns,
-    .navbar .nav-cta{
+    .mobile-nav-container {
         display: none;
     }
 
-}
+    .mobile-nav-container.active {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: hsl(var(--secondary-color));
+        z-index: 1000;
+        padding: var(--m24);
+        overflow-y: auto;
+    }
 
+    .mobile-nav-container.active .nav-links {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        gap: 20px;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links li a {
+        display: block;
+        padding: 15px;
+        font-size: 1.2rem;
+    }
+
+    .hamburger {
+        display: block;
+        z-index: 1100;
+        position: relative;
+    }
+
+    .nav-cta {
+        display: none;
+    }
+
+    .mobile-contact-link {
+        display: block;
+    }
+}

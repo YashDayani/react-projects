@@ -98,7 +98,7 @@ a{
   rotate: 45deg;
 }
 
-@media  (max-width: 1440px) {
+@media  (max-width: 1640px) {
   :root{
     --m162: 80px;
     --m120: 80px;
@@ -131,7 +131,7 @@ a{
 }
 }
 
-@media  (max-width: 930px) {
+  @media  (max-width: 930px) {
   :root{
       /* Colors */
   --primary-color: 0, 0%, 5%;

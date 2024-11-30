@@ -86,9 +86,9 @@ const Header = () => {
                     aria-expanded={isMobileMenuOpen}
                 >
                     {isMobileMenuOpen ? (
-                        <img src={assets.close_icon} alt="close menu" />
+                        <img className='menu_icons' src={assets.menu_close} alt="close menu" />
                     ) : (
-                        <img src={assets.hamburger_icon} alt="open menu" />
+                        <img className='menu_icons' src={assets.menu_open} alt="open menu" />
                     )}
                 </div>
             </nav>

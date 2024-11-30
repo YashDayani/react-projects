@@ -1,0 +1,106 @@
+.contact-container {
+
+}
+
+.contact-section, .faq-section {
+    display: flex;
+    align-items: center;
+    border: 1px solid hsl(var(--border-color));
+}
+
+.contact-left, .faq-left {
+    border-right: 1px solid hsl(var(--border-color));
+    max-width: 520px;
+    margin: 0px 0px 0px var(--m162);
+    padding-right: var(--m80);
+}
+
+.contact-right, .faq-right {
+    margin: 80px;
+}
+
+.contact-left img, .faq-left img {
+    width: 80px;
+    margin-bottom: 20px;
+}
+
+.contact-title, .faq-title {
+    font-family: var(--kbsans);
+    color: hsl(var(--font-color-light));
+    font-size: var(--h1);
+    margin-bottom: 10px;
+}
+
+.faq-subtitle {
+    color: hsl(var(--font-color-medium));
+    font-size: var(--p);
+}
+
+.contact-container .contact-form input,
+.contact-container .contact-form select,
+.contact-container .contact-form textarea{
+    padding: 20px;
+    font-size: var(--p);
+    border: 1px solid hsl(var(--border-color));
+    background-color: hsl(var(--secondary-color));
+    border-radius: 8px;
+    color: hsl(var(--font-color-light));
+    outline: none;
+    flex: 1;
+}
+
+.contact-container .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.form-group {
+    display: grid;
+grid-template-columns: repeat(2, 1fr);
+grid-column-gap: 50px;
+grid-row-gap: 0px;
+}
+
+.form-group:nth-of-type(3){
+    display: flex;
+    height: 162px;
+    box-sizing: border-box;
+}
+
+.phone-input {
+    display: flex;
+    gap: 5px;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--p);
+    color: hsl(var(--font-color-light));
+    align-items: center;
+}
+
+.form-footer label{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.send-btn {
+    padding: 18px 46px;
+    color: hsl(var(--primary-color));
+    background-color: hsl(var(--accent-color));
+    border-radius: 6px;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 1640px) {
+    .contact-left img, .faq-left img {
+        width: 60px;
+    }
+}

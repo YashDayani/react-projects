@@ -119,4 +119,8 @@ header {
     .mobile-contact-link {
         display: block;
     }
+
+    .menu_icons{
+        width: 34px;
+    }
 }

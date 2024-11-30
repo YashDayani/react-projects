@@ -9,7 +9,9 @@ const Dividers = (props) => {
             <div className="subtitle"> {props.subtitle} </div>
             <div className="title"> {props.title} </div>
         </div>
-        <div className='link-btn'><a href="#" className='nav-btn'> {props.linktext} <img className='up_arror_img' src={assets.up_arrow} alt="" /></a></div>
+        <div className='link-btn'>
+          <a href="#" className='nav-btn'> {props.linktext} <img className='up_arror_img' src={assets.up_arrow} alt="" /></a>
+        </div>
     </section>
   )
 }

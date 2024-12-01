@@ -94,6 +94,11 @@ a{
   transition: rotate 0.3s;
 }
 
+.dfc{
+  display: flex;
+  flex-direction: column;
+}
+
 .nav-btn:hover img{
   rotate: 45deg;
 }

@@ -1,8 +1,15 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import './Contacts2.css'
 import { assets } from '../../assets/assets'
+import { faqData } from './Data'
 
 const Contacts2 = () => {
+  const [activeIndex, setActiveIndex] = useState(null)
+
+  const toggleAccordion = (index) => {
+    setActiveIndex(activeIndex === index ? null : index)
+  }
+
   return (
     <div className="contact-container">
       <div className="contact-section">
@@ -13,21 +20,35 @@ const Contacts2 = () => {
         <div className="contact-right">
           <form className="contact-form">
             <div className="form-group">
-              <input type="text" placeholder="First Name" />
-              <input type="text" placeholder="Last Name" />
+              <div className='dfc'>
+                <label htmlFor="">First Name</label>
+                <input type="text" placeholder="First Name" />
+              </div>
+              <div className='dfc'>
+                <label htmlFor="">Last Name</label>
+                <input type="text" placeholder="Last Name" />
+              </div>
+
             </div>
             <div className="form-group">
+              <div className='dfc'>
+                <label htmlFor="">Email</label>
               <input type="email" placeholder="Enter your Email" />
+              </div>
+              <div className='dfc'>
+              <label htmlFor="">Phone</label>
               <div className="phone-input">
                 <select className="country-select">
-                  <option value="IN" data-icon="🇮🇳">India</option>
-                  {/* Add more countries as needed */}
+                  <option value="IN" >India</option>
+                  <option value="US" >USA</option>
                 </select>
                 <input type="text" placeholder="Enter Phone Number" />
               </div>
+              </div>
             </div>
             <div className="form-group">
-              <textarea placeholder="Enter your Message"></textarea>
+              <label htmlFor="messageIn">Message</label>
+              <textarea id='messageIn' placeholder="Enter your Message"></textarea>
             </div>
             <div className="form-footer">
               <label>
@@ -49,7 +70,20 @@ const Contacts2 = () => {
           </div>
         </div>
         <div className="faq-right">
-          {/* Add FAQ items here */}
+          {faqData.map((faq, index) => (
+            <div key={faq.id} className="accordion-item">
+              <div 
+                className={`accordion-header ${activeIndex === index ? 'active' : ''}`}
+                onClick={() => toggleAccordion(index)}
+              >
+                <span>{faq.question}</span>
+                <span className="accordion-icon">{activeIndex === index ? '-' : '+'}</span>
+              </div>
+              <div className={`accordion-content ${activeIndex === index ? 'active' : ''}`}>
+                {faq.answer}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
